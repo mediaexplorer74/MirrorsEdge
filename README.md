@@ -23,14 +23,15 @@ Planned "UWP-remake" of Mirror's Edge game project.
 - Extend Input manager (kbd, mouse, and touchscreen or joystick)
 
 
-## .
-As is. No support. DIY. Learn purposes only.
-
 ## Reference(s)
-- https://yandex.com/games/app/278766 
+- https://www.ea.com/games/mirrors-edge/ Electronic Arts site :: Mirror's Edge section 
+- https://soundcloud.com/user249000542/lisa-miskovsky-still-alive-the-theme-from-mirrors-edge Sound Cloud :: Lisa Miskovsky - Still Alive (music theme from Mirror's Edge)
 
+## .
+As is. No support. Research purposes only. DIY.
 
 ## ..
 [m][e] May 2025
+
 
 ![Logo](Images/footer.png)
