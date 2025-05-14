@@ -1,14 +1,14 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: game.AppEngine
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using ea;
 using generic;
 using microedition.m3g;
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using support;
 using System;
 using System.Net.NetworkInformation;
@@ -50,7 +50,7 @@ namespace game
     private QuadManager m_quadManager = new QuadManager();
     private SoundManager m_soundManager = new SoundManager();
     private BGMusic m_bgMusic;
-    private Thread m_bgMusicThread;
+    //private Thread m_bgMusicThread;
     private Random m_randomInstance = new Random();
     public static AppEngine AppEngine_instance;
     private bool m_startupDone;
@@ -105,7 +105,7 @@ namespace game
       this.m_midlet = (MonkeyApp) null;
       this.m_bgMusic.beQuiet();
       this.m_bgMusic.close();
-      this.m_bgMusicThread = (Thread) null;
+      //this.m_bgMusicThread = (Thread) null;
       if (!MirrorsEdge.TrialMode && this.m_achievementNotification != null)
         this.m_achievementNotification = (AchievementNotification) null;
       this.freeLoadingScreens(true);
@@ -209,8 +209,8 @@ namespace game
       this.m_textManager.init();
       this.changeScene(1);
       this.m_bgMusic = new BGMusic(this.m_soundManager);
-      this.m_bgMusicThread = new Thread(new ThreadStart(BGMusic.Process));
-      this.m_bgMusicThread.Start();
+      //this.m_bgMusicThread = new Thread(new ThreadStart(BGMusic.Process));
+      //this.m_bgMusicThread.Start();
       AppEngine.getM3GAssets().loadData();
       this.m_quadManager.loadQuadData(this.m_resourceManager.loadBinaryFile((int) ResourceManager.get("IDI_QUADS_BIN")), 533, 320);
       this.m_quadManager.loadQuads((int) QuadManager.get("GROUP_SCENESTARTUP"));
@@ -250,8 +250,10 @@ namespace game
 
     public void stopThread()
     {
-      while (this.m_updateScheduled || this.m_paintScheduled)
-        Thread.Sleep(1);
+        while (this.m_updateScheduled || this.m_paintScheduled)
+        {
+            //Thread.Sleep(1);
+        }
     }
 
     public void runLoop(int frameTime) => this.update(frameTime);
@@ -262,7 +264,10 @@ namespace game
     {
       this.m_paused = true;
       while (this.m_paintScheduled)
-        Thread.Sleep(1);
+      {
+        //Thread.Sleep(1);
+      }
+        
       if (this.m_currentScene != null)
         this.m_currentScene.pause();
       this.m_soundManager.pause();
@@ -532,11 +537,11 @@ namespace game
 
     private static string GetVersionNumber()
     {
-      string versionNumber = Assembly.GetExecutingAssembly().FullName.Split(',')[1].Split('=')[1];
-      int length = versionNumber.LastIndexOf(".");
-      if (length > 0)
-        versionNumber = versionNumber.Substring(0, length);
-      return versionNumber;
+        //string versionNumber = typeof(AppEngine).Assembly.FullName.Split(',')[1].Split('=')[1];
+        //int length = versionNumber.LastIndexOf(".");
+        //if (length > 0)
+        //    versionNumber = versionNumber.Substring(0, length);
+        return "v1.0-alpha";//versionNumber;
     }
 
     public void initAboutString()

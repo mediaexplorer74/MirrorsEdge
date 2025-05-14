@@ -1,13 +1,13 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: support.BGMusic
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using generic;
 using Microsoft.Xna.Framework.Media;
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using System;
 using System.Threading;
 
@@ -190,7 +190,7 @@ namespace support
           return;
         this.m_state = BGMusic.PlayState.STATE_STOPPING;
         MediaPlayer.Stop();
-        Thread.Sleep(200);
+        //Thread.Sleep(200);
         this.m_state = BGMusic.PlayState.STATE_CLOSING;
         this.m_eventMusic = (Song) null;
       }
@@ -248,7 +248,7 @@ namespace support
           }
         }
         this.m_updated = true;
-        Thread.Sleep(250);
+        //Thread.Sleep(250);
       }
     }
 

@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: midp.WP7InputStreamIsolatedStorage
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -35,28 +35,30 @@ namespace midp
 
     public override int read()
     {
-      return this.m_Stream != null ? this.m_Stream.ReadByte() : throw new FileNotFoundException();
+      return this.m_Stream != null
+                ? this.m_Stream.ReadByte() 
+                : throw new System.Exception("File Not Found");
     }
 
     public override void close()
     {
       if (this.m_Stream == null)
         return;
-      this.m_Stream.Close();
+      this.m_Stream.Dispose();
       this.m_Stream = (IsolatedStorageFileStream) null;
     }
 
     public override int read(ref byte[] b, int off, int len)
     {
       if (this.m_Stream == null)
-        throw new FileNotFoundException();
+        throw new System.Exception("File Not Found");
       return this.m_Stream.Read(b, off, len);
     }
 
     public override int available()
     {
       if (this.m_Stream == null)
-        throw new FileNotFoundException();
+        throw new System.Exception("File Not Found");
       return (int) (this.m_Stream.Length - this.m_Stream.Position);
     }
 
@@ -64,7 +66,7 @@ namespace midp
 
     public override int size()
     {
-      return this.m_Stream != null ? (int) this.m_Stream.Length : throw new FileNotFoundException();
+      return this.m_Stream != null ? (int) this.m_Stream.Length : throw new System.Exception("File Not Found");
     }
   }
 }

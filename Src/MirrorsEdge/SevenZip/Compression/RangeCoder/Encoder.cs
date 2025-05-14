@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: SevenZip.Compression.RangeCoder.Encoder
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using System.IO;
 
@@ -40,7 +40,7 @@ namespace SevenZip.Compression.RangeCoder
 
     public void FlushStream() => this.Stream.Flush();
 
-    public void CloseStream() => this.Stream.Close();
+    public void CloseStream() => this.Stream.Dispose();
 
     public void Encode(uint start, uint size, uint total)
     {

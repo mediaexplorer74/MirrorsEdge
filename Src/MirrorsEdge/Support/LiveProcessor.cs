@@ -1,20 +1,21 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: support.LiveProcessor
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using mirrorsedge_wp7;
+using GameManager;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using text;
+using UI;
 
 #nullable disable
 namespace support
@@ -139,7 +140,7 @@ namespace support
       LiveProcessor.m_SignedGamer = args.Gamer;
       if (LiveProcessor.m_SignedGamer == null || LiveProcessor.gamestate != LiveProcessor.GameState.WaitingForSignIn)
         return;
-      MirrorsEdge.TrialMode = Guide.IsTrialMode;
+      MirrorsEdge.TrialMode = false;//Guide.IsTrialMode;
       if (MirrorsEdge.TrialMode)
       {
         LiveProcessor.gamestate = LiveProcessor.GameState.Error;
@@ -183,7 +184,7 @@ namespace support
       {
         if (LiveProcessor.m_Achievements == null)
           return;
-        foreach (Achievement achievement in LiveProcessor.m_Achievements)
+        /*foreach (Achievement achievement in LiveProcessor.m_Achievements)
         {
           if (achievement.Key == achievementKey)
           {
@@ -193,7 +194,7 @@ namespace support
                 new AsyncCallback(LiveProcessor.AwardAchievementCallback), (object) LiveProcessor.m_SignedGamer);
             break;
           }
-        }
+        }*/
       }
     }
 
@@ -207,8 +208,8 @@ namespace support
       LeaderboardIdentity leaderboardId = LeaderboardIdentity.Create(LeaderboardKey.BestTimeLifeTime, LevelIndex);
       LeaderboardEntry leaderboard = LiveProcessor.m_SignedGamer.LeaderboardWriter.GetLeaderboard(leaderboardId);
       leaderboard.Rating = (long) score;
-      new BinaryWriter(leaderboard.Columns.GetValueStream("TimeBlob")).Write(data, 0, size);
-      leaderboard.Columns.SetValue("TimeStamp", DateTime.Now);
+      //new BinaryWriter(leaderboard.Columns.GetValueStream("TimeBlob")).Write(data, 0, size);
+      //leaderboard.Columns.SetValue("TimeStamp", DateTime.Now);
       return true;
     }
 
@@ -230,7 +231,8 @@ namespace support
           LiveProcessor.gamestate = LiveProcessor.GameState.WaitingForLeaderboard;
           try
           {
-            LeaderboardReader.BeginRead(LeaderboardIdentity.Create(LeaderboardKey.BestTimeLifeTime, LevelIndex), (Gamer) LiveProcessor.m_SignedGamer, 29, new AsyncCallback(LiveProcessor.LeaderboardReadCallback), (object) LiveProcessor.m_SignedGamer);
+            LeaderboardReader.BeginRead(LeaderboardIdentity.Create(LeaderboardKey.BestTimeLifeTime, LevelIndex), 
+                /*(Gamer) LiveProcessor.m_SignedGamer*/default, 29, new AsyncCallback(LiveProcessor.LeaderboardReadCallback), (object) LiveProcessor.m_SignedGamer);
           }
           catch (Exception ex)
           {

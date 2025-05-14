@@ -1,14 +1,21 @@
-﻿using System.Reflection;
-using System.Resources;
+
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCopyright("Copyright ©  Electronic Arts Inc. 2012")]
-[assembly: AssemblyTitle("Mirror's Edge")]
-[assembly: AssemblyProduct("Mirror's Edge")]
+
+[assembly: AssemblyTitle("MirrorsEdge")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("Electronic Arts Inc.")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MirrorsEdge")]
+[assembly: AssemblyCopyright("Copyright � 2025")]
 [assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+
+[assembly: Guid("f571b16a-2c9b-44ab-b115-7c762c9e4e7e")]
+
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: ComVisible(false)]
-[assembly: Guid("f7f87574-edad-4325-94fb-0342cc80eb6a")]
-[assembly: NeutralResourcesLanguage("en")]
-[assembly: AssemblyVersion("1.1.25.0")]
+

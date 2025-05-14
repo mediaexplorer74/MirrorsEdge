@@ -1,12 +1,12 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: game.SceneStartup
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using generic;
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using support;
 using System.Threading;
 
@@ -29,7 +29,7 @@ namespace game
     private int m_loadingState;
     private int m_loadingTime;
     private int m_splashTime;
-    private Thread m_loadingThread;
+    //private Thread m_loadingThread;
     private SceneStartup.LoadingThreadState m_loadingThreadState;
 
     public SceneStartup(AppEngine engine)
@@ -39,7 +39,7 @@ namespace game
       this.m_loadingState = 0;
       this.m_loadingTime = 0;
       this.m_splashTime = -1;
-      this.m_loadingThread = (Thread) null;
+      //this.m_loadingThread = (Thread) null;
       this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
     }
 
@@ -61,16 +61,17 @@ namespace game
       this.m_engine.getLoadingRunAnimPlayer().updateAnim(timeStep);
       if (0 <= this.m_splashTime)
         this.m_splashTime += timeStep;
-      if (this.m_loadingThread == null && this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-      {
+      //if (this.m_loadingThread == null && this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
+      //{
         if (this.m_engine.isFading())
           return;
-        this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneStartup.Start));
-        this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
-        this.m_loadingThread.Start((object) this);
-      }
-      else
-        Thread.Sleep(40);
+        //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneStartup.Start));
+        ThreadImplSceneStartup.Start(default);
+        //this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
+        //this.m_loadingThread.Start((object) this);
+        //}
+        //else
+        //  Thread.Sleep(40);
     }
 
     public void updateLoadingState(int timeStep)
@@ -92,7 +93,9 @@ namespace game
           this.m_engine.getBGMusic();
           this.m_engine.loadSounds();
           while (this.m_splashTime == -1)
-            Thread.Sleep(1);
+          {
+            //Thread.Sleep(1);
+          }            
           quadManager.loadQuads((int) QuadManager.get("GROUP_APPENGINE"));
           quadManager.setAnimFrame((int) QuadManager.get("ANIM_FADE"), 1);
           ++this.m_loadingState;
@@ -105,7 +108,7 @@ namespace game
           if (3000 >= this.m_splashTime)
             break;
           this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-          this.m_loadingThread = (Thread) null;
+          //this.m_loadingThread = (Thread) null;
           break;
       }
     }
@@ -115,9 +118,11 @@ namespace game
       while (this.m_loadingThreadState != SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
       {
         if (this.m_loadingThreadState != SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-          Thread.Sleep(1000);
+        {
+            //Thread.Sleep(1000);
+        }
         else
-          this.updateLoadingState(100);
+            this.updateLoadingState(100);
       }
     }
 
@@ -137,10 +142,10 @@ namespace game
 
     public override void end()
     {
-      if (this.m_loadingThread == null)
-        return;
-      this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-      this.m_loadingThread = (Thread) null;
+      //if (this.m_loadingThread == null)
+      //  return;
+      //this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
+      //this.m_loadingThread = (Thread) null;
     }
 
     public override void update(int timeStepMillis)

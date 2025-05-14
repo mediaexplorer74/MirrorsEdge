@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: mirrorsedge_wp7.MirrorsEdge
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+﻿
+// Type: GameManager.MirrorsEdge
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using game;
 using generic;
@@ -11,7 +11,7 @@ using generic;
 //using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using text;
 
 #nullable disable
-namespace mirrorsedge_wp7
+namespace GameManager
 {
   public class MirrorsEdge : Game
   {
@@ -67,7 +67,7 @@ namespace mirrorsedge_wp7
       MirrorsEdge.graphics.IsFullScreen = true;
       MirrorsEdge.graphics.SynchronizeWithVerticalRetrace = false;
       MirrorsEdge.graphics.ApplyChanges();
-      MirrorsEdge.TrialMode = Guide.IsTrialMode;
+      MirrorsEdge.TrialMode = false;//Guide.IsTrialMode;
       ResourceManager.SetResources();
       this.IsFixedTimeStep = false;
     }
@@ -108,23 +108,23 @@ namespace mirrorsedge_wp7
       MirrorsEdge.m_monkeyAppDisplay = new DisplayWP7();
       Runtime.getRuntime().setMIDlet((MIDlet) MirrorsEdge.m_monkeyAppMIDlet, (Display) MirrorsEdge.m_monkeyAppDisplay);
       MirrorsEdge.m_monkeyAppDisplay.showNotify();
-      try
-      {
-        GamerServicesDispatcher.WindowHandle = this.Window.Handle;
-        GamerServicesDispatcher.Initialize((IServiceProvider) this.Services);
-      }
-      catch (GamerServicesNotAvailableException ex)
-      {
+      //try
+      //{
+      //  GamerServicesDispatcher.WindowHandle = this.Window.Handle;
+      //  GamerServicesDispatcher.Initialize((IServiceProvider) this.Services);
+      //}
+      //catch (GamerServicesNotAvailableException ex)
+      //{
         MirrorsEdge.GS_Supported = false;
-      }
-      catch (NotSupportedException ex)
-      {
-        MirrorsEdge.GS_Supported = false;
-      }
-      catch (InvalidOperationException ex)
-      {
-        MirrorsEdge.GS_Supported = false;
-      }
+      //}
+      //catch (NotSupportedException ex)
+      //{
+      //  MirrorsEdge.GS_Supported = false;
+      //}
+      //catch (InvalidOperationException ex)
+      //{
+      //  MirrorsEdge.GS_Supported = false;
+      //}
       base.Initialize();
     }
 
@@ -149,7 +149,7 @@ namespace mirrorsedge_wp7
 
     protected void UpdateDialogGetMBResult1(IAsyncResult userResult)
     {
-      int? nullable = Guide.EndShowMessageBox(userResult);
+      int? nullable = default;//Guide.EndShowMessageBox(userResult);
       if (nullable.HasValue)
       {
         if (nullable.Value > 0)
@@ -177,15 +177,15 @@ namespace mirrorsedge_wp7
         // ISSUE: reference to a compiler-generated method
         // ISSUE: reference to a compiler-generated method
         this.dialogButtons.Add(LocaleManager.getInstance().getString(2054));
+
         // ISSUE: reference to a compiler-generated method
         // ISSUE: reference to a compiler-generated method
         this.dialogButtons.Add(LocaleManager.getInstance().getString(2053));
+
         // ISSUE: reference to a compiler-generated method
-        // ISSUE: reference to a compiler-generated method
-        // ISSUE: reference to a compiler-generated method
-        // ISSUE: reference to a compiler-generated method
-        Guide.BeginShowMessageBox(LocaleManager.getInstance().getString(2264), LocaleManager.getInstance().getString(2391),
-            (IEnumerable<string>) this.dialogButtons, 1, MessageBoxIcon.None, new AsyncCallback(this.UpdateDialogGetMBResult1), (object) null);
+       
+        //Guide.BeginShowMessageBox(LocaleManager.getInstance().getString(2264), LocaleManager.getInstance().getString(2391),
+        //    (IEnumerable<string>) this.dialogButtons, 1, MessageBoxIcon.None, new AsyncCallback(this.UpdateDialogGetMBResult1), (object) null);
       }
       else
       {
@@ -197,7 +197,7 @@ namespace mirrorsedge_wp7
 
     protected void UpdateDialogGetMBResult3(IAsyncResult userResult)
     {
-      int num = Guide.EndShowMessageBox(userResult).HasValue ? 1 : 0;
+      int num = default;//Guide.EndShowMessageBox(userResult).HasValue ? 1 : 0;
       MirrorsEdge.displayTitanWarning = false;
     }
 
@@ -249,8 +249,12 @@ namespace mirrorsedge_wp7
 label_13:
       try
       {
-        if (MirrorsEdge.GS_Supported && !MirrorsEdge.displayMusicQuestion && !MirrorsEdge.displayTitanWarning && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
-          GamerServicesDispatcher.Update();
+        if (MirrorsEdge.GS_Supported && !MirrorsEdge.displayMusicQuestion && !MirrorsEdge.displayTitanWarning 
+            && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
+        { 
+            //GamerServicesDispatcher.Update();
+        }
+         
         base.Update(gameTime);
       }
       catch (Microsoft.Xna.Framework.GameUpdateRequiredException ex)
@@ -276,7 +280,7 @@ label_13:
 
     protected void UpdateDialogGetMBResult2(IAsyncResult userResult)
     {
-      int? nullable = Guide.EndShowMessageBox(userResult);
+      int? nullable = default;//Guide.EndShowMessageBox(userResult);
       if (nullable.HasValue)
       {
         if (nullable.Value > 0)

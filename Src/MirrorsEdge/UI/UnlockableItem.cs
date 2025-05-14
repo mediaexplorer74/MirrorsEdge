@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: UI.UnlockableItem
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using game;
 using generic;
@@ -115,16 +115,17 @@ namespace UI
         wp7InputStream.close();
     }
 
-    private void SavePictureToMediaLibrary(string pictureName, byte[] pictureBytes)
-    {
-        // Custom implementation to save the picture
-        using (var mediaLibrary = new MediaLibrary())
+        private void SavePictureToMediaLibrary(string pictureName, byte[] pictureBytes)
         {
-            var picturePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), pictureName);
-            File.WriteAllBytes(picturePath, pictureBytes);
-            // Optionally, you can log or notify the user that the picture was saved successfully
+            // Custom implementation to save the picture
+            using (var mediaLibrary = new MediaLibrary())
+            {
+                // Replace Environment.GetFolderPath with a hardcoded path or a valid method to retrieve the Pictures folder
+                var picturesFolderPath = System.IO.Path.Combine("C:\\Users\\Public\\Pictures", pictureName);
+                File.WriteAllBytes(picturesFolderPath, pictureBytes);
+                // Optionally, you can log or notify the user that the picture was saved successfully
+            }
         }
-    }
 
 
     public override void render(Graphics g, int top, int left)

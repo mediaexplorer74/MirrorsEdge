@@ -1,15 +1,15 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: game.SceneGame
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using generic;
 using microedition.m3g;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using support;
 using System;
 using System.Threading;
@@ -122,7 +122,7 @@ namespace game
     private SceneGame.GameState m_preMenuState;
     private int m_stateTime;
     private bool m_gameRunning;
-    private Thread m_loadingThread;
+    //private Thread m_loadingThread;
     private int m_loadingThreadState;
     private int m_loadingState;
     private SceneGame.GameState m_postLoadingState;
@@ -216,7 +216,7 @@ namespace game
       this.m_preMenuState = SceneGame.GameState.STATE_INVALID;
       this.m_stateTime = 0;
       this.m_gameRunning = false;
-      this.m_loadingThread = (Thread) null;
+      //this.m_loadingThread = (Thread) null;
       this.m_loadingThreadState = 0;
       this.m_loadingState = 0;
       this.m_postLoadingState = SceneGame.GameState.STATE_INTRO;
@@ -660,9 +660,11 @@ namespace game
       while (this.m_loadingThreadState != 2)
       {
         if (this.m_loadingThreadState != 0)
-          Thread.Sleep(1000);
+        {
+            //Thread.Sleep(1000);
+        }
         else
-          this.updateLoadingState(100);
+            this.updateLoadingState(100);
       }
     }
 
@@ -671,16 +673,19 @@ namespace game
       this.m_engine.updateLoading(timeStep);
       if (this.m_loadingProgress == 100)
         return;
-      if (this.m_loadingThread == null)
-      {
+      //if (this.m_loadingThread == null)
+      //{
         if (this.m_engine.isFading())
           return;
-        this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneGame.Start));
-        this.m_loadingThreadState = 0;
-        this.m_loadingThread.Start((object) this);
-      }
-      else
-        Thread.Sleep(40);
+            //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneGame.Start));
+
+        ThreadImplSceneGame.Start(default);
+        
+        //this.m_loadingThreadState = 0;
+        //this.m_loadingThread.Start((object) this);
+        //}
+        //else
+        //  Thread.Sleep(40);
     }
 
     public void updateLoadingState(int timeStep)
@@ -740,7 +745,7 @@ namespace game
         case 13:
           this.m_loadingProgress = 100;
           this.m_loadingThreadState = 2;
-          this.m_loadingThread = (Thread) null;
+          //this.m_loadingThread = (Thread) null;
           break;
       }
     }

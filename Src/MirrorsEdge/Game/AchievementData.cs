@@ -1,12 +1,12 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: game.AchievementData
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using generic;
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using support;
 using System.Collections.Generic;
 
@@ -497,10 +497,10 @@ namespace game
       }
       dataInputStream.close();
       this.loadRmsData();
-      if (LiveProcessor.m_Achievements == null || LiveProcessor.m_Achievements.Count <= 0)
-        return;
+      //if (LiveProcessor.m_Achievements == null || LiveProcessor.m_Achievements.Count <= 0)
+      //  return;
       List<string> stringList = new List<string>();
-      foreach (Microsoft.Xna.Framework.GamerServices.Achievement achievement4 in LiveProcessor.m_Achievements)
+      /*foreach (Microsoft.Xna.Framework.GamerServices.Achievement achievement4 in LiveProcessor.m_Achievements)
       {
         Achievement achievement5 = this.FindAchievement(achievement4.Key);
         if (achievement5 != null)
@@ -513,7 +513,7 @@ namespace game
           else if (achievement5.isComplete())
             stringList.Add(achievement5.m_ServerKey);
         }
-      }
+      }*/
       foreach (string achievementKey in stringList)
         LiveProcessor.AwardAchievement(achievementKey);
       this.saveRmsData();

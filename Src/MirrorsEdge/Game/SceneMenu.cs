@@ -1,17 +1,17 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: game.SceneMenu
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using ea;
 using generic;
 using microedition.m3g;
 //using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using support;
 using System;
 using System.Threading;
@@ -49,7 +49,7 @@ namespace game
     private int m_loadingState;
     private SceneMenu.MenuState m_postLoadingState;
     private static bool IsItTheFirstEnter = true;
-    private Thread m_loadingThread;
+    //private Thread m_loadingThread;
     private SceneMenu.LoadingThreadState m_loadingThreadState;
     private World m_world;
     private Camera m_m3gCamera;
@@ -158,7 +158,7 @@ namespace game
       this.m_statePhaseTime = 0;
       this.m_stateTransitionFade = false;
       this.m_loadingState = 0;
-      this.m_loadingThread = (Thread) null;
+      //this.m_loadingThread = (Thread) null;
       this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
       this.m_world = (World) null;
       this.m_m3gCamera = (Camera) null;
@@ -242,16 +242,17 @@ namespace game
         this.stateActivate();
       else if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_ACTIVE)
       {
-        if (this.m_loadingThread == null && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-        {
+        //if (this.m_loadingThread == null && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
+        //{
           if (this.m_engine.isFading())
             return;
-          this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneMenu.Start));
-          this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
-          this.m_loadingThread.Start((object) this);
-        }
-        else
-          Thread.Sleep(40);
+                //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneMenu.Start));
+          ThreadImplSceneMenu.Start(default);
+          //this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
+          //this.m_loadingThread.Start((object) this);
+          //}
+          //else
+          //  Thread.Sleep(40);
       }
       else
       {
@@ -307,7 +308,7 @@ namespace game
         case 4:
           this.precacheAchievementsWindow();
           this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-          this.m_loadingThread = (Thread) null;
+          //this.m_loadingThread = (Thread) null;
           if (this.m_engine.getSaveFileError())
             this.stateTransition(SceneMenu.MenuState.STATE_FILESAVEERROR);
           else
@@ -322,9 +323,11 @@ namespace game
       while (this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
       {
         if (this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-          Thread.Sleep(1000);
+        {
+            //Thread.Sleep(1000);
+        }
         else
-          this.updateLoadingState(100);
+            this.updateLoadingState(100);
       }
     }
 
@@ -350,11 +353,11 @@ namespace game
 
     public override void end()
     {
-      if (this.m_loadingThread != null)
-      {
-        this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-        this.m_loadingThread = (Thread) null;
-      }
+      //if (this.m_loadingThread != null)
+      //{
+      //  this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
+      //  this.m_loadingThread = (Thread) null;
+      //}
       this.m_engine.getQuadManager().freeQuads((int) QuadManager.get("GROUP_SCENEMENU"));
     }
 

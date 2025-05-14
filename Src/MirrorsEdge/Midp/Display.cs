@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: midp.Display
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using System.Threading;
 
@@ -95,7 +95,9 @@ namespace midp
       if (nextDisplayable == this.m_currentDisplayable)
         return;
       while (this.m_isRefreshing)
-        Thread.Sleep(1);
+      {
+            //Thread.Sleep(1);
+      }
       if (this.m_currentDisplayable != null)
       {
         this.m_currentDisplayable.hideNotify();

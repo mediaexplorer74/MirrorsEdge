@@ -1,11 +1,11 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: game.GhostAnimationRecorder
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using SevenZip;
 using SevenZip.Compression.LZMA;
 using System.Collections.Generic;
@@ -119,7 +119,7 @@ namespace game
       resourceAsStream2.close();
       byte[] array = outStream.ToArray();
       this.packedDataLength = array.Length;
-      outStream.Close();
+      outStream.Dispose();
       OutputStream resourceAsStream3 = (OutputStream) OutputStream.getResourceAsStream(filename + "_7zip");
       if (resourceAsStream3 == null)
         return;

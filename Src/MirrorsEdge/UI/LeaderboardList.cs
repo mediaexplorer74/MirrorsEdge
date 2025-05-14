@@ -1,14 +1,14 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: UI.LeaderboardList
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using game;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using midp;
-using mirrorsedge_wp7;
+using GameManager;
 using SevenZip;
 using SevenZip.Compression.LZMA;
 using System;
@@ -80,7 +80,7 @@ namespace UI
         textManager.appendStringToBuffer(gamertag);
         string str2 = stringBuffer2.toString();
         StringBuffer stringBuffer3 = textManager.clearStringBuffer();
-        int valueInt32 = entry.Columns.GetValueInt32("BestTime");
+        int valueInt32 = 1;//entry.Columns.GetValueInt32("BestTime");
         textManager.appendMillisTimeToBuffer(stringBuffer3, valueInt32, 2);
         string str3 = stringBuffer3.toString();
         int num3 = !flag ? 2141233312 : 2135969872;
@@ -128,7 +128,7 @@ namespace UI
       if (AppEngine.getCanvas().getWindowStore().getWindowResult() == WindowResult.WINDOW_RESULT_POSITIVE)
       {
         AppEngine.getCanvas().getWindowStore().clearWindowResult();
-        Stream valueStream = this.m_pendingStat.Columns.GetValueStream("BestTimeBlob");
+        Stream valueStream = default;// this.m_pendingStat.Columns.GetValueStream("BestTimeBlob");
         valueStream.Position = 0L;
         byte[] numArray = new byte[5];
         MemoryStream outStream = new MemoryStream();
@@ -166,7 +166,7 @@ namespace UI
           long inSize = valueStream.Length - valueStream.Position;
           decoder.Code(valueStream, (Stream) outStream, inSize, outSize, (ICodeProgress) null);
           byte[] array = outStream.ToArray();
-          outStream.Close();
+          outStream.Dispose();
           OutputStream resourceAsStream = (OutputStream) OutputStream.getResourceAsStream("ChallengeGhost" + (MirrorsEdge.TrialMode ? "_trial" : ""));
           if (resourceAsStream != null)
           {
@@ -177,7 +177,7 @@ namespace UI
         AppEngine canvas = AppEngine.getCanvas();
         AppEngine.getLevelData().setCurrentLevelByIndex(LevelData.GameMode.GAME_MODE_CHALLENGE, this.m_levelNum);
         canvas.getSceneMenu().stateTransitionFade(SceneMenu.MenuState.STATE_TRANSITION_TO_GAME);
-        int valueInt32 = this.m_pendingStat.Columns.GetValueInt32("BestTime");
+        int valueInt32 = 0;//this.m_pendingStat.Columns.GetValueInt32("BestTime");
         canvas.setChallengeTime(valueInt32);
         this.m_owner.close(WindowResult.WINDOW_RESULT_NONE);
         this.m_pendingStat = (LeaderboardEntry) null;
@@ -239,10 +239,11 @@ namespace UI
         return false;
       }
       LeaderboardEntry statId = this.m_statIDs[this.m_selectedItem];
-      if (statId.Columns.GetValueStream("BestTimeBlob").Length > 0L)
-        this.m_pendingStat = statId;
-      else
+      //if (statId.Columns.GetValueStream("BestTimeBlob").Length > 0L)
+      //  this.m_pendingStat = statId;
+      //else
         this.m_selectedItem = -1;
+      
       return true;
     }
   }

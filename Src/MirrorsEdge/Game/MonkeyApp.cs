@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: game.MonkeyApp
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using ea;
 using midp;
@@ -38,7 +38,9 @@ namespace game
     public override void destroyApp(bool unconditional)
     {
       while (this.m_gettingInput)
-        Thread.Sleep(1);
+      {
+          //Thread.Sleep(1);
+      }
       EASpywareManager.getInstance().logEvent(20000);
       this.close();
       this.notifyDestroyed();
@@ -89,7 +91,7 @@ namespace game
       int frameTime = Math.Max(0, (int) (time - this.timeStartFrame));
       if (frameTime < 34)
       {
-        Thread.Sleep(34 - frameTime);
+        //Thread.Sleep(34 - frameTime);
         this.timeStartFrame += 34L;
         frameTime = 34;
       }
