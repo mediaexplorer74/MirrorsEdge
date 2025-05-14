@@ -679,13 +679,16 @@ namespace game
           return;
             //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneGame.Start));
 
-        ThreadImplSceneGame.Start(default);
+        ThreadImplSceneGame.Start((object) this);
         
-        //this.m_loadingThreadState = 0;
+        this.m_loadingThreadState = 0;
         //this.m_loadingThread.Start((object) this);
         //}
         //else
         //  Thread.Sleep(40);
+
+        //RnD
+        this.m_loadingProgress = 100;
     }
 
     public void updateLoadingState(int timeStep)

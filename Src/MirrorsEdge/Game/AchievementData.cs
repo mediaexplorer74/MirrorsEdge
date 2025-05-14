@@ -243,41 +243,41 @@ namespace game
       "ACHIEVEMENT_SCRUFFY",
       "ACHIEVEMENT_RADIO"
     };
-    public static int m_totalGamePoints;
-    private Achievement[] m_allAchievements;
-    private List<Achievement> m_uniqueAchievements;
-    private List<LevelAchievement> m_levelAchievements;
-    private List<TimedLevelAchievement> m_timedLevelAchievements;
-    private List<BagsPerLevelAchievement> m_bagsPerLevelAchievements;
-    private List<CountAchievement> m_bagsAchievements;
-    private List<CountAchievement> m_starsAchievements;
-    private List<CountAchievement> m_dyingAchievements;
-    private List<CountAchievement> m_badLandingAchievements;
-    private List<CountAchievement> m_advancedMoveAchievements;
-    private List<CountAchievement> m_runDistanceAchievements;
-    private List<CountAchievement> m_wallRunDistanceAchievements;
-    private List<CountAchievement> m_climbDistanceAchievements;
-    private List<CountAchievement> m_ziplineDistanceAchievements;
-    private List<CountAchievement> m_balanceDistanceAchievements;
-    private List<CountAchievement> m_slideDistanceAchievements;
-    private List<CountAchievement> m_fallDistanceAchievements;
-    private List<CountAchievement> m_defeatEnemyAchievements;
-    private List<CountAchievement> m_disarmEnemyAchievements;
-    private List<CountAchievement> m_defeatRivalAchievements;
-    private List<CountAchievement> m_fallEnemyAchievements;
-    private List<EventsInPhaseAchievement> m_singleAttackAchievements;
-    private List<TimedEventsAchievement> m_attacksInTimeAchievements;
-    private List<TimedAchievement> m_sprintDurationAchievements;
-    private List<Achievement> m_boundingBoxAchievements;
-    private bool m_inLevel;
-    private int m_currentLevel;
-    private int m_gameCompletes;
-    private AchievementMetrics m_levelData;
-    private AchievementMetrics m_overallData;
+    public static int m_totalGamePoints = 0;
+    private Achievement[] m_allAchievements =  new Achievement[17]; //!;
+    private List<Achievement> m_uniqueAchievements = new List<Achievement>();
+    private List<LevelAchievement> m_levelAchievements = new List<LevelAchievement>();
+    private List<TimedLevelAchievement> m_timedLevelAchievements = new List<TimedLevelAchievement>();
+    private List<BagsPerLevelAchievement> m_bagsPerLevelAchievements = new List<BagsPerLevelAchievement>();
+    private List<CountAchievement> m_bagsAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_starsAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_dyingAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_badLandingAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_advancedMoveAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_runDistanceAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_wallRunDistanceAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_climbDistanceAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_ziplineDistanceAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_balanceDistanceAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_slideDistanceAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_fallDistanceAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_defeatEnemyAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_disarmEnemyAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_defeatRivalAchievements = new List<CountAchievement>();
+    private List<CountAchievement> m_fallEnemyAchievements = new List<CountAchievement>();
+    private List<EventsInPhaseAchievement> m_singleAttackAchievements = new List<EventsInPhaseAchievement>();
+    private List<TimedEventsAchievement> m_attacksInTimeAchievements = new List<TimedEventsAchievement>();
+    private List<TimedAchievement> m_sprintDurationAchievements = new List<TimedAchievement>();
+    private List<Achievement> m_boundingBoxAchievements = new List<Achievement>();
+    private bool m_inLevel = true; //!
+    private int m_currentLevel = 1; //!
+    private int m_gameCompletes = 1; //!
+    private AchievementMetrics m_levelData = new AchievementMetrics();
+    private AchievementMetrics m_overallData = new AchievementMetrics();
 
     public AchievementData()
     {
-      this.m_allAchievements = (Achievement[]) null;
+      this.m_allAchievements = new Achievement[17]; // null
       this.m_uniqueAchievements = new List<Achievement>();
       this.m_levelAchievements = new List<LevelAchievement>();
       this.m_timedLevelAchievements = new List<TimedLevelAchievement>();
@@ -336,7 +336,7 @@ namespace game
       this.m_attacksInTimeAchievements.Clear();
       this.m_sprintDurationAchievements.Clear();
       this.m_boundingBoxAchievements.Clear();
-      this.m_allAchievements = (Achievement[]) null;
+      this.m_allAchievements = new Achievement[17]; //!
       this.m_levelData = (AchievementMetrics) null;
       this.m_overallData = (AchievementMetrics) null;
     }
@@ -631,7 +631,7 @@ namespace game
         attackAchievement.eventHappended();
       foreach (TimedEventsAchievement inTimeAchievement in this.m_attacksInTimeAchievements)
         inTimeAchievement.eventHappended(raceTimeSecs);
-      ((EventsInPhaseAchievement) this.m_allAchievements[17]).eventHappended();
+      this.m_allAchievements[17].eventHappended();
       this.saveRmsData();
     }
 

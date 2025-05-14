@@ -37,16 +37,19 @@ namespace game
 
     public override void destroyApp(bool unconditional)
     {
-      while (this.m_gettingInput)
-      {
-          //Thread.Sleep(1);
-      }
+      //while (this.m_gettingInput)
+      //{
+      //    //Thread.Sleep(1);
+      //}
       EASpywareManager.getInstance().logEvent(20000);
       this.close();
       this.notifyDestroyed();
     }
 
-    public override void pauseApp() => this.m_engine.pauseGame();
+    public override void pauseApp()
+    {
+        this.m_engine.pauseGame();
+    }
 
     public override void startApp()
     {

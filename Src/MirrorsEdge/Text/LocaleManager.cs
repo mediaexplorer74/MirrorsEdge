@@ -14,13 +14,14 @@ using System.Globalization;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Reflection;
 
 #nullable disable
 namespace text
 {
-  [CompilerGenerated]
-  [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-  [DebuggerNonUserCode]
+  //[CompilerGenerated]
+  //[GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+  //[DebuggerNonUserCode]
   public class LocaleManager
   {
     public const int LOCALE_NONE = 0;
@@ -41,7 +42,7 @@ namespace text
     public const int LOCALE_COUNT = 15;
     public const int LOCALE_ARABIC = 15;
     private static Dictionary<int, string> m_StringTable = new Dictionary<int, string>();
-    private List<string> m_supportedLocales;
+    private List<string> m_supportedLocales = new List<string>();
     private string m_currentLocale;
     private int m_currentLocaleIndex;
     private int m_stringPoolIdShift;
@@ -86,7 +87,7 @@ namespace text
         case 15:
           return "ar";
         default:
-          return (string) null;
+          return "en";//(string) null;
       }
     }
 
@@ -119,53 +120,50 @@ namespace text
 
     internal LocaleManager()
     {
-      // ISSUE: reference to a compiler-generated field
+     
       this.m_supportedLocales = new List<string>();
-      // ISSUE: reference to a compiler-generated field
+     
       this.m_currentLocale = (string) null;
-      // ISSUE: reference to a compiler-generated field
+    
       this.m_currentLocaleIndex = -1;
-      // ISSUE: reference to a compiler-generated field
+    
       this.m_stringPoolIdShift = 0;
-      // ISSUE: reference to a compiler-generated field
+     
       this.m_stringIdMask = 0;
       for (int locale = 1; locale < 15; ++locale)
       {
-        // ISSUE: reference to a compiler-generated field
-        // ISSUE: reference to a compiler-generated method
+        
         this.m_supportedLocales.Add(LocaleManager.GetLocaleCode(locale));
       }
-      // ISSUE: reference to a compiler-generated method
+    
       this.setStringIdBits(16);
-      // ISSUE: reference to a compiler-generated method
-      // ISSUE: reference to a compiler-generated method
-      // ISSUE: reference to a compiler-generated field
-      // ISSUE: reference to a compiler-generated method
+    
       this.setLocale(LocaleManager.GetLocaleCode(LocaleManager.GetDeviceLanguage(1)) ?? this.m_supportedLocales[0]);
     }
 
     public virtual void Destructor()
     {
-      // ISSUE: reference to a compiler-generated field
-      this.m_supportedLocales = (List<string>) null;
-      // ISSUE: reference to a compiler-generated field
+      this.m_supportedLocales = (List<string>) null;     
       this.m_currentLocale = (string) null;
     }
 
     public static LocaleManager getInstance() => LocaleManager.s_instance;
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    internal static ResourceManager ResourceManager
-    {
-      get
-      {
-        if (object.ReferenceEquals((object) LocaleManager.resourceMan, (object) null))
-          LocaleManager.resourceMan = new ResourceManager("MirrorsEdge.ME_Resource", /*typeof (ME_Resource).Assembly*/default);
-        return LocaleManager.resourceMan;
-      }
-    }
+        //[EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals((object)LocaleManager.resourceMan, (object)null))
+                    LocaleManager.resourceMan = new ResourceManager(
+                        /*"MirrorsEdge.ME_Resource"*/
+                        "MirrorsEdge.Resources", 
+                        typeof(ME_Resource).GetTypeInfo().Assembly); // as GetTypeInfo().Assembly
+                return LocaleManager.resourceMan;
+            }
+        }
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    //[EditorBrowsable(EditorBrowsableState.Advanced)]
     internal static CultureInfo Culture
     {
       get => LocaleManager.resourceCulture;
@@ -178,21 +176,36 @@ namespace text
 
     public string getString(int stringId)
     {
-      string str;
-      // ISSUE: reference to a compiler-generated field
+      string str = "";
+      
       if (!LocaleManager.m_StringTable.TryGetValue(stringId, out str))
       {
-        // ISSUE: reference to a compiler-generated field
-        int num = stringId & this.m_stringIdMask;
-        // ISSUE: reference to a compiler-generated field
-        LocaleManager.sb.Clear();
-        // ISSUE: reference to a compiler-generated field
-        LocaleManager.sb.Append("TEXT_");
-        // ISSUE: reference to a compiler-generated field
+        
+        int num = stringId & this.m_stringIdMask;        
+       
+        LocaleManager.sb.Clear();        
+       
+        LocaleManager.sb.Append("TEXT_");        
+       
         LocaleManager.sb.Append(num);
-        // ISSUE: reference to a compiler-generated field
-        // ISSUE: reference to a compiler-generated field
-        str = LocaleManager.ResourceManager.GetString(LocaleManager.sb.ToString(), LocaleManager.resourceCulture) ?? "XXXXXX " + (object) num + " XXXXXX";
+
+        //TODO
+        //str = LocaleManager.sb.ToString();
+        try
+        {
+            //str = LocaleManager.ResourceManager.GetString(LocaleManager.sb.ToString()/*, LocaleManager.resourceCulture*/);// ?? "XXXXXX " + num + " XXXXXX";
+            //str = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView().GetString(LocaleManager.sb.ToString());
+            var resourceContext = new Windows.ApplicationModel.Resources.Core.ResourceContext(); // not using ResourceContext.GetForCurrentView
+            resourceContext.QualifierValues["Language"] = "en";
+            var resourceMap = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+            str = resourceMap.GetValue(LocaleManager.sb.ToString(), resourceContext).ValueAsString;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.WriteLine("[ex] LocaleManager error: " + ex.Message);
+            str = LocaleManager.sb.ToString();
+        }
+
         // ISSUE: reference to a compiler-generated field
         LocaleManager.m_StringTable.Add(stringId, str);
       }

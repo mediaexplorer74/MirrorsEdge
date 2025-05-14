@@ -64,9 +64,13 @@ namespace GameManager
       MirrorsEdge.graphics.PreferredBackBufferHeight = MirrorsEdge.SCREEN_HEIGHT;
       MirrorsEdge.graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
       MirrorsEdge.graphics.PreferMultiSampling = false;
-      MirrorsEdge.graphics.IsFullScreen = true;
-      MirrorsEdge.graphics.SynchronizeWithVerticalRetrace = false;
-      MirrorsEdge.graphics.ApplyChanges();
+
+      MirrorsEdge.graphics.IsFullScreen = false;//true; // set it True for w10m/release
+      MirrorsEdge.graphics.SynchronizeWithVerticalRetrace = false; // ?
+
+      MirrorsEdge.graphics.GraphicsProfile = GraphicsProfile.HiDef; // experimental
+
+      //MirrorsEdge.graphics.ApplyChanges();
       MirrorsEdge.TrialMode = false;//Guide.IsTrialMode;
       ResourceManager.SetResources();
       this.IsFixedTimeStep = false;
@@ -371,7 +375,12 @@ label_13:
         if (!MirrorsEdge.externalMusic && !MediaPlayer.GameHasControl)
           MirrorsEdge.externalMusic = true;
         WP7_TouchManager.Init();
-        Runtime.getRuntime().startMIDlet();
+
+        try
+        {
+            Runtime.getRuntime().startMIDlet();
+        }
+        catch { }
       }
       base.OnActivated(sender, args);
       if (!MirrorsEdge.marketplaceCalled && (!MirrorsEdge.externalMusic || MirrorsEdge.m_ReturnFromTombstone || !MirrorsEdge.displayMusicQuestion))

@@ -28,7 +28,7 @@ namespace support
     private volatile bool m_otherAudioPlaying;
     private volatile int m_otherAudioPollTime;
     private volatile bool m_restarting;
-    private volatile bool m_closed;
+    private volatile bool m_closed = true; //!
     private volatile bool m_updated;
     public static object musicLockObject = new object();
     private volatile BGMusic.PlayState m_state;
@@ -232,7 +232,7 @@ namespace support
 
     public virtual void run()
     {
-      while (!this.m_closed)
+      //while (!this.m_closed)
       {
         if (!MirrorsEdge.externalMusic)
         {

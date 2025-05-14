@@ -238,28 +238,36 @@ namespace game
     {
       this.m_engine.updateLoading(timeStep);
       this.m_engine.getLoadingRunAnimPlayer().updateAnim(timeStep);
-      if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_PRE)
-        this.stateActivate();
-      else if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_ACTIVE)
-      {
-        //if (this.m_loadingThread == null && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-        //{
-          if (this.m_engine.isFading())
-            return;
+
+        if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_PRE)
+        {
+            this.stateActivate();
+        }
+        else if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_ACTIVE)
+        {
+            if (/*this.m_loadingThread == null &&*/ this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
+            {
+                if (this.m_engine.isFading())
+                    return;
                 //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneMenu.Start));
-          ThreadImplSceneMenu.Start(default);
-          //this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
-          //this.m_loadingThread.Start((object) this);
-          //}
-          //else
-          //  Thread.Sleep(40);
-      }
-      else
-      {
-        if (this.m_statePhase != SceneMenu.StatePhase.STATE_PHASE_POST)
-          return;
-        this.stateDeactivate();
-      }
+                ThreadImplSceneMenu.Start((object)this);
+                //this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
+                //this.m_loadingThread.Start((object) this);
+
+                //TEST
+                //this.m_loadingProgress = 100;
+            }
+            else
+            {
+                //Thread.Sleep(40); 
+            }
+        }
+        else
+        {
+            if (this.m_statePhase != SceneMenu.StatePhase.STATE_PHASE_POST)
+                return;
+            this.stateDeactivate();
+        }
     }
 
     public void updateLoadingState(int timeStep)
@@ -355,7 +363,7 @@ namespace game
     {
       //if (this.m_loadingThread != null)
       //{
-      //  this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
+        this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
       //  this.m_loadingThread = (Thread) null;
       //}
       this.m_engine.getQuadManager().freeQuads((int) QuadManager.get("GROUP_SCENEMENU"));
@@ -378,8 +386,10 @@ namespace game
       if (this.m_cityscapeCameraInterp)
       {
         float progress = 1f - this.m_cityscapeCameraInterpolationProgress;
-        float degrees1 = (float) ((double) this.m_cityscapeCameraInterpolationProgress * (double) this.m_cityscapeCameraInterpolationAzimuthStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationAzimuthEndDeg);
-        float degrees2 = (float) ((double) this.m_cityscapeCameraInterpolationProgress * (double) this.m_cityscapeCameraInterpolationElevationStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationElevationEndDeg);
+        float degrees1 = (float) ((double) this.m_cityscapeCameraInterpolationProgress
+                    * (double) this.m_cityscapeCameraInterpolationAzimuthStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationAzimuthEndDeg);
+        float degrees2 = (float) ((double) this.m_cityscapeCameraInterpolationProgress
+                    * (double) this.m_cityscapeCameraInterpolationElevationStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationElevationEndDeg);
         MathVector mathVector = new MathVector();
         mathVector.setAsLinearInterpolation(this.m_cityscapeCameraInterpolationFromStart, this.m_cityscapeCameraInterpolationFromEnd, progress);
         this.m_cityscapeCameraTransform.setIdentity();
@@ -391,7 +401,8 @@ namespace game
       {
         this.m_cityscapeCameraLookFromNode.getTranslation(ref this.lookFrom);
         this.m_cityscapeCameraLookAtNode.getTranslation(ref this.lookAt);
-        GameCamera.createLookAtTransform(this.m_cityscapeCameraTransform, this.lookFrom[0], this.lookFrom[1], this.lookFrom[2], this.lookAt[0], this.lookAt[1], this.lookAt[2], 0.0f, 1f, 0.0f);
+        GameCamera.createLookAtTransform(this.m_cityscapeCameraTransform, this.lookFrom[0], this.lookFrom[1], 
+            this.lookFrom[2], this.lookAt[0], this.lookAt[1], this.lookAt[2], 0.0f, 1f, 0.0f);
       }
       this.m_cityscapeCameraTransform.postRotate(0.0f, 0.0f, 0.0f, 1f);
       this.m_m3gCamera.setTransform(ref this.m_cityscapeCameraTransform);
@@ -421,8 +432,10 @@ namespace game
       this.m_cityscapeCameraLookAtAnim.setAnimTime(num2);
       this.m_cityscapeCameraInterp = true;
       this.m_cityscapeCameraInterpolationProgress = 1f;
-      this.calculateCameraOrientationAtTime(animTime, ref this.m_cityscapeCameraInterpolationFromStart, ref this.m_cityscapeCameraInterpolationAzimuthStartDeg, ref this.m_cityscapeCameraInterpolationElevationStartDeg);
-      this.calculateCameraOrientationAtTime(num2, ref this.m_cityscapeCameraInterpolationFromEnd, ref this.m_cityscapeCameraInterpolationAzimuthEndDeg, ref this.m_cityscapeCameraInterpolationElevationEndDeg);
+      this.calculateCameraOrientationAtTime(animTime, ref this.m_cityscapeCameraInterpolationFromStart, 
+          ref this.m_cityscapeCameraInterpolationAzimuthStartDeg, ref this.m_cityscapeCameraInterpolationElevationStartDeg);
+      this.calculateCameraOrientationAtTime(num2, ref this.m_cityscapeCameraInterpolationFromEnd,
+          ref this.m_cityscapeCameraInterpolationAzimuthEndDeg, ref this.m_cityscapeCameraInterpolationElevationEndDeg);
     }
 
     private void calculateCameraOrientationAtTime(
@@ -436,7 +449,8 @@ namespace game
       this.m_cityscapeCameraLookFromNode.getTranslation(ref this.lookFrom);
       this.m_cityscapeCameraLookAtNode.getTranslation(ref this.lookAt);
       position.set(this.lookFrom[0], this.lookFrom[1], this.lookFrom[2]);
-      MathTrig.convertLookVectorToEulerRotationsDeg(this.lookAt[0] - this.lookFrom[0], this.lookAt[1] - this.lookFrom[1], this.lookAt[2] - this.lookFrom[2], ref azimuth, ref elevation);
+      MathTrig.convertLookVectorToEulerRotationsDeg(this.lookAt[0] - this.lookFrom[0], this.lookAt[1] - this.lookFrom[1],
+          this.lookAt[2] - this.lookFrom[2], ref azimuth, ref elevation);
     }
 
     private void initState()

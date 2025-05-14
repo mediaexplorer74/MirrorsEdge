@@ -30,14 +30,24 @@ namespace UI
       : base(0, 0, 463, 0)
     {
       this.m_achievementId = id;
-      this.m_titleString = (string) null;
+      this.m_titleString = " ";   
       this.m_descriptionString = new WrappedString();
       this.m_parent = (WindowElement) parent;
       TextManager textManager = AppEngine.getCanvas().getTextManager();
-      Achievement achievement = parent.getAchievementData().getAchievement(id);
+      Achievement achievement = new Achievement(id, 0, 0)
+      {
+          m_CompletedDescription = 0,
+          m_GamePoints = 0,
+          m_ServerKey = "achserverkey",
+      };//parent.getAchievementData().getAchievement(id);
+      
       this.m_StringGamePoints = string.Concat((object) achievement.m_GamePoints);
       this.m_titleString = achievement.getNameStringBuffer().toString();
-      this.m_descriptionString.wrapString((achievement.isComplete() ? achievement.getCompletedDescriptionStringBuffer() : achievement.getDescriptionStringBuffer()).toString(), this.FONT_DESCRIPTION, 408, false);
+
+      this.m_descriptionString.wrapString((achievement.isComplete() 
+          ? achievement.getCompletedDescriptionStringBuffer() 
+          : achievement.getDescriptionStringBuffer()).toString(), this.FONT_DESCRIPTION, 408, false);
+
       int numWrappedLines = this.m_descriptionString.getNumWrappedLines();
       this.setHeight(textManager.getLineHeight(this.FONT_TITLE) + textManager.getLineHeight(this.FONT_DESCRIPTION) * numWrappedLines + 3);
     }
@@ -70,7 +80,10 @@ namespace UI
       textManager.drawString(g, this.m_StringGamePoints, this.FONT_TITLE, left + this.m_x + 441 + 50, top + this.m_y + 3 + this.m_height, 36);
       Achievement achievement = (this.m_parent as AchievementsList).getAchievementData().getAchievement(this.m_achievementId);
       Image src = achievement.isComplete() ? achievement.iconOpened : achievement.iconLocked;
-      g.drawScaledRegion(src, 0, 0, src.getWidth(), src.getHeight(), left + this.m_x + 441, top + this.m_y, left + this.m_x + 441 + Math.Min(src.getWidth(), this.m_height) / Runtime.pixelScale, top + this.m_y + Math.Min(src.getHeight(), this.m_height) / Runtime.pixelScale);
+
+      g.drawScaledRegion(src, 0, 0, src.getWidth(), src.getHeight(), left + this.m_x + 441, top + this.m_y, 
+          left + this.m_x + 441 + Math.Min(src.getWidth(), this.m_height) / Runtime.pixelScale,
+          top + this.m_y + Math.Min(src.getHeight(), this.m_height) / Runtime.pixelScale);
     }
   }
 }

@@ -45,9 +45,18 @@ namespace midp
       this.addMIDlet(midlet);
     }
 
-    public void startMIDlet() => this.getCurrentMIDlet().startApp();
+        public void startMIDlet()
+        {
+            try
+            {
+              MIDlet curMidlet = this.getCurrentMIDlet();
+              if (curMidlet != null)
+                curMidlet.startApp();
+            }
+            catch { }
+        }
 
-    public void pauseMIDlet() => this.getCurrentMIDlet().pauseApp();
+        public void pauseMIDlet() => this.getCurrentMIDlet().pauseApp();
 
     public void destroyMIDlet(bool unconditional)
     {
@@ -134,7 +143,14 @@ namespace midp
 
     protected MIDlet getCurrentMIDlet()
     {
-      return this.m_midlets.Count > 0 ? this.m_midlets.Last<MIDlet>() : (MIDlet) null;
+        MIDlet res = (MIDlet)null;
+
+        if (this.m_midlets != null)
+        {
+            if (this.m_midlets.Count > 0)
+                res = this.m_midlets.Last<MIDlet>();
+        }
+      return res;
     }
 
     private MIDlet Graphics3D_getMIDlet() => Runtime.getRuntime().getCurrentMIDlet();

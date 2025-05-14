@@ -2734,7 +2734,8 @@ namespace generic
 
     public InputStream loadBinaryFile(int resourceID)
     {
-      return meClass.getResourceAsStream("res/" + ResourceManager.ID_TO_FILENAME(resourceID));
+       string fileName = "res/" + ResourceManager.ID_TO_FILENAME(resourceID);
+       return meClass.getResourceAsStream(fileName);
     }
 
     public List<Object3D> loadM3GFile(int resourceID)

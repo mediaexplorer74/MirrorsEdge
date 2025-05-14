@@ -1,6 +1,6 @@
 ﻿namespace text
 {
-    internal class ME_Resource
+    public class ME_Resource
     {
     }
 }

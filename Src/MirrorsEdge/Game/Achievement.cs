@@ -7,6 +7,7 @@
 using midp;
 using GameManager;
 using text;
+using System;
 
 #nullable disable
 namespace game
@@ -76,6 +77,11 @@ namespace game
       StringBuffer stringBuffer = textManager.clearStringBuffer();
       textManager.appendStringIdToBuffer(stringBuffer, this.m_CompletedDescription);
       return stringBuffer;
+    }
+
+    public void eventHappended()
+    {
+            
     }
   }
 }

@@ -7,6 +7,7 @@
 using game;
 using generic;
 using midp;
+using SharpDX;
 using System;
 using System.Collections.Generic;
 
@@ -70,9 +71,16 @@ namespace text
 
     public string getString(int stringid)
     {
-      // ISSUE: reference to a compiler-generated method
-      // ISSUE: reference to a compiler-generated method
-      return stringid < -2 ? this.m_dynamicStrings[stringid - -12] : LocaleManager.getInstance().getString(stringid);
+        string str = "";
+        if (stringid < -2)
+        {
+            str = this.m_dynamicStrings[stringid - -12];
+        }
+        else
+        {
+            str = LocaleManager.getInstance().getString(stringid);
+        }
+        return str;
     }
 
     public string getLangString(int languageIndex)
@@ -105,8 +113,8 @@ namespace text
 
     public void setCurrentLanguage(int index)
     {
-      if (index == this.getCurrentLanguage())
-        return;
+      //if (index == this.getCurrentLanguage())
+      //  return;
       // ISSUE: reference to a compiler-generated method
       // ISSUE: variable of a compiler-generated type
       LocaleManager instance = LocaleManager.getInstance();
@@ -254,7 +262,8 @@ namespace text
       // ISSUE: reference to a compiler-generated method
       // ISSUE: reference to a compiler-generated method
       int localeIndex = LocaleManager.getInstance().getLocaleIndex((string) null);
-      return localeIndex < 5 || localeIndex + 1 == 11 || localeIndex + 1 == 12 || localeIndex + 1 == 13 ? this.m_EFIGS_stringRenderers[font] : this.m_Other_stringRenderers[font];
+      return localeIndex < 5 || localeIndex + 1 == 11 || localeIndex + 1 == 12 || localeIndex + 1 == 13 
+                ? this.m_EFIGS_stringRenderers[font] : this.m_Other_stringRenderers[font];
     }
 
     public string replaceFirst(string baseString, string string0)

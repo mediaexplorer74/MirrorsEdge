@@ -59,19 +59,26 @@ namespace game
     {
       this.m_engine.updateLoading(timeStep);
       this.m_engine.getLoadingRunAnimPlayer().updateAnim(timeStep);
+
       if (0 <= this.m_splashTime)
         this.m_splashTime += timeStep;
-      //if (this.m_loadingThread == null && this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-      //{
-        if (this.m_engine.isFading())
-          return;
-        //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneStartup.Start));
-        ThreadImplSceneStartup.Start(default);
-        //this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
-        //this.m_loadingThread.Start((object) this);
-        //}
-        //else
-        //  Thread.Sleep(40);
+       
+        if (true)//(/*this.m_loadingThread == null && */this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
+        {
+            if (this.m_engine.isFading())
+                return;
+            //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneStartup.Start));
+            ThreadImplSceneStartup.Start((object)this);
+            this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
+            //this.m_loadingThread.Start((object) this);
+
+            //TEST
+            this.m_loadingProgress = 100;
+            }
+        else
+        {
+            //Thread.Sleep(40);
+        }
     }
 
     public void updateLoadingState(int timeStep)
@@ -92,10 +99,10 @@ namespace game
           this.m_engine.loadLoadingAssets();
           this.m_engine.getBGMusic();
           this.m_engine.loadSounds();
-          while (this.m_splashTime == -1)
-          {
+          //while (this.m_splashTime == -1)
+          //{
             //Thread.Sleep(1);
-          }            
+          //}            
           quadManager.loadQuads((int) QuadManager.get("GROUP_APPENGINE"));
           quadManager.setAnimFrame((int) QuadManager.get("ANIM_FADE"), 1);
           ++this.m_loadingState;
@@ -144,17 +151,17 @@ namespace game
     {
       //if (this.m_loadingThread == null)
       //  return;
-      //this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
+      this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
       //this.m_loadingThread = (Thread) null;
     }
 
     public override void update(int timeStepMillis)
     {
       this.m_loadingTime += timeStepMillis;
-      if (this.m_loadingState == 4 && this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
+      if (true)//(/*this.m_loadingState == 4 &&*/ this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
       {
-        if (3000 > this.m_loadingTime || this.m_engine.isFading())
-          return;
+        //if (3000 > this.m_loadingTime || this.m_engine.isFading())
+        //  return;
         this.exitStartup();
       }
       else

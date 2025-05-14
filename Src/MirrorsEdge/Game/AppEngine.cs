@@ -208,9 +208,13 @@ namespace game
       this.loadRMSAppSettings();
       this.m_textManager.init();
       this.changeScene(1);
+
       this.m_bgMusic = new BGMusic(this.m_soundManager);
+        
       //this.m_bgMusicThread = new Thread(new ThreadStart(BGMusic.Process));
       //this.m_bgMusicThread.Start();
+      BGMusic.Process();
+
       AppEngine.getM3GAssets().loadData();
       this.m_quadManager.loadQuadData(this.m_resourceManager.loadBinaryFile((int) ResourceManager.get("IDI_QUADS_BIN")), 533, 320);
       this.m_quadManager.loadQuads((int) QuadManager.get("GROUP_SCENESTARTUP"));
@@ -250,10 +254,10 @@ namespace game
 
     public void stopThread()
     {
-        while (this.m_updateScheduled || this.m_paintScheduled)
-        {
+        //while (this.m_updateScheduled || this.m_paintScheduled)
+        //{
             //Thread.Sleep(1);
-        }
+        //}
     }
 
     public void runLoop(int frameTime) => this.update(frameTime);
@@ -263,10 +267,10 @@ namespace game
     public void pauseGame()
     {
       this.m_paused = true;
-      while (this.m_paintScheduled)
-      {
+      //while (this.m_paintScheduled)
+      //{
         //Thread.Sleep(1);
-      }
+      //}
         
       if (this.m_currentScene != null)
         this.m_currentScene.pause();
