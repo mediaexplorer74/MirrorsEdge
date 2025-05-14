@@ -1,4 +1,4 @@
-# Mirror's Edge pre-alpha - net48 branch 
+# Mirror's Edge pre-alpha - main branch 
 
 ![Logo](Images/logo.png)
 
