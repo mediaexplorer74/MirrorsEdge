@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: midp.WP7InputStreamIsolatedStorage
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -12,19 +12,23 @@ namespace midp
 {
   public class WP7InputStreamIsolatedStorage : InputStream
   {
-    private IsolatedStorageFile isoFile;
-    private IsolatedStorageFileStream m_Stream;
+    //private IsolatedStorageFile isoFile = default;
+    //private IsolatedStorageFileStream m_Stream = default;
+    private FileStream m_Stream = default;
 
     protected WP7InputStreamIsolatedStorage(string fileName)
     {
-      this.isoFile = IsolatedStorageFile.GetUserStoreForApplication();
-      if (!this.isoFile.FileExists(fileName))
-        return;
-      this.m_Stream = this.isoFile.OpenFile(fileName, FileMode.Open);
+        // Use FileStream instead of Stream, as Stream is abstract and cannot be instantiated.
+        try
+        {
+            this.m_Stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+        }
+        catch { }
     }
 
     public static WP7InputStreamIsolatedStorage getResourceAsStream(string name)
     {
+      name = "res/" + name;
       WP7InputStreamIsolatedStorage resourceAsStream = new WP7InputStreamIsolatedStorage(name);
       if (resourceAsStream.loadSuccessful())
         return resourceAsStream;

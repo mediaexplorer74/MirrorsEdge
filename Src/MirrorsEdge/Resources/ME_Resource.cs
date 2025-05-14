@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: mirrorsedge_wp7.ME_Resource
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using System.CodeDom.Compiler;
 using System.ComponentModel;
@@ -14,9 +14,9 @@ using System.Runtime.CompilerServices;
 #nullable disable
 namespace mirrorsedge_wp7
 {
-  [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-  [DebuggerNonUserCode]
-  [CompilerGenerated]
+  //[GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+  //[DebuggerNonUserCode]
+  //[CompilerGenerated]
   internal class ME_Resource
   {
     private static ResourceManager resourceMan;
@@ -26,7 +26,7 @@ namespace mirrorsedge_wp7
     {
     }
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    //[EditorBrowsable(EditorBrowsableState.Advanced)]
     internal static ResourceManager ResourceManager
     {
       get
@@ -37,7 +37,7 @@ namespace mirrorsedge_wp7
       }
     }
 
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    //[EditorBrowsable(EditorBrowsableState.Advanced)]
     internal static CultureInfo Culture
     {
       get => ME_Resource.resourceCulture;

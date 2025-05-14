@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: midp.Runtime
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +45,15 @@ namespace midp
       this.addMIDlet(midlet);
     }
 
-    public void startMIDlet() => this.getCurrentMIDlet().startApp();
+        public void startMIDlet()
+        {
+            MIDlet curMidlet = this.getCurrentMIDlet();
 
-    public void pauseMIDlet() => this.getCurrentMIDlet().pauseApp();
+            if (curMidlet != null)
+               curMidlet.startApp();
+        }
+
+        public void pauseMIDlet() => this.getCurrentMIDlet().pauseApp();
 
     public void destroyMIDlet(bool unconditional)
     {

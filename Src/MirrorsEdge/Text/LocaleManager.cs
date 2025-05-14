@@ -1,8 +1,8 @@
-﻿// Decompiled with JetBrains decompiler
+﻿
 // Type: text.LocaleManager
-// Assembly: mirrorsedge_wp7, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
+// Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
-// Assembly location: C:\Users\Admin\Desktop\RE\MirrorsEdge1_1\mirrorsedge_wp7.dll
+
 
 using midp;
 using mirrorsedge_wp7;
@@ -18,9 +18,9 @@ using System.Text;
 #nullable disable
 namespace text
 {
-  [CompilerGenerated]
-  [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-  [DebuggerNonUserCode]
+  //[CompilerGenerated]
+  //[GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+  //[DebuggerNonUserCode]
   public class LocaleManager
   {
     public const int LOCALE_NONE = 0;
@@ -41,8 +41,8 @@ namespace text
     public const int LOCALE_COUNT = 15;
     public const int LOCALE_ARABIC = 15;
     private static Dictionary<int, string> m_StringTable = new Dictionary<int, string>();
-    private List<string> m_supportedLocales;
-    private string m_currentLocale;
+    private List<string> m_supportedLocales = new List<string>();
+    private string m_currentLocale = "en";
     private int m_currentLocaleIndex;
     private int m_stringPoolIdShift;
     private int m_stringIdMask;
@@ -72,7 +72,7 @@ namespace text
         case 8:
           return "zh-CN";
         case 9:
-          return "ru-RU";
+          return "ru";//"ru-RU";
         case 10:
           return "pl-PL";
         case 11:
@@ -86,7 +86,7 @@ namespace text
         case 15:
           return "ar";
         default:
-          return (string) null;
+           return "en";//(string) null;
       }
     }
 
@@ -119,37 +119,31 @@ namespace text
 
     internal LocaleManager()
     {
-      // ISSUE: reference to a compiler-generated field
       this.m_supportedLocales = new List<string>();
-      // ISSUE: reference to a compiler-generated field
+      
       this.m_currentLocale = (string) null;
-      // ISSUE: reference to a compiler-generated field
+      
       this.m_currentLocaleIndex = -1;
-      // ISSUE: reference to a compiler-generated field
+      
       this.m_stringPoolIdShift = 0;
-      // ISSUE: reference to a compiler-generated field
+      
       this.m_stringIdMask = 0;
       for (int locale = 1; locale < 15; ++locale)
       {
-        // ISSUE: reference to a compiler-generated field
-        // ISSUE: reference to a compiler-generated method
+        
         this.m_supportedLocales.Add(LocaleManager.GetLocaleCode(locale));
       }
-      // ISSUE: reference to a compiler-generated method
+     
       this.setStringIdBits(16);
-      // ISSUE: reference to a compiler-generated method
-      // ISSUE: reference to a compiler-generated method
-      // ISSUE: reference to a compiler-generated field
-      // ISSUE: reference to a compiler-generated method
+     
       this.setLocale(LocaleManager.GetLocaleCode(LocaleManager.GetDeviceLanguage(1)) ?? this.m_supportedLocales[0]);
     }
 
     public virtual void Destructor()
     {
-      // ISSUE: reference to a compiler-generated field
-      this.m_supportedLocales = (List<string>) null;
-      // ISSUE: reference to a compiler-generated field
-      this.m_currentLocale = (string) null;
+      this.m_supportedLocales =  new List<string>();
+
+      this.m_currentLocale = default;//(string) null;
     }
 
     public static LocaleManager getInstance() => LocaleManager.s_instance;
@@ -160,7 +154,7 @@ namespace text
       get
       {
         if (object.ReferenceEquals((object) LocaleManager.resourceMan, (object) null))
-          LocaleManager.resourceMan = new ResourceManager("mirrorsedge_wp7.ME_Resource", typeof (ME_Resource).Assembly);
+          LocaleManager.resourceMan = new ResourceManager(/*"mirrorsedge_wp7.ME_Resource"*/"mirrorsedge_wp7", typeof (ME_Resource).Assembly);
         return LocaleManager.resourceMan;
       }
     }
@@ -179,21 +173,28 @@ namespace text
     public string getString(int stringId)
     {
       string str;
-      // ISSUE: reference to a compiler-generated field
+      
       if (!LocaleManager.m_StringTable.TryGetValue(stringId, out str))
       {
-        // ISSUE: reference to a compiler-generated field
+      
         int num = stringId & this.m_stringIdMask;
-        // ISSUE: reference to a compiler-generated field
+      
         LocaleManager.sb.Clear();
-        // ISSUE: reference to a compiler-generated field
+      
         LocaleManager.sb.Append("TEXT_");
-        // ISSUE: reference to a compiler-generated field
+      
         LocaleManager.sb.Append(num);
-        // ISSUE: reference to a compiler-generated field
-        // ISSUE: reference to a compiler-generated field
-        str = LocaleManager.ResourceManager.GetString(LocaleManager.sb.ToString(), LocaleManager.resourceCulture) ?? "XXXXXX " + (object) num + " XXXXXX";
-        // ISSUE: reference to a compiler-generated field
+
+        try
+        {
+            //str = LocaleManager.ResourceManager.GetString(LocaleManager.sb.ToString(), LocaleManager.resourceCulture) ?? "XXXXXX " + (object)num + " XXXXXX";
+            str = LocaleManager.ResourceManager.GetString(LocaleManager.sb.ToString(), LocaleManager.resourceCulture);
+        }
+        catch 
+        {
+            str = LocaleManager.sb.ToString();
+        }
+      
         LocaleManager.m_StringTable.Add(stringId, str);
       }
       return str;

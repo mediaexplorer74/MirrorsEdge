@@ -2,14 +2,16 @@
 
 ![Logo](Images/logo.png)
 
+## Screenshot
+![W11](Images/screenshot.png)
 
 ## Status
 - Game framework ("engine"): MonoGame 3.8 DX
 - NET 4.8 used
 - Project sucessfully builded 
-- Game run failed
-
-![](Images/build_ok.png)
+- Game run only to Menu Scene (no kbd/mouse support)
+- Sound/music work well only when game window activated (re-actiovation aftor focus lost -- no sound) 
+- Resource (strings) work damaged (not ready)
 
 ## ToDo
 - Fix game run
