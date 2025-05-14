@@ -1,0 +1,1680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{35BCCEB6-2B07-4D1E-A140-7ADB2ACA37B2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>mirrorsedge_wp7</AssemblyName>
+    <ApplicationVersion>1.1.25.0</ApplicationVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>mirrorsedge_wp7</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.0.1\lib\net45\SharpDX.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct2D1.4.0.1\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.0.1\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D9.4.0.1\lib\net45\SharpDX.Direct3D9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.0.1\lib\net45\SharpDX.DXGI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.0.1\lib\net45\SharpDX.Mathematics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.MediaFoundation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.MediaFoundation.4.0.1\lib\net45\SharpDX.MediaFoundation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.XAudio2, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.XAudio2.4.0.1\lib\net45\SharpDX.XAudio2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.GamerServices" />
+    <Reference Include="SharpDX.XInput, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.XInput.4.0.1\lib\net45\SharpDX.XInput.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <!--Reference Include="System.Numerics" /-->
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.ServiceModel.Http" />
+    <Reference Include="System.ServiceModel.Primitives" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Util\ABCDStruct.cs" />
+    <Compile Include="Util\MD5Core.cs" />
+    <Compile Include="Util\MathTrig.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Text\WrappedString.cs" />
+    <Compile Include="Text\StringRenderer.cs" />
+    <Compile Include="Text\LocaleManager.cs" />
+    <Compile Include="Text\TextManager.cs" />
+    <Compile Include="Text\SystemStringRenderer.cs" />
+    <Compile Include="Text\SystemStringRendererIPhone.cs" />
+    <Compile Include="Text\CachedStringRenderer.cs" />
+    <Compile Include="Text\StringRecord.cs" />
+    <Compile Include="Midp\meObject.cs" />
+    <Compile Include="Midp\PlayerListener.cs" />
+    <Compile Include="Midp\Runnable.cs" />
+    <Compile Include="Midp\meClass.cs" />
+    <Compile Include="Midp\Display.cs" />
+    <Compile Include="Midp\DisplayWP7.cs" />
+    <Compile Include="Midp\DefineConstants.cs" />
+    <Compile Include="Midp\OutputStream.cs" />
+    <Compile Include="Midp\ByteArrayOutputStream.cs" />
+    <Compile Include="Midp\ByteArrayOutputStreamClass.cs" />
+    <Compile Include="Midp\InputStream.cs" />
+    <Compile Include="Midp\ByteArrayInputStream.cs" />
+    <Compile Include="Midp\ByteArrayInputStreamClass.cs" />
+    <Compile Include="Midp\MIDlet.cs" />
+    <Compile Include="Midp\Throwable.cs" />
+    <Compile Include="Midp\Controllable.cs" />
+    <Compile Include="Midp\Player.cs" />
+    <Compile Include="Midp\PlayerClass.cs" />
+    <Compile Include="Midp\Control.cs" />
+    <Compile Include="Midp\InputStreamClass.cs" />
+    <Compile Include="Midp\DisplayClass.cs" />
+    <Compile Include="Midp\Font.cs" />
+    <Compile Include="Midp\FontWP7Font.cs" />
+    <Compile Include="Midp\WP7OutputStreamIsolatedStorage.cs" />
+    <Compile Include="Midp\VolumeControl.cs" />
+    <Compile Include="Midp\PitchControl.cs" />
+    <Compile Include="Midp\PositionControl.cs" />
+    <Compile Include="Midp\PlayerWP7CoreAudio.cs" />
+    <Compile Include="Midp\AnimationManager3D.cs" />
+    <Compile Include="Midp\Runtime.cs" />
+    <Compile Include="Midp\RuntimeClass.cs" />
+    <Compile Include="Midp\FontClass.cs" />
+    <Compile Include="Midp\Graphics.cs" />
+    <Compile Include="Midp\GraphicsWP7.cs" />
+    <Compile Include="Midp\GraphicsClass.cs" />
+    <Compile Include="Midp\Displayable.cs" />
+    <Compile Include="Midp\DisplayableClass.cs" />
+    <Compile Include="Midp\Image.cs" />
+    <Compile Include="Midp\WebImage.cs" />
+    <Compile Include="Midp\DataInputStream.cs" />
+    <Compile Include="Midp\DataInputStreamClass.cs" />
+    <Compile Include="Midp\WP7InputStream.cs" />
+    <Compile Include="Midp\WP7InputStreamIsolatedStorage.cs" />
+    <Compile Include="Midp\Sprite.cs" />
+    <Compile Include="Midp\DataOutputStream.cs" />
+    <Compile Include="Midp\DataOutputStreamClass.cs" />
+    <Compile Include="Midp\Canvas.cs" />
+    <Compile Include="Midp\CanvasClass.cs" />
+    <Compile Include="Midp\JMath.cs" />
+    <Compile Include="Midp\MIDletClass.cs" />
+    <Compile Include="Midp\ImageClass.cs" />
+    <Compile Include="Midp\ImageWP7.cs" />
+    <Compile Include="Midp\StringBuffer.cs" />
+    <Compile Include="Midp\Exception.cs" />
+    <Compile Include="Midp\ArithmeticException.cs" />
+    <Compile Include="Midp\ArrayIndexOutOfBoundsException.cs" />
+    <Compile Include="Midp\EOFException.cs" />
+    <Compile Include="Midp\FileNotFoundException.cs" />
+    <Compile Include="Midp\IllegalAccessException.cs" />
+    <Compile Include="Midp\IllegalArgumentException.cs" />
+    <Compile Include="Midp\IllegalStateException.cs" />
+    <Compile Include="Midp\IOException.cs" />
+    <Compile Include="Midp\IndexOutOfBoundsException.cs" />
+    <Compile Include="Midp\InstantiationException.cs" />
+    <Compile Include="Midp\NoSuchElementException.cs" />
+    <Compile Include="Midp\NullPointerException.cs" />
+    <Compile Include="Midp\OutputStreamClass.cs" />
+    <Compile Include="Microedition\MathExt.cs" />
+    <Compile Include="Microedition\m3g\Object3D.cs" />
+    <Compile Include="Microedition\m3g\Transformable.cs" />
+    <Compile Include="Microedition\m3g\Node.cs" />
+    <Compile Include="Microedition\m3g\Mesh.cs" />
+    <Compile Include="Microedition\m3g\SkinnedMesh.cs" />
+    <Compile Include="Microedition\m3g\Light.cs" />
+    <Compile Include="Microedition\m3g\Fog.cs" />
+    <Compile Include="Microedition\m3g\Texture2D.cs" />
+    <Compile Include="Microedition\m3g\AnimationTrack.cs" />
+    <Compile Include="Microedition\m3g\AnimationController.cs" />
+    <Compile Include="Microedition\m3g\Group.cs" />
+    <Compile Include="Microedition\m3g\LineMode.cs" />
+    <Compile Include="Microedition\m3g\Renderer.cs" />
+    <Compile Include="Microedition\m3g\PointSpriteMode.cs" />
+    <Compile Include="Microedition\m3g\Material.cs" />
+    <Compile Include="Microedition\m3g\ChunkInputStream.cs" />
+    <Compile Include="Microedition\m3g\Loader.cs" />
+    <Compile Include="Microedition\m3g\Camera.cs" />
+    <Compile Include="Microedition\m3g\TextureCombiner.cs" />
+    <Compile Include="Microedition\m3g\Object3DFinder.cs" />
+    <Compile Include="Microedition\m3g\RenderPass.cs" />
+    <Compile Include="Microedition\m3g\VertexArray.cs" />
+    <Compile Include="Microedition\m3g\Background.cs" />
+    <Compile Include="Microedition\m3g\Sprite3D.cs" />
+    <Compile Include="Microedition\m3g\PolygonMode.cs" />
+    <Compile Include="Microedition\m3g\World.cs" />
+    <Compile Include="Microedition\m3g\Vertex.cs" />
+    <Compile Include="Microedition\m3g\Vertex2D.cs" />
+    <Compile Include="Microedition\m3g\SkinnedVertex.cs" />
+    <Compile Include="Microedition\m3g\VertexArrayTextureUnit.cs" />
+    <Compile Include="Microedition\m3g\VertexBuffer.cs" />
+    <Compile Include="Microedition\m3g\Transform.cs" />
+    <Compile Include="Microedition\m3g\KeyframeSequence.cs" />
+    <Compile Include="Microedition\m3g\Image2D.cs" />
+    <Compile Include="Microedition\m3g\TransformStack.cs" />
+    <Compile Include="Microedition\m3g\RendererXNA.cs" />
+    <Compile Include="Microedition\m3g\Blender.cs" />
+    <Compile Include="Microedition\m3g\AppearanceBase.cs" />
+    <Compile Include="Microedition\m3g\Appearance.cs" />
+    <Compile Include="Microedition\m3g\IndexBuffer.cs" />
+    <Compile Include="Microedition\m3g\TriangleStripArray.cs" />
+    <Compile Include="Microedition\m3g\RenderNode.cs" />
+    <Compile Include="Microedition\m3g\Graphics3D.cs" />
+    <Compile Include="Microedition\m3g\CompositingMode.cs" />
+    <Compile Include="Generic\SignalFilter.cs" />
+    <Compile Include="Generic\AnimationManagerData.cs" />
+    <Compile Include="Generic\AnimationManager.cs" />
+    <Compile Include="Generic\StringConstants.cs" />
+    <Compile Include="Generic\ResourceManager.cs" />
+    <Compile Include="Generic\AnimPlayer3D.cs" />
+    <Compile Include="Generic\AnimPlayer3DClass.cs" />
+    <Compile Include="Generic\SoundManager.cs" />
+    <Compile Include="Generic\FBFriend.cs" />
+    <Compile Include="Generic\FacebookLoginResult.cs" />
+    <Compile Include="Generic\FBConnection.cs" />
+    <Compile Include="Generic\GMath.cs" />
+    <Compile Include="Generic\AnimPlayer.cs" />
+    <Compile Include="Generic\BoundingRectangle.cs" />
+    <Compile Include="EA\EAMTX_Constants.cs" />
+    <Compile Include="EA\MTX_EventID.cs" />
+    <Compile Include="EA\EASpywareManager.cs" />
+    <Compile Include="Util\TimerTask.cs" />
+    <Compile Include="Util\TimerTaskClass.cs" />
+    <Compile Include="Util\Timer.cs" />
+    <Compile Include="Util\TimerClass.cs" />
+    <Compile Include="Support\WP7_TouchManager.cs" />
+    <Compile Include="Support\IFFHandler.cs" />
+    <Compile Include="Support\IFFReader.cs" />
+    <Compile Include="Support\IFFWriter.cs" />
+    <Compile Include="Support\LiveProcessor.cs" />
+    <Compile Include="Support\QuadAttrib.cs" />
+    <Compile Include="Support\AnimPlayerQuad.cs" />
+    <Compile Include="Support\M3GAssets_Image.cs" />
+    <Compile Include="Support\M3GAssets_Texture.cs" />
+    <Compile Include="Support\M3GAssets_AppGroup.cs" />
+    <Compile Include="Support\M3GAssets_TexGroup.cs" />
+    <Compile Include="Support\M3GAssets_File.cs" />
+    <Compile Include="Support\M3GAssets_Node.cs" />
+    <Compile Include="Support\M3GAssets_Model.cs" />
+    <Compile Include="Support\M3GAssets.cs" />
+    <Compile Include="Support\BGMusic.cs" />
+    <Compile Include="Support\AccelerationSample.cs" />
+    <Compile Include="Support\WP7_Accelerometer.cs" />
+    <Compile Include="Support\InterpolationTimed.cs" />
+    <Compile Include="Support\InterpolationFloatTimed.cs" />
+    <Compile Include="Support\InterpolationVectorTimed.cs" />
+    <Compile Include="Support\QuadImage.cs" />
+    <Compile Include="Support\QuadTexture.cs" />
+    <Compile Include="Support\QuadGroup.cs" />
+    <Compile Include="Support\QuadMesh.cs" />
+    <Compile Include="Support\QuadManager.cs" />
+    <Compile Include="Support\AnimationBlenderData.cs" />
+    <Compile Include="Support\AnimationBlender.cs" />
+    <Compile Include="Particles\Particles.cs" />
+    <Compile Include="Particles\PointParticles.cs" />
+    <Compile Include="Particles\ParticleEffect.cs" />
+    <Compile Include="Particles\Emitter.cs" />
+    <Compile Include="Particles\EmissionMode.cs" />
+    <Compile Include="Particles\QuadParticles.cs" />
+    <Compile Include="Particles\ParticleMode.cs" />
+    <Compile Include="Particles\CylinderParticles.cs" />
+    <Compile Include="Game\TweakConstants.cs" />
+    <Compile Include="Game\GhostKeyframe.cs" />
+    <Compile Include="Game\GhostAnimation.cs" />
+    <Compile Include="Game\GhostAnimationPlayback.cs" />
+    <Compile Include="Game\GhostAnimationRecorder.cs" />
+    <Compile Include="Game\ThreadImplSceneStartup.cs" />
+    <Compile Include="Game\Scene.cs" />
+    <Compile Include="Game\SceneStartup.cs" />
+    <Compile Include="Game\MonkeyApp.cs" />
+    <Compile Include="Game\GameObject.cs" />
+    <Compile Include="Game\GameObjectPopupBox.cs" />
+    <Compile Include="Game\GameObjectCutsceneTrigger.cs" />
+    <Compile Include="Game\GameObjectRunner.cs" />
+    <Compile Include="Game\GameObjectNPC.cs" />
+    <Compile Include="Game\GameObjectPolice.cs" />
+    <Compile Include="Game\GameObjectPoliceLight.cs" />
+    <Compile Include="Game\GameObjectCheckpoint.cs" />
+    <Compile Include="Game\SeperatedAxis.cs" />
+    <Compile Include="Game\SeperatedAxesList.cs" />
+    <Compile Include="Game\CollShape.cs" />
+    <Compile Include="Game\CollOrthoHexahedron.cs" />
+    <Compile Include="Game\CollOrthoRampNegX.cs" />
+    <Compile Include="Game\CollOrthoRampPosX.cs" />
+    <Compile Include="Game\CollOctahedron.cs" />
+    <Compile Include="Game\CollLine.cs" />
+    <Compile Include="Game\SceneGamePointer.cs" />
+    <Compile Include="Game\ThreadImplSceneGame.cs" />
+    <Compile Include="Game\SceneGame.cs" />
+    <Compile Include="Game\GameObjectFinish.cs" />
+    <Compile Include="Game\GameCommon.cs" />
+    <Compile Include="Game\SoundEventPoolManager.cs" />
+    <Compile Include="Game\ThreadImplSceneMenu.cs" />
+    <Compile Include="Game\SceneMenu.cs" />
+    <Compile Include="Game\MathVector.cs" />
+    <Compile Include="Game\MathQuaternion.cs" />
+    <Compile Include="Game\MathLine.cs" />
+    <Compile Include="Game\MathPlane.cs" />
+    <Compile Include="Game\MathOrthoBox.cs" />
+    <Compile Include="Game\MathFrustum.cs" />
+    <Compile Include="Game\SceneClass.cs" />
+    <Compile Include="Game\GameObjectData_SoloVisual.cs" />
+    <Compile Include="Game\GameObjectData_OriginAnimVisual.cs" />
+    <Compile Include="Game\GameObjectData_3ChannelBlendVisual.cs" />
+    <Compile Include="Game\GameObjectRunnerData.cs" />
+    <Compile Include="Game\MEdgeMap.cs" />
+    <Compile Include="Game\Level.cs" />
+    <Compile Include="Game\LevelData.cs" />
+    <Compile Include="Game\GameObjectPlayer.cs" />
+    <Compile Include="Game\MenuStringChoice.cs" />
+    <Compile Include="Game\MenuMainSubMenu.cs" />
+    <Compile Include="Game\Menu.cs" />
+    <Compile Include="Game\MenuMain.cs" />
+    <Compile Include="Game\MenuPause.cs" />
+    <Compile Include="Game\Achievement.cs" />
+    <Compile Include="Game\LevelAchievement.cs" />
+    <Compile Include="Game\TimedLevelAchievement.cs" />
+    <Compile Include="Game\TimedAchievement.cs" />
+    <Compile Include="Game\TimedEventsAchievement.cs" />
+    <Compile Include="Game\EventsInPhaseAchievement.cs" />
+    <Compile Include="Game\BagsPerLevelAchievement.cs" />
+    <Compile Include="Game\CountAchievement.cs" />
+    <Compile Include="Game\AchievementMetrics.cs" />
+    <Compile Include="Game\AchievementData.cs" />
+    <Compile Include="Game\GameObjectEffectPickup.cs" />
+    <Compile Include="Game\GameObjectCollectable.cs" />
+    <Compile Include="Game\GameObjectData.cs" />
+    <Compile Include="Game\GameObjectPlaneLight.cs" />
+    <Compile Include="Game\GameObjectZipLine.cs" />
+    <Compile Include="Game\GameObjectAmbientSound.cs" />
+    <Compile Include="Game\GameObjectSoundOneShot.cs" />
+    <Compile Include="Game\GameObjectMusicCue.cs" />
+    <Compile Include="Game\GlobalMembersGameObjectPolice.cs" />
+    <Compile Include="Game\GameObjectChopper.cs" />
+    <Compile Include="Game\GameObjectBullet.cs" />
+    <Compile Include="Game\SpywareManager.cs" />
+    <Compile Include="Game\DataCameraAnimStep.cs" />
+    <Compile Include="Game\DataCameraAnim.cs" />
+    <Compile Include="Game\Path.cs" />
+    <Compile Include="Game\PathPoint.cs" />
+    <Compile Include="Game\FallBox.cs" />
+    <Compile Include="Game\PainBox.cs" />
+    <Compile Include="Game\ModelSet.cs" />
+    <Compile Include="Game\MapPalette.cs" />
+    <Compile Include="Game\ChunkDynamic.cs" />
+    <Compile Include="Game\ChunkRunnerVision.cs" />
+    <Compile Include="Game\ChunkSection.cs" />
+    <Compile Include="Game\ChunkColumn.cs" />
+    <Compile Include="Game\ChunkLayer.cs" />
+    <Compile Include="Game\ChunkManager.cs" />
+    <Compile Include="Game\GameObjectEffectPigeonTakeoff_Pigeon.cs" />
+    <Compile Include="Game\GameObjectEffectPigeonTakeoff.cs" />
+    <Compile Include="Game\GlobalMembersGameCamera.cs" />
+    <Compile Include="Game\GameCamera.cs" />
+    <Compile Include="Game\PendingChallenge.cs" />
+    <Compile Include="Game\AppEngine.cs" />
+    <Compile Include="Game\GameObjectRival.cs" />
+    <Compile Include="Game\GameObjectRivalGeneral.cs" />
+    <Compile Include="Game\GameObjectRivalBoss.cs" />
+    <Compile Include="Game\GameObjectPoliceRiot.cs" />
+    <Compile Include="Game\GameObjectGhost.cs" />
+    <Compile Include="Game\SequencerTrack.cs" />
+    <Compile Include="Game\SequencerTrackPlayer.cs" />
+    <Compile Include="Game\SoundSequencer.cs" />
+    <Compile Include="Game\SequencerEvent.cs" />
+    <Compile Include="Game\SequencerFootstep.cs" />
+    <Compile Include="Game\SequencerSound.cs" />
+    <Compile Include="Game\SequencerPoolSound.cs" />
+    <Compile Include="Game\GameObjectEffectHit.cs" />
+    <Compile Include="Game\Splines\GlobalMembersNonUniformSpline.cs" />
+    <Compile Include="Game\Splines\TimedSpline.cs" />
+    <Compile Include="Game\Splines\SmoothSpline.cs" />
+    <Compile Include="SevenZip\DataErrorException.cs" />
+    <Compile Include="SevenZip\InvalidParamException.cs" />
+    <Compile Include="SevenZip\ICodeProgress.cs" />
+    <Compile Include="SevenZip\ICoder.cs" />
+    <Compile Include="SevenZip\CoderPropID.cs" />
+    <Compile Include="SevenZip\ISetCoderProperties.cs" />
+    <Compile Include="SevenZip\IWriteCoderProperties.cs" />
+    <Compile Include="SevenZip\ISetDecoderProperties.cs" />
+    <Compile Include="SevenZip\CRC.cs" />
+    <Compile Include="SevenZip\Compression\RangeCoder\BitEncoder.cs" />
+    <Compile Include="SevenZip\Compression\RangeCoder\BitDecoder.cs" />
+    <Compile Include="SevenZip\Compression\RangeCoder\BitTreeEncoder.cs" />
+    <Compile Include="SevenZip\Compression\RangeCoder\BitTreeDecoder.cs" />
+    <Compile Include="SevenZip\Compression\RangeCoder\Encoder.cs" />
+    <Compile Include="SevenZip\Compression\RangeCoder\Decoder.cs" />
+    <Compile Include="SevenZip\Compression\LZMA\Base.cs" />
+    <Compile Include="SevenZip\Compression\LZMA\Encoder.cs" />
+    <Compile Include="SevenZip\Compression\LZMA\Decoder.cs" />
+    <Compile Include="SevenZip\Compression\LZ\InWindow.cs" />
+    <Compile Include="SevenZip\Compression\LZ\IInWindowStream.cs" />
+    <Compile Include="SevenZip\Compression\LZ\IMatchFinder.cs" />
+    <Compile Include="SevenZip\Compression\LZ\BinTree.cs" />
+    <Compile Include="SevenZip\Compression\LZ\OutWindow.cs" />
+    <Compile Include="UI\WindowResult.cs" />
+    <Compile Include="UI\ButtonEffect.cs" />
+    <Compile Include="UI\NetworkWaitEffect.cs" />
+    <Compile Include="UI\WindowStore.cs" />
+    <Compile Include="UI\WindowElement.cs" />
+    <Compile Include="UI\BorderedElement.cs" />
+    <Compile Include="UI\ScrollBar.cs" />
+    <Compile Include="UI\VerticalScrollBar.cs" />
+    <Compile Include="UI\HorizontalScrollBar.cs" />
+    <Compile Include="UI\SliderElement.cs" />
+    <Compile Include="UI\HorizontalSliderElement.cs" />
+    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\MinorButton.cs" />
+    <Compile Include="UI\MajorButton.cs" />
+    <Compile Include="UI\LeftArrowButton.cs" />
+    <Compile Include="UI\RightArrowButton.cs" />
+    <Compile Include="UI\CheckBox.cs" />
+    <Compile Include="UI\NotchedSlider.cs" />
+    <Compile Include="UI\Window.cs" />
+    <Compile Include="UI\WindowWithBackground.cs" />
+    <Compile Include="UI\TitledWindow.cs" />
+    <Compile Include="UI\ConfirmationWindow.cs" />
+    <Compile Include="UI\AchievementsList.cs" />
+    <Compile Include="UI\AchievementWindow.cs" />
+    <Compile Include="UI\AchievementItem.cs" />
+    <Compile Include="UI\AchievementNotification.cs" />
+    <Compile Include="UI\AboutWindow.cs" />
+    <Compile Include="UI\AboutText.cs" />
+    <Compile Include="UI\HelpWindow.cs" />
+    <Compile Include="UI\HelpText.cs" />
+    <Compile Include="UI\EndOfLevelPrompt.cs" />
+    <Compile Include="UI\StoryEndOfLevelPrompt.cs" />
+    <Compile Include="UI\SpeedRunEndOfLevelPrompt.cs" />
+    <Compile Include="UI\ChallengeEndOfLevelPrompt.cs" />
+    <Compile Include="UI\LoadingScreen.cs" />
+    <Compile Include="UI\LoadingScreenImageElement.cs" />
+    <Compile Include="UI\LoadingScreenStringElement.cs" />
+    <Compile Include="UI\SoundOptions.cs" />
+    <Compile Include="UI\GameOptions.cs" />
+    <Compile Include="UI\PopupBox.cs" />
+    <Compile Include="UI\UnlockablePanel.cs" />
+    <Compile Include="UI\UnlockableWindow.cs" />
+    <Compile Include="UI\UnlockableItem.cs" />
+    <Compile Include="UI\LanguagePanel.cs" />
+    <Compile Include="UI\LanguageWindow.cs" />
+    <Compile Include="UI\LanguageItem.cs" />
+    <Compile Include="UI\AboutMenuPanel.cs" />
+    <Compile Include="UI\AboutMenu.cs" />
+    <Compile Include="UI\AboutMenuItem.cs" />
+    <Compile Include="UI\RestartConfirm.cs" />
+    <Compile Include="UI\ReturnToMenuConfirm.cs" />
+    <Compile Include="UI\ExitToBrowserConfirm.cs" />
+    <Compile Include="UI\NewGameConfirm.cs" />
+    <Compile Include="UI\BuyFromLeaderboardsMessage.cs" />
+    <Compile Include="UI\TutorialConfirm.cs" />
+    <Compile Include="UI\EnableShareDataConfirm.cs" />
+    <Compile Include="UI\DisableShareDataConfirm.cs" />
+    <Compile Include="UI\ShareDataEnabledConfirm.cs" />
+    <Compile Include="UI\ShareDataDisabledConfirm.cs" />
+    <Compile Include="UI\ChallengeNoNetwork.cs" />
+    <Compile Include="UI\NoStorage.cs" />
+    <Compile Include="UI\ChapterSelectWindow.cs" />
+    <Compile Include="UI\ChapterSelectStoryWindow.cs" />
+    <Compile Include="UI\ChapterSelectSpeedrunWindow.cs" />
+    <Compile Include="UI\ChapterSelectItem.cs" />
+    <Compile Include="UI\ChapterSelectItemStory.cs" />
+    <Compile Include="UI\ChapterSelectItemSpeedrun.cs" />
+    <Compile Include="UI\EndOfGameResultsWindow.cs" />
+    <Compile Include="UI\LeaderboardList.cs" />
+    <Compile Include="UI\LeaderboardListWindow.cs" />
+    <Compile Include="UI\LeaderboardWindow.cs" />
+    <Compile Include="UI\UploadConfirmationWindow.cs" />
+    <Compile Include="UI\DisplayNameEntry.cs" />
+    <Compile Include="UI\PleaseWaitWindow.cs" />
+    <Compile Include="Resources\MirrorsEdge.cs" />
+    <Compile Include="Resources\ME_Resource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ME_Resource.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="Content\Default.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\Font12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\Helvetica-Oblique_16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_21.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_24.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\HelveticaNeueLTStd_MdExO_9.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_21.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_24.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\MyriadProBlack_9.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_01.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_02.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_03.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_04.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_05.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_06.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_07.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_08.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_09.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_10.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Ambience_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\BF_Casio_theme.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\BF_Casio_theme.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_01.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_02.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_03.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_04.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_05.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_06.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_07.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_08.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Chase_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_01.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_02.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_03.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_04.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_05.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_06.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_07.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_08.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_09.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Combat_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_01.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_02.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_03.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_04.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_05.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_06.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\Puzzle_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\StillAlive.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\StillAlive.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\StillAliveRemix.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\music\StillAliveRemix.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_00_on_clock_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_00_on_clock_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_01_still_counting_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_01_still_counting_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_02_superstar_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_02_superstar_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_03_that_s_a_wrap_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_03_that_s_a_wrap_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_04_bag_lady_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_04_bag_lady_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_05_hoarder_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_05_hoarder_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_06_balancing_act_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_06_balancing_act_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_07_free_falling_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_07_free_falling_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_08_tango_down_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_08_tango_down_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_09_rampage_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_09_rampage_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_10_i_ll_take_that_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_10_i_ll_take_that_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_11_neutralizer_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_11_neutralizer_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_12_tag_you_re_it_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_12_tag_you_re_it_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_13_thrill_of_the_chase_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_13_thrill_of_the_chase_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_14_falling_down_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_14_falling_down_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_15_scream_for_me_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_15_scream_for_me_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_16_economist_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_16_economist_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_17_death_from_above_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_17_death_from_above_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_18_scruffy_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_18_scruffy_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_19_i_heart_88_7_lock.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\achiev_19_i_heart_88_7_open.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\Connect_iphone.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\loading_run.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\Logout_iphone.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_boss_runner.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_bullet_effect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_button_effect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_0_0.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_0_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_1_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_1_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_2_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_2_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_3_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_3_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_4_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_4_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_5_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_5_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_6_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chapterend_6_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_chopper.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_collect_effect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_faith_dusk.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_faith_gen_interior.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_faith_ghost.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_faith_jail.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_faith_midday.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_faith_night.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_faith_underground.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_fx_particles.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_fx_smoke_t1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_fx_steamjet_t1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_bg_backdrop_dusk.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_bg_backdrop_midday.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_bg_backdrop_night.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_buildings_dusk.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_buildings_midday.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_buildings_night.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_gen_interior_t1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_gen_interior_t2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_gen_interior_t3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_graffiti_interio.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_jail_interior_t1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_jail_interior_t2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_jail_interior_t3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_objects_dusk.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_objects_dusk_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_objects_midday.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_objects_midday_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_objects_night.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_objects_night_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_underground_interior_t1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_underground_interior_t2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_map_underground_interior_t3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_pain_effect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_pigeon.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_plane_light.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_policelight.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_police_riot.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_Runner.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_ui_city.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_19.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\texture_unlockable_20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\texture_intro_bg.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\texture_upsell_screen_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\texture_upsell_screen_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\texture_upsell_screen_3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\texture_upsell_screen_4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\texture_upsell_screen_5.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\ui_loading_icon_stars.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\ui_loading_text_blank.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\trial\ui_loading_text_blank_short.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\ui_banner_cropped.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\ui_loading_icon_norunning.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\ui_loading_icon_stars.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\ui_loading_icon_tick.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\ui_loading_text_blank.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\res\ui_loading_text_blank_short.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_AI_Scream_Short_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_AI_Scream_Short_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_AI_Scream_Short_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_AI_Scream_Short_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_bag_stinger.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Blades_Far.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Blades_Near.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_In_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Breath_Soft_Short_Out_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_checkpoint.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_start_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_start_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_start_3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_start_4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_success_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_success_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_success_3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_success_4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_combat_success_5.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ConcreteFootStepRun_14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_death_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Fist_Head_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Fist_Head_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Fist_Head_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Foot_Body_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Foot_Body_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_GLOCK_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_GLOCK_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_GLOCK_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_HeliStart_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Med_14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Soft_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Soft_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Impact_Soft_12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Inverted_Stinger_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_KickBack_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_KickBack_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_KickSide_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_KickSide_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalCraneFootStepRun_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalDuctFootstepRun_12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MetalGantryFootStepRun_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MiniMe_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MiniMe_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_MiniMe_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Overhead.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_pigeon_wings.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Puzzle_intro.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Reversed_stinger_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_slide_in.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_slide_loop.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_slide_out.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_steam.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Stinger_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Stinger_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Stinger_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Stinger_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_5.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_6.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_7.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_Strain_Soft_8.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ui_neg.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_ui_pos.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_wilhelm_scream.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_01.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_02.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_03.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_04.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_05.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_06.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_07.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_08.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_09.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_WoodPlanksFootStepRun_10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_zip_in.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_zip_loop.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\sounds\sfx_zip_out.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets" Condition="Exists('..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets'))" />
+  </Target>
+</Project>
