@@ -479,7 +479,7 @@
     <Compile Include="UI\UploadConfirmationWindow.cs" />
     <Compile Include="UI\DisplayNameEntry.cs" />
     <Compile Include="UI\PleaseWaitWindow.cs" />
-    <Compile Include="Resources\MirrorsEdge.cs" />
+    <Compile Include="MirrorsEdge.cs" />
     <Compile Include="Resources\ME_Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
