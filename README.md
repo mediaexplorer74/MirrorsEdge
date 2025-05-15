@@ -3,7 +3,7 @@
 
 Planned "UWP-remake" of Mirror's Edge game project. However, is just cool dev research project. No less, no more.
 
-## Screenshot
+## Screenshots
 ![W11](Images/sshot01.png)
 ![W11](Images/sshot02.png)
 ![W11](Images/sshot03.png)
