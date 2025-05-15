@@ -4,11 +4,12 @@
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
 
 
+using GameManager;
 using generic;
 using midp;
-using GameManager;
 using support;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace game
@@ -29,7 +30,7 @@ namespace game
     private int m_loadingState;
     private int m_loadingTime;
     private int m_splashTime;
-    //private Thread m_loadingThread;
+    private Thread m_loadingThread;
     private SceneStartup.LoadingThreadState m_loadingThreadState;
 
     public SceneStartup(AppEngine engine)
@@ -39,7 +40,7 @@ namespace game
       this.m_loadingState = 0;
       this.m_loadingTime = 0;
       this.m_splashTime = -1;
-      //this.m_loadingThread = (Thread) null;
+      this.m_loadingThread = (Thread) null;
       this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
     }
 
@@ -55,7 +56,7 @@ namespace game
       this.m_loadingProgress = 0;
     }
 
-    public void updateLoading(int timeStep)
+    public async void updateLoading(int timeStep)
     {
       this.m_engine.updateLoading(timeStep);
       this.m_engine.getLoadingRunAnimPlayer().updateAnim(timeStep);
@@ -63,25 +64,27 @@ namespace game
       if (0 <= this.m_splashTime)
         this.m_splashTime += timeStep;
        
-        if (true)//(/*this.m_loadingThread == null && */this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
+        if (this.m_loadingThread == null && 
+                this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
         {
             if (this.m_engine.isFading())
                 return;
-            //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneStartup.Start));
-            ThreadImplSceneStartup.Start((object)this);
+            this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneStartup.Start));
+            //ThreadImplSceneStartup.Start((object)this);
             this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
-            //this.m_loadingThread.Start((object) this);
+            this.m_loadingThread.Start((object) this);
 
             //TEST
-            this.m_loadingProgress = 100;
+            //this.m_loadingProgress = 100;
             }
         else
         {
             //Thread.Sleep(40);
+            await Task.Delay(40);
         }
     }
 
-    public void updateLoadingState(int timeStep)
+    public async void updateLoadingState(int timeStep)
     {
       switch (this.m_loadingState)
       {
@@ -91,7 +94,8 @@ namespace game
         case 2:
           this.m_engine.doStartupLoading();
           QuadManager quadManager = this.m_engine.getQuadManager();
-          AnimationManager.loadImage(this.m_engine.getResourceManager(), (int) ResourceManager.get("IDI_LOADING_RUN_PNG"));
+          AnimationManager.loadImage(this.m_engine.getResourceManager(), 
+              (int) ResourceManager.get("IDI_LOADING_RUN_PNG"));
           this.m_engine.getLoadingRunAnimPlayer().startAnim(0, 4);
           AppEngine.getM3GAssets().getAppearance(7).m_Mirror = true;
           AppEngine.getLevelData().loadData();
@@ -99,10 +103,11 @@ namespace game
           this.m_engine.loadLoadingAssets();
           this.m_engine.getBGMusic();
           this.m_engine.loadSounds();
-          //while (this.m_splashTime == -1)
-          //{
+          while (this.m_splashTime == -1)
+          {
             //Thread.Sleep(1);
-          //}            
+            await Task.Delay(1);
+           }            
           quadManager.loadQuads((int) QuadManager.get("GROUP_APPENGINE"));
           quadManager.setAnimFrame((int) QuadManager.get("ANIM_FADE"), 1);
           ++this.m_loadingState;
@@ -115,18 +120,19 @@ namespace game
           if (3000 >= this.m_splashTime)
             break;
           this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-          //this.m_loadingThread = (Thread) null;
+          this.m_loadingThread = (Thread) null;
           break;
       }
     }
 
-    public void Run()
+    public async void Run()
     {
       while (this.m_loadingThreadState != SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
       {
         if (this.m_loadingThreadState != SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
         {
-            //Thread.Sleep(1000);
+           //Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
         else
             this.updateLoadingState(100);
@@ -149,19 +155,20 @@ namespace game
 
     public override void end()
     {
-      //if (this.m_loadingThread == null)
-      //  return;
+      if (this.m_loadingThread == null)
+        return;
       this.m_loadingThreadState = SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-      //this.m_loadingThread = (Thread) null;
+      this.m_loadingThread = (Thread) null;
     }
 
     public override void update(int timeStepMillis)
     {
       this.m_loadingTime += timeStepMillis;
-      if (true)//(/*this.m_loadingState == 4 &&*/ this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
+      if (this.m_loadingState == 4 && 
+                this.m_loadingThreadState == SceneStartup.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
       {
-        //if (3000 > this.m_loadingTime || this.m_engine.isFading())
-        //  return;
+        if (3000 > this.m_loadingTime || this.m_engine.isFading())
+          return;
         this.exitStartup();
       }
       else
@@ -231,7 +238,8 @@ namespace game
 
     public void checkForLevelAutoStart()
     {
-      InputStream resourceAsStream1 = (InputStream) WP7InputStreamIsolatedStorage.getResourceAsStream("LevelAutoStart");
+      InputStream resourceAsStream1 = (InputStream) WP7InputStreamIsolatedStorage
+                .getResourceAsStream("LevelAutoStart");
       if (resourceAsStream1 != null)
       {
         DataInputStream dataInputStream = new DataInputStream(resourceAsStream1);
@@ -253,7 +261,8 @@ namespace game
 
     public static void setCurrentLevelToAutoStart()
     {
-      DataOutputStream dataOutputStream = new DataOutputStream((OutputStream) OutputStream.getResourceAsStream("LevelAutoStart"));
+      DataOutputStream dataOutputStream = 
+                new DataOutputStream((OutputStream) OutputStream.getResourceAsStream("LevelAutoStart"));
       LevelData levelData = AppEngine.getLevelData();
       dataOutputStream.writeShort((short) 0);
       dataOutputStream.writeByte((byte) levelData.getGameMode());

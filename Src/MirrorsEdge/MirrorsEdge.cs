@@ -36,16 +36,16 @@ namespace GameManager
     public static int SCREEN_WIDTH = 800;
     public static int SCREEN_HEIGHT = 480;
 
-    public static bool externalMusic = false;//MediaPlayer.State == MediaState.Playing || !MediaPlayer.GameHasControl;
+    public static bool externalMusic = MediaPlayer.State == MediaState.Playing || !MediaPlayer.GameHasControl;
 
-    public static bool displayMusicQuestion = false;//true;
+    public static bool displayMusicQuestion = true;
     public static bool displayTitanWarning = false;
     public static MirrorsEdge m_MirrorsEdge = (MirrorsEdge) null;
     public static bool TrialMode = false;
     public static bool displayTitleUpdateMessage = false;
     public static bool marketplaceCalled = false;
     public static bool active;
-    public static bool GS_Supported = false;//true;
+    public static bool GS_Supported = true;
     public int[] frame = new int[10];
     public int current_frame;
     public SpriteFont ffont;
@@ -67,10 +67,10 @@ namespace GameManager
       MirrorsEdge.graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
       MirrorsEdge.graphics.PreferMultiSampling = false;
 
-      MirrorsEdge.graphics.IsFullScreen = true; // set it True for w10m/release
+      MirrorsEdge.graphics.IsFullScreen = false; // set it True for w10m/release
 
       //MirrorsEdge.graphics.SynchronizeWithVerticalRetrace = true;//false; // ?
-      //MirrorsEdge.graphics.GraphicsProfile = GraphicsProfile.HiDef; // experimental
+      MirrorsEdge.graphics.GraphicsProfile = GraphicsProfile.HiDef; // experimental
       //MirrorsEdge.graphics.ApplyChanges();
       MirrorsEdge.TrialMode = false;//Guide.IsTrialMode;
       ResourceManager.SetResources();
@@ -379,7 +379,7 @@ label_13:
       base.Draw(gameTime);
     }
 
-    protected override void OnActivated(object sender, EventArgs args)
+    /*protected override void OnActivated(object sender, EventArgs args)
     {
       if (!MirrorsEdge.active)
       {
@@ -394,6 +394,7 @@ label_13:
         }
         catch { }
       }
+
       base.OnActivated(sender, args);
 
       if (!MirrorsEdge.marketplaceCalled && (!MirrorsEdge.externalMusic 
@@ -402,9 +403,9 @@ label_13:
       MirrorsEdge.marketplaceCalled = false;
       MirrorsEdge.displayMusicQuestion = false;
       MirrorsEdge.defaultImageTime = DateTime.Now.Ticks / 10000L;
-    }
+    }*/
 
-    protected override void OnDeactivated(object sender, EventArgs args)
+    /*protected override void OnDeactivated(object sender, EventArgs args)
     {
       if (MirrorsEdge.active)
       {
@@ -412,7 +413,7 @@ label_13:
         Runtime.getRuntime().pauseMIDlet();
       }
       base.OnDeactivated(sender, args);
-    }
+    }*/
 
     protected override void OnExiting(object sender, EventArgs args)
     {

@@ -9,6 +9,7 @@ using midp;
 using support;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace generic
@@ -21,9 +22,9 @@ namespace generic
     private byte[] d_eventInstances = new byte[4]; //!;
     private byte[] d_eventFlags = new byte[4]; //!;
     private float[] d_eventRanges = new float[4]; //!;
-    private float m_globalVolume = 0; //!
-    private float m_musicVolume = 0; // !
-    private float m_sfxVolume = 0; //!
+    private float m_globalVolume = 1f; //!
+    private float m_musicVolume = 1f; // !
+    private float m_sfxVolume = 1f; //!
 
     private Player[][] m_players = new Player[4][]; //!;
     private float[][] m_volumes = new float[4][]; //!
@@ -101,7 +102,8 @@ namespace generic
     public void loadData()
     {
       DataInputStream dataInputStream = new DataInputStream(
-          AppEngine.getCanvas().getResourceManager().loadBinaryFile((int) ResourceManager.get("IDI_SOUNDEVENTS_BIN")));
+          AppEngine.getCanvas().getResourceManager()
+          .loadBinaryFile((int) ResourceManager.get("IDI_SOUNDEVENTS_BIN")));
       int length1 = (int) dataInputStream.readByte();
       byte[] numArray1 = new byte[length1];
       for (int index = 0; index < length1; ++index)
@@ -166,7 +168,7 @@ namespace generic
       }
     }
 
-    public void unloadEvent(int eventID)
+    public async void unloadEvent(int eventID)
     {
       if (eventID < 0)
         return;
@@ -183,6 +185,7 @@ namespace generic
               player2.stop();
               player2.setMediaTime(0L);
               //Thread.Sleep(500);
+              await Task.Delay(500);
             }
             player2.close();
           }

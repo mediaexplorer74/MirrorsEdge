@@ -10,6 +10,7 @@ using midp;
 using support;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using text;
 
 #nullable disable
@@ -72,7 +73,7 @@ namespace UI
       base.Destructor();
     }
 
-    public override void update(int timeStep)
+    public override async void update(int timeStep)
     {
       base.update(timeStep);
       for (int index = 0; index < this.m_leaderboards.Count; ++index)
@@ -86,6 +87,7 @@ namespace UI
           else
           {
             //Thread.Sleep(1);
+            await Task.Delay(1);
             if (LiveProcessor.gamestate == LiveProcessor.GameState.ErrorLeaderboard)
             {
               this.m_WaitingForLeaderboardN = -1;

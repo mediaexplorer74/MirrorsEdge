@@ -4,12 +4,13 @@
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
 
 
+using GameManager;
 using generic;
 using Microsoft.Xna.Framework.Media;
 using midp;
-using GameManager;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace support
@@ -179,7 +180,7 @@ namespace support
       }
     }
 
-    public void suspend()
+    public async void suspend()
     {
       lock (BGMusic.musicLockObject)
       {
@@ -191,6 +192,7 @@ namespace support
         this.m_state = BGMusic.PlayState.STATE_STOPPING;
         MediaPlayer.Stop();
         //Thread.Sleep(200);
+        Task.Delay(200);
         this.m_state = BGMusic.PlayState.STATE_CLOSING;
         this.m_eventMusic = (Song) null;
       }
@@ -230,7 +232,7 @@ namespace support
 
     public bool isUpdated() => this.m_updated;
 
-    public virtual void run()
+    public async virtual void run()
     {
       //while (!this.m_closed)
       {
@@ -249,6 +251,7 @@ namespace support
         }
         this.m_updated = true;
         //Thread.Sleep(250);
+        await Task.Delay(250);
       }
     }
 

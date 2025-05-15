@@ -1,5 +1,4 @@
-﻿
-// Type: game.MonkeyApp
+﻿// Type: game.MonkeyApp
 // Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
 
@@ -9,6 +8,7 @@ using midp;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace game
@@ -35,12 +35,12 @@ namespace game
 
     public override void Destructor() => base.Destructor();
 
-    public override void destroyApp(bool unconditional)
+    public override async void destroyApp(bool unconditional)
     {
-      //while (this.m_gettingInput)
-      //{
-      //    //Thread.Sleep(1);
-      //}
+      while (this.m_gettingInput)
+      {
+          await Task.Delay(1);
+      }
       EASpywareManager.getInstance().logEvent(20000);
       this.close();
       this.notifyDestroyed();
@@ -88,13 +88,14 @@ namespace game
 
     public long GetTime() => DateTime.Now.Ticks / 10000L;
 
-    public void update()
+    public async void update()
     {
       long time = this.GetTime();
       int frameTime = Math.Max(0, (int) (time - this.timeStartFrame));
       if (frameTime < 34)
       {
         //Thread.Sleep(34 - frameTime);
+        await Task.Delay(34 - frameTime);
         this.timeStartFrame += 34L;
         frameTime = 34;
       }

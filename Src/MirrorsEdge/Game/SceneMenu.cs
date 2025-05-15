@@ -17,6 +17,7 @@ using System;
 using System.Threading;
 using text;
 using UI;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace game
@@ -49,7 +50,7 @@ namespace game
     private int m_loadingState;
     private SceneMenu.MenuState m_postLoadingState;
     private static bool IsItTheFirstEnter = true;
-    //private Thread m_loadingThread;
+    private Thread m_loadingThread;
     private SceneMenu.LoadingThreadState m_loadingThreadState;
     private World m_world;
     private Camera m_m3gCamera;
@@ -77,27 +78,15 @@ namespace game
     private AboutMenu m_aboutMenu;
     private static readonly int[] UPSELL_QUAD_BACK_MESH_ARRAY = new int[5]
     {
-      16,
-      18,
-      20,
-      22,
-      24
+      16,       18,      20,      22,      24
     };
     private static readonly int[] UPSELL_QUAD_FRONT_MESH_ARRAY = new int[5]
     {
-      17,
-      19,
-      21,
-      23,
-      25
+      17,      19,      21,      23,      25
     };
     private static readonly int[] UPSELL_QUAD_REVEAL_GROUP_ARRAY = new int[5]
     {
-      11,
-      12,
-      13,
-      14,
-      15
+      11,      12,      13,      14,      15
     };
     private static readonly int[][] UPSELL_QUAD_REVEAL_MESH_ARRAY = new int[5][]
     {
@@ -117,19 +106,11 @@ namespace game
     };
     private static readonly int[] UPSELL_STRING_TITLE_ARRAY = new int[5]
     {
-      2398,
-      2400,
-      2402,
-      2404,
-      2406
+      2398,      2400,      2402,      2404,      2406
     };
     private static readonly int[] UPSELL_STRING_BODY_ARRAY = new int[5]
     {
-      2399,
-      2401,
-      2403,
-      2405,
-      2407
+      2399,      2401,      2403,      2405,      2407
     };
     private SceneMenu.UpsellAnimState m_liteUpsellState;
     private int m_listUpsellScreenIndex;
@@ -158,7 +139,7 @@ namespace game
       this.m_statePhaseTime = 0;
       this.m_stateTransitionFade = false;
       this.m_loadingState = 0;
-      //this.m_loadingThread = (Thread) null;
+      this.m_loadingThread = (Thread) null;
       this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
       this.m_world = (World) null;
       this.m_m3gCamera = (Camera) null;
@@ -221,7 +202,12 @@ namespace game
       this.m_loadingState = 1;
       this.m_loadingProgress = 0;
       bool flag = false;
-      this.m_postLoadingState = AppEngine.getLevelData().isGameNewlyCompleted() || flag ? (MirrorsEdge.TrialMode ? (SceneMenu.MenuState) initialState : SceneMenu.MenuState.STATE_GAME_COMPLETE_RESULTS) : (SceneMenu.MenuState) initialState;
+      this.m_postLoadingState = AppEngine.getLevelData().isGameNewlyCompleted() 
+                || flag 
+                ? (MirrorsEdge.TrialMode 
+                 ? (SceneMenu.MenuState) initialState 
+                 : SceneMenu.MenuState.STATE_GAME_COMPLETE_RESULTS) 
+                   : (SceneMenu.MenuState) initialState;
       this.m_state = SceneMenu.MenuState.STATE_LOADING;
       SoundManager soundManager = this.m_engine.getSoundManager();
       soundManager.setVolumeGlobal(SoundManager.MAX_VOLUME);
@@ -234,7 +220,7 @@ namespace game
 
     public int getState() => (int) this.m_state;
 
-    public void updateLoading(int timeStep)
+    public async void updateLoading(int timeStep)
     {
       this.m_engine.updateLoading(timeStep);
       this.m_engine.getLoadingRunAnimPlayer().updateAnim(timeStep);
@@ -245,23 +231,25 @@ namespace game
         }
         else if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_ACTIVE)
         {
-            if (/*this.m_loadingThread == null &&*/ this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
+            if (this.m_loadingThread == null && 
+                    this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
             {
                 if (this.m_engine.isFading())
                     return;
-                //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneMenu.Start));
-                ThreadImplSceneMenu.Start((object)this);
-                //this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
-                //this.m_loadingThread.Start((object) this);
+                this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneMenu.Start));
+                //ThreadImplSceneMenu.Start((object)this);
+                this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
+                this.m_loadingThread.Start((object) this);
 
                 //TEST
                 //this.m_loadingProgress = 100;
             }
             else
             {
-                //Thread.Sleep(40); 
+                //Thread.Sleep(40);
+                await Task.Delay(40);
             }
-        }
+            }
         else
         {
             if (this.m_statePhase != SceneMenu.StatePhase.STATE_PHASE_POST)
@@ -316,7 +304,7 @@ namespace game
         case 4:
           this.precacheAchievementsWindow();
           this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-          //this.m_loadingThread = (Thread) null;
+          this.m_loadingThread = (Thread) null;
           if (this.m_engine.getSaveFileError())
             this.stateTransition(SceneMenu.MenuState.STATE_FILESAVEERROR);
           else
@@ -326,13 +314,14 @@ namespace game
       }
     }
 
-    public void Run()
+    public async void Run()
     {
       while (this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
       {
         if (this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
         {
             //Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
         else
             this.updateLoadingState(100);
@@ -345,27 +334,32 @@ namespace game
         this.m_menuMain.getSelectedSubMenu().transitionToIdle();
       if (this.m_engine.getBGMusic() != null)
         this.m_engine.getBGMusic().suspend();
-      if (this.m_state == SceneMenu.MenuState.STATE_LOADING && this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
+      if (this.m_state == SceneMenu.MenuState.STATE_LOADING
+                && this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
         this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_WAIT;
       EASpywareManager.getInstance().MTXpause();
     }
 
     public override void resume()
     {
-      if (this.m_engine.getBGMusic() != null && (!MirrorsEdge.TrialMode || this.m_state != SceneMenu.MenuState.STATE_MEDIAPICKER))
+      if (this.m_engine.getBGMusic() != null 
+                && (!MirrorsEdge.TrialMode
+                || this.m_state != SceneMenu.MenuState.STATE_MEDIAPICKER))
         this.m_engine.getBGMusic().resume();
-      if (this.m_state == SceneMenu.MenuState.STATE_LOADING && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_WAIT)
+
+      if (this.m_state == SceneMenu.MenuState.STATE_LOADING 
+                && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_WAIT)
         this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
       EASpywareManager.getInstance().MTXresume();
     }
 
     public override void end()
     {
-      //if (this.m_loadingThread != null)
-      //{
+      if (this.m_loadingThread != null)
+      {
         this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-      //  this.m_loadingThread = (Thread) null;
-      //}
+        this.m_loadingThread = (Thread) null;
+      }
       this.m_engine.getQuadManager().freeQuads((int) QuadManager.get("GROUP_SCENEMENU"));
     }
 

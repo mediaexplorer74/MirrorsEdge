@@ -12,6 +12,7 @@ using GameManager;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace support
@@ -191,11 +192,12 @@ namespace support
       return num;
     }
 
-    private void threadLock()
+    private async void threadLock()
     {
       while (this.m_threadLock)
       {
         //Thread.Sleep(1);
+        await Task.Delay(1);
       }
       this.m_threadLock = true;
     }

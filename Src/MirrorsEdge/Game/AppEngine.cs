@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Threading;
 using text;
 using UI;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace game
@@ -50,7 +51,7 @@ namespace game
     private QuadManager m_quadManager = new QuadManager();
     private SoundManager m_soundManager = new SoundManager();
     private BGMusic m_bgMusic;
-    //private Thread m_bgMusicThread;
+    private Thread m_bgMusicThread;
     private Random m_randomInstance = new Random();
     public static AppEngine AppEngine_instance;
     private bool m_startupDone;
@@ -105,7 +106,7 @@ namespace game
       this.m_midlet = (MonkeyApp) null;
       this.m_bgMusic.beQuiet();
       this.m_bgMusic.close();
-      //this.m_bgMusicThread = (Thread) null;
+      this.m_bgMusicThread = (Thread) null;
       if (!MirrorsEdge.TrialMode && this.m_achievementNotification != null)
         this.m_achievementNotification = (AchievementNotification) null;
       this.freeLoadingScreens(true);
@@ -211,9 +212,9 @@ namespace game
 
       this.m_bgMusic = new BGMusic(this.m_soundManager);
         
-      //this.m_bgMusicThread = new Thread(new ThreadStart(BGMusic.Process));
-      //this.m_bgMusicThread.Start();
-      BGMusic.Process();
+      this.m_bgMusicThread = new Thread(new ThreadStart(BGMusic.Process));
+      this.m_bgMusicThread.Start();
+      //BGMusic.Process();
 
       AppEngine.getM3GAssets().loadData();
       this.m_quadManager.loadQuadData(this.m_resourceManager.loadBinaryFile((int) ResourceManager.get("IDI_QUADS_BIN")), 533, 320);
@@ -252,25 +253,27 @@ namespace game
 
     public void startThread() => this.m_gameRunning = true;
 
-    public void stopThread()
+    public async void stopThread()
     {
-        //while (this.m_updateScheduled || this.m_paintScheduled)
-        //{
+        while (this.m_updateScheduled || this.m_paintScheduled)
+        {
             //Thread.Sleep(1);
-        //}
+            await Task.Delay(1);
+        }
     }
 
     public void runLoop(int frameTime) => this.update(frameTime);
 
     public void endGame() => this.m_gameRunning = false;
 
-    public void pauseGame()
+    public async void pauseGame()
     {
       this.m_paused = true;
-      //while (this.m_paintScheduled)
-      //{
-        //Thread.Sleep(1);
-      //}
+      while (this.m_paintScheduled)
+      {
+         //Thread.Sleep(1);
+          await Task.Delay(1);
+      }
         
       if (this.m_currentScene != null)
         this.m_currentScene.pause();
@@ -490,7 +493,8 @@ namespace game
       int anchor,
       bool drawShadow)
     {
-      this.drawStatString(g, fontIndex, label, AppEngine.StatType.STAT_TYPE_OF, numerator << 16 | denominator, x, y, anchor, drawShadow);
+      this.drawStatString(g, fontIndex, label, AppEngine.StatType.STAT_TYPE_OF, 
+          numerator << 16 | denominator, x, y, anchor, drawShadow);
     }
 
     public void drawStatString(
