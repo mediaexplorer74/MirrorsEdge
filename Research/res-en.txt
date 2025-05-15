@@ -1,0 +1,401 @@
+TEXT_0	Null	
+TEXT_1	About	
+TEXT_2	By purchasing and/or using this application, you agree to the terms of the End User License Agreement and EA’s Privacy Policy and Terms of Service.||Mirror’s Edge © 2012 EA Digital Illusions CE AB. Mirror’s Edge is a trademark of EA Digital Illusions CE AB. All Rights Reserved. EA and the EA logo are trademarks of Electronic Arts Inc. in the U.S. and/or other countries. All other trademarks are the property of their respective owners. ||Version: \0||Customer service: Send email to help@eamobile.com ||Credits:||Developed by IronMonkey Studios.||PRODUCTION|Angela Lin|Paul Motion|Toby Charlton|Tony Lay|Ed Webb|Rik Skews|Krishna Phani Dhanekula||DESIGN|Jarrad Trudgen||PROGRAMMING|Andrew Bubics|Jacques Gasselin|Lewis Strudwick|Matthew Cotton|Per Gantelius|Steven Moore|Viorel Mihalache-Oprea||ART|Ben Alexander|Dan Tonkin|Jamie Andersen|Jonathan Derby||WINDOWS PHONE 7||Boris Shirvinsky|Vladimir Lagutin	
+TEXT_3	Help	
+TEXT_4	PAUSE||Swipe two fingers down screen to pause.||RUNNING||Swipe screen left/right to run.||Tap screen to stop or swipe in the opposite direction to change direction without stopping.||SLIDING||Swipe down when running to slide.||Swipe up when sliding to quickly resume running.||JUMPING||Swipe up to jump.||ROLLING||Swipe down before impact during a jump or drop to roll. Failing to roll causes Faith to land badly and slows her down.||WALL RUN||Swipe up when in front of an orange sign to wall run.||WALL CLIMB||Jump at a wall to climb it. Faith must jump while running to do a wall climb.||Swipe up during a wall climb to do a wall jump.||BOOST JUMP||Swipe up when Faith is on a ramp to do a boost jump.||HIGH JUMP||If Faith collides with an edge she will clamber over it. Swipe up during a clamber to do a high jump.||SWINGING||Swipe left/right to change direction when swinging. Swipe up to jump out. Faith can only jump out on a forward swing.||Swipe down to drop out of a swing.||LEDGE SCALE||Swipe up to scale platforms when Faith is directly beneath one.||Faith will remember inputs you make while she is scaling up platforms.||ZIPLINES||Swipe up to enter a zipline. Faith can only enter a zipline from the correct direction.||If you see sparks when on a zipline tilt the device to streamline Faith and go faster.||Swipe down to exit a zipline gracefully. Failing to swipe down to exit the zipline will cause Faith to land badly and slow her down.||RAMP SLIDE||Faith will slide automatically down sloped surfaces. If you see smoke when sliding then tilt the device to streamline Faith and go faster.||BALANCING||Jump over or avoid short balance beams that slow Faith down.||When on long balance beams tilt the device to stabilize Faith. If she falls off swipe up to get back on the beam.||RUNNER VISION||Objects will turn red if Faith approaches them from the correct direction to reach the end of the level.	
+TEXT_5	Yes	
+TEXT_6	No	
+TEXT_7	Off	
+TEXT_8	On	
+TEXT_9	Page	
+TEXT_10	/	
+TEXT_11	:	
+TEXT_12	.	
+TEXT_13	:	
+TEXT_14	.	
+TEXT_15	$\0	
+TEXT_16	,	
+TEXT_17	--:--.--	
+TEXT_18	Loading … Drag Screen to Scroll Text	
+TEXT_19	Tap to Continue	
+TEXT_20	Menu	
+TEXT_21	Next	
+TEXT_22	Mirror's Edge	
+TEXT_23	Story	
+TEXT_24	Continue Game	
+TEXT_25	Play Chapter	
+TEXT_26	New Game	
+TEXT_27	Race	
+TEXT_28	Speed Run	
+TEXT_29	Leaderboards	
+TEXT_30	Options	
+TEXT_31	Video	
+TEXT_32	Audio	
+TEXT_33	Controls	
+TEXT_34	Settings	
+TEXT_35	Extras	
+TEXT_36	More Games	
+TEXT_37	Achievements	
+TEXT_38	Media Library	
+TEXT_39	Unavailable	
+TEXT_40	Game Paused	
+TEXT_41	Resume	
+TEXT_42	Restart	
+TEXT_43	Quit	
+TEXT_44	Controls	
+TEXT_45	Start Race	
+TEXT_46	OK	
+TEXT_47	BACK	
+TEXT_48	Time	
+TEXT_49	Chapter 0-0 Training	
+TEXT_50	Chapter 0-1  Higher	
+TEXT_51	Chapter 1-1 Transmission	
+TEXT_52	Chapter 1-2 Contact	
+TEXT_53	Chapter 2-1 Home	
+TEXT_54	Chapter 2-2 Nest	
+TEXT_55	Chapter 3-1 Ambush	
+TEXT_56	Chapter 3-2 Jailbreak	
+TEXT_57	Chapter 4-1 Fugitive	
+TEXT_58	Chapter 4-2 Playground	
+TEXT_59	Chapter 5-1 Descent	
+TEXT_60	Chapter 5-2 Underground	
+TEXT_61	Chapter 6-1 Reflection	
+TEXT_62	Chapter 6-2 Shadows	
+TEXT_63	Best Speed Run Time	
+TEXT_64	Qualifying Times:	
+TEXT_65	Bags Found	
+TEXT_66	Bags	
+TEXT_67	Swipe up to jump.	
+TEXT_68	Swipe screen left/right to run.	
+TEXT_69	Swipe down when running to slide.	
+TEXT_70	Swipe up when sliding to quickly resume running.	
+TEXT_71	Swipe down before impact to roll.	
+TEXT_72	Don't forget to swipe down before impact to roll straight back into a run.	
+TEXT_73	Swipe up to enter a zipline.	
+TEXT_74	If you see smoke, tilt the device to streamline Faith and go faster! 	
+TEXT_75	Swipe down to exit a zipline gracefully.	
+TEXT_76	Swipe down to drop.	
+TEXT_77	Swipe up when in front of an orange sign to wall run.	
+TEXT_78	Jump at a wall to climb it. Faith must jump while running to do a wall climb.	
+TEXT_79	Swipe up during a wall climb to do a wall jump.	
+TEXT_80	Swipe up to scale platforms when Faith is directly beneath one.	
+TEXT_81	If you see smoke, tilt the device to streamline Faith and go faster! 	
+TEXT_82	Jump over or avoid short balance beams that slow Faith down.	
+TEXT_83	When on long balance beams tilt the device to stabilize Faith. If she falls off swipe up to get back on the beam.	
+TEXT_84	Swipe left/right to change direction when swinging. Swipe up to jump out. Faith can only jump out on a forward swing.	
+TEXT_85	Swipe up when hanging to pull up. Tap to jump away.	
+TEXT_86	Jump when Faith is on a ramp to do a boost jump.	
+TEXT_87	Swipe up during a clamber to do a high jump.	
+TEXT_88	Go back, climb the boxes and then swipe up during a clamber to do a high jump.	
+TEXT_89	Tap screen to stop. Swipe in the opposite direction to change direction without stopping. Swipe two fingers down to pause the game.	
+TEXT_90	Swipe in the opposite direction to change direction without stopping.	
+TEXT_91	Well done! Collect enough hidden bags and you will unlock rewards. Faith must reach a checkpoint to 'bank' any collected bags.	
+TEXT_92	Remember locations of hidden bags and explore the environment to find them.	
+TEXT_93	Pump switches are checkpoints in the underground. Faith will restart from the last one she passed if she is hurt.	
+TEXT_94	Cameras are checkpoints in interiors. Faith will restart from the last one she passed if she is hurt.	
+TEXT_95	Radar dishes are checkpoints. Faith will restart from the last one she passed if she is hurt.	
+TEXT_96	If Faith collides with an edge she will clamber over it.	
+TEXT_97	Faith will gain speed as she runs.	
+TEXT_98	Jump just before a wall run and then swipe up over it to travel even further.	
+TEXT_99	Swipe up to jump out of a wall run and maximize distance.	
+TEXT_100	Faith will gain speed as she runs. Avoid obstacles to maintain speed.	
+TEXT_101	Faith will remember inputs you make while she is scaling up platforms.	
+TEXT_102	If you see sparks, tilt the device to streamline Faith and go faster!	
+TEXT_103	Swipe up again quickly to wallrun on orange surfaces.	
+TEXT_104	Avoid steam bursts!	
+TEXT_105	Red objects indicate the path to the end of the level.	
+TEXT_106	Enemies will knock Faith down if she tries to run past them. Swipe down to slide and knock them down temporarily.	
+TEXT_107	Swipe in the same direction Faith is running when right next to an enemy to disarm them and knock them out permanently.	
+TEXT_108	Swipe down when dropping in on an enemy to perform a combat roll and knock them down temporarily.	
+TEXT_109	Jump and then swipe left or right to do a flying kick and knock enemies down temporarily.	
+TEXT_110	Name & Description	
+TEXT_111	Complete	
+TEXT_112	\0 complete	
+TEXT_113	Complete \0 in story mode	
+TEXT_114	\0 complete in \1	
+TEXT_115	Complete \0 in \1	
+TEXT_116	Collect \1 bags in \0	
+TEXT_117	Collect \1 bags in \0	
+TEXT_118	That's a wrap	
+TEXT_119	Complete the game	
+TEXT_120	Bag lady	
+TEXT_121	Collect a bag	
+TEXT_122	Hoarder	
+TEXT_123	Collect \0 bags	
+TEXT_124	Packrat	
+TEXT_125	Collect all bags	
+TEXT_126	Invincible	
+TEXT_127	Complete game without dying	
+TEXT_128	Nine lives	
+TEXT_129	Complete game dying under \0 times	
+TEXT_130	Head over heels	
+TEXT_131	Complete game with under \0 bad landings	
+TEXT_132	Free flowing	
+TEXT_133	Perform an advanced move	
+TEXT_134	Parkour!	
+TEXT_135	Perform an advanced move \0 times	
+TEXT_136	Marathon Runner	
+TEXT_137	Run \0 meters	
+TEXT_138	Fly on the wall	
+TEXT_139	Wall run \0 meters	
+TEXT_140	Mountaineer	
+TEXT_141	Climb \0 meters	
+TEXT_142	Zip-a-Dee-Doo-Dah	
+TEXT_143	Zipline \0 meters	
+TEXT_144	Gravel rash	
+TEXT_145	Slide \0 meters	
+TEXT_146	Balancing act	
+TEXT_147	Balance \0 meters	
+TEXT_148	Free falling	
+TEXT_149	Fall \0 meters	
+TEXT_150	Tango down	
+TEXT_151	Defeat an enemy	
+TEXT_152	Body count	
+TEXT_153	Defeat an enemy \0 times	
+TEXT_154	Rampage	
+TEXT_155	Defeat \0 enemies in \1 seconds	
+TEXT_156	Economist	
+TEXT_157	Defeat 2 enemies with 1 attack	
+TEXT_158	I'll take that	
+TEXT_159	Disarm an enemy	
+TEXT_160	Neutralizer	
+TEXT_161	Disarm \0 enemies	
+TEXT_162	Falling down	
+TEXT_163	Make an enemy fall	
+TEXT_164	Scream for me	
+TEXT_165	Make \0 enemies fall	
+TEXT_166	Death from above	
+TEXT_167	Drop from a zipline and kick an enemy	
+TEXT_168	Vrooom!	
+TEXT_169	Maintain sprint speed for \0 seconds	
+TEXT_170	Scruffy	
+TEXT_171	Find the Scruffy graffiti	
+TEXT_172	I heart 88.7	
+TEXT_173	Find the pirate radio frequency graffiti	
+TEXT_174	Tag, you're it	
+TEXT_175	Defeat a Runner	
+TEXT_176	Thrill of the chase	
+TEXT_177	Defeat \0 Runners	
+TEXT_178	Congratulations!	
+TEXT_179	Complete	
+TEXT_180	Go to the Pirate Radio Hideout	
+TEXT_181	The CPF are Here. Fight Your Way Out!	
+TEXT_182	Return to Faith's Hideout	
+TEXT_183	Search the Runner Gang's Hideout	
+TEXT_184	Avoid the CPF	
+TEXT_185	Escape the Police Station	
+TEXT_186	Go to Kate's Apartment	
+TEXT_187	Go to New Stream Energy	
+TEXT_188	Head Down to the Pump Room	
+TEXT_189	Turn Off the Water Pumps	
+TEXT_190	Get Some Distance From New Stream Energy	
+TEXT_191	Find and Take Down the Gang Leader	
+TEXT_192	April 26th, 3:44 pm	
+TEXT_193	April 26th, 5:03 pm	
+TEXT_194	April 26th, 7:56 pm	
+TEXT_195	April 26th, 8:32 pm	
+TEXT_196	April 27th, 6:50 pm	
+TEXT_197	April 28th, 7:45 pm	
+TEXT_198	April 28th, 10:38 pm	
+TEXT_199	April 29th, 1:03 pm	
+TEXT_200	April 29th, 3:07 pm	
+TEXT_201	April 29th, 5:00 pm	
+TEXT_202	April 29th, 7:11 pm	
+TEXT_203	April 29th, 11:59 pm	
+TEXT_204	The Newest Threat to Children: RUNNING	
+TEXT_205	Are your children safe?	
+TEXT_206	Is your radio transmitting secret messages?	
+TEXT_207	Find out what you should know!	
+TEXT_208	5 signs someone you know might be a	
+TEXT_209	Runner	
+TEXT_210	Telltale scuffmarks on their clothes	
+TEXT_211	Unexplained scrapes, bruises or broken bones	
+TEXT_212	Unreliable or unexplained absences from work or school	
+TEXT_213	Calluses on the palm, knuckle and fingertips	
+TEXT_214	A fondness for the colour red	
+TEXT_215	Sound	
+TEXT_216	Music	
+TEXT_217	Effects	
+TEXT_218	More EA Games	
+TEXT_219	Daily City	
+TEXT_220	All the news you need	
+TEXT_221	Inquiry calls for crackdown on Runners	
+TEXT_222	An official inquiry has called for the immediate introduction of tougher measures to curb the illegal activities of Runners; highly athletic couriers specializing in the commercial distribution of illegal materials.||The inquiry, which involved the collaboration of national intelligence and municipal authorities, brings to light disturbing new information on the extent of the Runner's criminal activities. In addition to working for organized crime, the Runners have now been proven to have possible links to notorious terrorist cells rumored to be embedded in the city.||Speaking at a campaign fundraiser, Senator Elaine Callaghan stated, "Public perception of Runners as harmless low rent pests and thrill seekers has been shattered today. Our efforts must be vigilant in striking down this threat to our city as we move ever closer to peace". Callaghan lamented the lack of co-operation from police in the inquiry as, "regrettable" and called for, "a re-evaluation of the city's obviously inadequate data retrieval facilities and the extension of the Guardian surveillance network to marginalized areas".      	
+TEXT_223	Pirate Radio Transmission	
+TEXT_224	The Voice of Defiance	
+TEXT_225	“Would be Mayor, Elaine Callaghan, is peddling her usual shtick today through one of her loyal digital media mouthpieces, The Daily City, as she blazes along the campaign trail to her vision of a sparkling, high-rise utopia free of grime, grit and humanity.||Her latest scapegoat? Our faithful Runners; that stalwart, final bastion of freedom of information in a world where every bowel movement is monitored.||Citing results of a completely fabricated inquiry into Runner activities, Callaghan now claims that if we don't stop the Runners, the terrorists win. Look, so what if the Runners have some shady clients? The truth is they are all that hold us; the disenfranchised, the disbelieving, the disheveled, together.||If you need to get a message to someone without the Guardian network playing peeping Tom, then you need a Runner. Fact is; they are the single remaining method of private untraceable communication in the entire city. Hell, even the CPF have been known to have a few on the payroll. But hypocrisy from the cops isn't something to be surprised about in this town, is it?”	
+TEXT_226	Intercepted CPF Communication 	
+TEXT_227	“Alright, listen up. We just got a lock on another pirate transmission operation; Runner sympathizers.||Now you all know we're getting heat from the press lately. It doesn't help that Callaghan's gunning for us because I wouldn't hand over our Runner informants for that stitch-up "inquiry" she's running, either. Any more speeches from her like yesterday and we'll all be night guards at Eden Mall. If we do this up right then she might ease off.||I want every officer on the scene immediately. Get in there, shut the broadcast down and arrest all civilians found. We'll be taking a chopper to see if we can pick up any stragglers. Good luck out there; your jobs might count on it.”	
+TEXT_228	“Thanks to a timely warning from our new friend, Faith, the operators of this esteemed broadcast narrowly avoided violent reprisal at the hands of CPF today and are free to pollute the airwaves another day.||So, chalk another one up to the Runners; apart from providing the best damn rooftop acrobatics delivery service you'll never see they also moonlight as protectors of the city's only source of unadulterated news.||For such a nice bunch of people it makes you wonder about reports we're getting about escalating animosity between rival Runner groups over clients and delivery routes. Word is, some are stooping to sabotage, as ramps and planks used for rooftop trade routes are being moved or destroyed, resulting in potentially fatal falls for Runners that don’t look before they leap. C'mon people, it's dangerous enough out there without someone moving your plank.”	
+TEXT_229	Public outcry against CPF incompetence	
+TEXT_230	There was public outcry today against police as it was revealed that innocent lives could have been saved in the attack on a Megacomplex development site last December had police acted earlier on known information.||In what Senator Callaghan described as, "Unforgivable gross negligence", the department failed to sufficiently investigate an anonymous tip that could have led to an arrest prior to the explosion at the developing Megacomplex site that claimed the lives of twenty seven construction workers.||Called on for comment at the opening of a new children's hospital wing, Callaghan further opined, "As we again grieve for the heroes that died that tragic day we must now also grieve for the loss of what should be our civic right; a competent police force".||News of the bureaucratic bungle comes fresh on reports that police botched a routine raid just hours ago and failed to apprehend a lone Runner despite several weapons being discharged. 	
+TEXT_231	“This is bad. Callaghan isn’t going to stop until she has her own private army. She’s going to bury us and at this rate she’s going to do it with the city’s blessing.||I know we’ve had arrangements with Runners in the past; no doubt they serve a purpose, but from here out, all bets are off. We need the people back on our side and if that means we have to hang a few Roof Rats out to dry then so be it.||We've had reports of a possible Runner enclave hiding out in an empty office building on City Road. If there's any Runner activity I want to know about it. We need to make some arrests and get a press release out as soon as they're processed.”	
+TEXT_232	Three dead in bomb attack	
+TEXT_233	A man has been arrested after a bomb detonated prematurely inside the loading docks of the city’s almost completed Eastern Megacomplex development; killing three and injuring five in a grim reminder of last year’s similar attack on a Megacomplex development.||Matt Cotton has been identified as a member of an organized gang of Runners and is suspected of involvement in several past attacks against the city. He is being held at the city police department pending trial. Armoured CPF task forces are being deployed in response to the attack.	
+TEXT_234	Callaghan demands tougher security measures	
+TEXT_235	Senator Elaine Callaghan again rallied for tougher security measures at a campaign fundraiser today. She claimed today’s Megacomplex attack was, “entirely preventable”, and called for, “increased public surveillance, a tougher, smarter law enforcement presence and a focus on punitive deterrence measures on the streets as well as in the courtroom”.	
+TEXT_236	“We are receiving a number of reports with more information regarding the audacious attack against the CPF holding cells as we go to air. It is true that the CBD police station is being stormed by an armed group but, contrary to what the Daily City is reporting, these people are not Runners.||Several reliable sources inform us that this is a rogue group with absolutely no connection to the Runner community. Apparently they have stormed the holding cells and are using C4 to break everyone out.||With news yesterday of our favourite Runner’s capture by the CPF we hope that at least some good can come from this callous attack on the station. If she can get out, we’re sure Faith will be a great asset in tracking down this rogue group and clearing the Runner’s names.”	
+TEXT_237	Public opinion paves the way for PK	
+TEXT_238	The city is primed for an unprecedented overhaul of its law enforcement infrastructure in the wake of more public disgrace to the police department as they fail to prevent an all out attack on the city station at the hands of the Runners.||As constituents continue to lose faith in the department, calls are being made for the Chief of Police to step down and a solution for the growing fear and violence in the city to be found. Senator Callaghan believes she may have that solution in a radical proposal brought forward today which would see police relegated to revenue generating infringement notice enforcement and the introduction of private, highly trained and equipped militarized personnel, under contract from Pirandello Kruger, to handle security concerns.||Polling indicates a growing wave of support for Callaghan and her proposed amendments.	
+TEXT_239	“Officer Kate Connors has received intelligence about a suspected attack on New Stream Energy today.||Her source says an isolated Runner gang is being employed to carry out the attacks to discredit us.||We can’t take any risks, though. This might be our last chance to put things right. Get to New Stream and seal it off. If you see a Runner, kill them. As far as I’m concerned they’re all in on it.”	
+TEXT_240	New Stream Energy completes expansion	
+TEXT_241	Privatized utility company New Stream Energy is now the sole provider of recycled water resources to the entire city. New Stream has recently completed work on centralizing all of the city’s water resources, encompassing residential, commercial and industrial services.	
+TEXT_242	Chemicals stolen from University labs	
+TEXT_243	A large quantity of 14-azacamptothecin, a potent water-soluble poison, has been reported stolen from the City University medical centre today. Apart from use in pharmaceutical research, the hazardous chemical has a number of industrial applications.||University Professor, Jarrad Trudgen, expressed bafflement as to why anyone would steal such a large amount of the highly toxic substance unless for, "nefarious purposes".	
+TEXT_244	“We are hearing from the wider Runner community that they definitely do not have anything to do with the recent Megacomplex attacks being pinned on them. We have it in good faith from a most trusted source that the maniacs responsible are hired guns masquerading as Runners.||One theory has it that PK mercs are actually behind the attacks to create a false demand for their services. Unfortunately, the CPF seem oblivious to any of this and are indiscriminately hunting down anyone in a pair of running shoes.||Please, if any CPF officers are listening, think about who you’re shooting at. The Runners might just be your biggest allies in the days ahead.”	
+TEXT_245	Malfunction at New Stream	
+TEXT_246	An unpredictable technical fault has resulted in the water supply to huge sections of the city being completely shut off.||New Stream Energy spokesperson, Angela Lin, stated that the problem will be remedied as soon as possible and urged people to remain calm.	
+TEXT_247	Hospitalized Runner threatens to sue	
+TEXT_248	A man hospitalized for injuries sustained while trespassing on CBD rooftops is threatening to sue the city for failing to provide proper signage for hazardous obstacles.||Jonathan Derby, a confessed Runner, stated that construction equipment on a popular Runner trade route nicknamed, “the Suez Canal”, was frequently moved and caused Runners to make potentially fatal misjudgments on their runs.||Judge Steven Moore stated that the case, “is a joke; a waste of the court’s and the taxpayer’s time”. He added, “In no way have any of the municipal construction by-laws been violated”.||Mr. Derby is expected to be charged and sentenced later today.	
+TEXT_249	“Word has it that our good friend, the elusive Faith, has single-handedly prevented the latest in a string of homicidal attacks against the city’s people.||In a plan as insidious as it would have been deadly the entire city’s water supply was to be contaminated with a potentially lethal chemical. And behind it all? Why, our city’s glorious benefactors.||It would seem that these ongoing attacks and the resultant tide of public disdain for the police has been carefully orchestrated by the powers that be in an effort to discredit the CPF and justify the removal of any remaining civil liberties we have left.||We just hope it’s not too late to change the people’s minds that replacing the police with paid mercenaries is a bad idea. Very bad.||Oh, and if anyone can bring the leader of this rogue group responsible for Callaghan's dirty work down... well, I guess we just gotta have Faith.”	
+TEXT_250	FROM THE DESK OF ELAINE CALLAGHAN	
+TEXT_251	RE: Project Icarus	
+TEXT_252	Please confirm reservations for tomorrow’s lunch with PK’s CEO. Despite the setbacks we still have enough steam to get this deal through.||Oh, and send a gift basket to the Chief of Police with my regards. Something for his retirement.||Also, have all necessary arrangements made for C’s meeting with Pope. Everyone’s priority should now be on executing Project Icarus. 	
+TEXT_253	RESTART	
+TEXT_254	\0/\1	
+TEXT_255	Tutorial Text	
+TEXT_256	\0 Achievements required to unlock.	
+TEXT_257	Wallpapers	
+TEXT_258	Save to Photos	
+TEXT_259	Language	
+TEXT_260	Next	
+TEXT_261	Prev	
+TEXT_262	Play	
+TEXT_263	EULA	
+TEXT_264	Privacy Policy	
+TEXT_265	Terms of Service	
+TEXT_266	By restarting you will lose all your current progress. Are you sure you want to continue?	
+TEXT_267	By returning to menu you will lose all your current progress. Are you sure you want to continue?	
+TEXT_268	This action will exit the game and launch the browser. Are you sure you want to continue?	
+TEXT_269	Your time:	
+TEXT_270	Best time:	
+TEXT_271	Are you sure you want to start a new game? Your previous progress will be lost.	
+TEXT_272	Do you want to play the tutorial?	
+TEXT_273	Share usage data	
+TEXT_274	Total Stars	
+TEXT_275	Sharing usage information such as your game settings and feature preferences helps EA improve product quality.  This information will not be used to identify you or shared with any third party. Do you wish to continue?	
+TEXT_276	Sharing of anonymous usage statistics has been disabled for this game.	
+TEXT_277	Once this city used to pulse with energy; dirty and dangerous, but alive and wonderful. Now it is something else. The changes came slowly at first, most did not realize or did not care, and accepted them. They chose a comfortable life.	
+TEXT_278	Some didn't... 	
+TEXT_279	they became our clients.	
+TEXT_280	http://tos.ea.com/legalapp/mobileeula/US/en/OTHER/	
+TEXT_281	http://tos.ea.com/legalapp/WEBTERMS/US/en/PC/	
+TEXT_282	http://tos.ea.com/legalapp/WEBPRIVACY/US/en/PC/	
+TEXT_283	Chapter	
+TEXT_284	End Game Results	
+TEXT_285	Total Bags	
+TEXT_286	Knock the gang leader down 3 times	
+TEXT_287	On the clock	
+TEXT_288	Earn one star in speed run mode	
+TEXT_289	Superstar	
+TEXT_290	Earn all stars in speed run mode	
+TEXT_291	Still counting	
+TEXT_292	Earn \0 stars in speed run mode	
+TEXT_293	You have broken a time record. Do you wish to upload your new time to the global leaderboard?	
+TEXT_294	Without Facebook	
+TEXT_295	With Facebook	
+TEXT_296	Please enter a unique name to identify yourself on the global leaderboards. This name will be used for all subsequent score uploads.	
+TEXT_297	Please enter a name	
+TEXT_298	Please wait…	
+TEXT_299	Rank	
+TEXT_300	Name	
+TEXT_301	Challenge	
+TEXT_302	Friends	
+TEXT_303	Global	
+TEXT_304	Please select a friend to challenge.	
+TEXT_305	Retry	
+TEXT_306	Your challenge was posted successfully.	
+TEXT_307	There was an error trying to post your challenge. Check network connectivity and retry.	
+TEXT_308	Your score was successfully uploaded.	
+TEXT_309	There was an error uploading your score. Please check your network connection and try again.	
+TEXT_310	Enter a comment you would like to send with your challenge. (Max \0 characters)	
+TEXT_311	GO!	
+TEXT_312	Time to beat	
+TEXT_313	You Win!	
+TEXT_314	You Lose.	
+TEXT_315	\0 more	
+TEXT_316	Accepting this challenge will launch that chapter. Pending challenges will be stored. Declining this challenge will delete it.	
+TEXT_317	Accept	
+TEXT_318	Decline	
+TEXT_319	Decline All	
+TEXT_320	There is no internet connection available. Please check your network settings and try again.	
+TEXT_321	No Internet connected.	
+TEXT_322	Enable score uploads	
+TEXT_323	Tap on a ranking to race against that player's ghost	
+TEXT_324	Race against this player's ghost?	
+TEXT_325	Your challenge was successfully uploaded.	
+TEXT_326	There was an error uploading your challenge. Please check your network connection and try again.	
+TEXT_327	Enable Usage Sharing: ||Sharing of usage statistics has been disabled for this game. |Help EA improve product quality and user experience by sharing usage information such as game stats, settings, incident or event data, and feature preferences. |Enable usage sharing?	
+TEXT_328	Disable Usage Sharing: ||Help EA improve product quality and user experience by sharing usage information such as game stats, settings, incident or event data, and feature preferences. |Disable usage sharing?	
+TEXT_329	Enable Usage Sharing.	
+TEXT_330	Disable Usage Sharing.	
+TEXT_331	Follow us on Twitter	
+TEXT_332	Fan us on Facebook	
+TEXT_333	Take on the SPEED RUN and challenge your Facebook friends!	
+TEXT_334	Sharing of anonymous usage statistics has been enabled for this game.	
+TEXT_335	This score is less than your current leaderboard score.	
+TEXT_336	Your time is too long to upload to the leaderboards. You must at least get one star.	
+TEXT_337	There is not enough space on this handset to save the game. Free some memory to allow game progress to be saved.	
+TEXT_338	English	
+TEXT_339	Français	
+TEXT_340	Deutsch	
+TEXT_341	Italiano	
+TEXT_342	Español	
+TEXT_343	Do you want to interrupt your music and use game background music?	
+TEXT_344	Update Game to communicate with Xbox LIVE	
+TEXT_345	Title Update Available	
+TEXT_346	An update is available! This update is required to connect to Xbox LIVE. Update now?	
+TEXT_347	This Leaderboard is empty	
+TEXT_348	PAUSE||Swipe two fingers down screen to pause.||RUNNING||Swipe screen left/right to run.||Tap screen to stop or swipe in the opposite direction to change direction without stopping.||SLIDING||Swipe down when running to slide.||Swipe up when sliding to quickly resume running.||JUMPING||Swipe up to jump.||ROLLING||Swipe down before impact during a jump or drop to roll. Failing to roll causes Faith to land badly and slows her down.||WALL RUN||Swipe up when in front of an orange sign to wall run.||WALL CLIMB||Jump at a wall to climb it. Faith must jump while running to do a wall climb.||Swipe up during a wall climb to do a wall jump.||BOOST JUMP||Swipe up when Faith is on a ramp to do a boost jump.||HIGH JUMP||If Faith collides with an edge she will clamber over it. Swipe up during a clamber to do a high jump.||SWINGING||Swipe left/right to change direction when swinging. Swipe up to jump out. Faith can only jump out on a forward swing.||Swipe down to drop out of a swing.||LEDGE SCALE||Swipe up to scale platforms when Faith is directly beneath one.||Faith will remember inputs you make while she is scaling up platforms.||RAMP SLIDE||Faith will slide automatically down sloped surfaces. If you see smoke when sliding then tilt the device to streamline Faith and go faster.||BALANCING||Jump over or avoid short balance beams that slow Faith down.||When on long balance beams tilt the device to stabilise Faith. If she falls off swipe up to get back on the beam.||RUNNER VISION||Objects will turn red if Faith approaches them from the correct direction to reach the end of the level.||CHECKPOINTS||Radar dishes, cameras and pump switches are checkpoints. Faith will restart from the last one she passed if she is hurt.||HINTS||Look for shortcuts.||Jump just before a wall run and then swipe up over it to travel even further.||Swipe up to jump out of a wall run and maximise distance.||Swipe away from a wall when sliding down to exit the wall slide and start running immediately when Faith lands (provided she does not land badly).||High jump from clamber can help Faith access hard to reach areas.	
+TEXT_349	Buy Full Game	
+TEXT_350	Experience the world of Mirror’s Edge	
+TEXT_351	A place where information is heavily monitored and law is brutally enforced in an effort to create the 'perfect' society.	
+TEXT_352	Your mission	
+TEXT_353	Take control of Faith Connors, a member of an underground messenger group known as Runners, as she races to stop a deadly threat that has grown from within their own ranks.	
+TEXT_354	Survival of the fittest…and fastest	
+TEXT_355	Use Faith's incredible acrobatic moves to outmanoeuvre the enemy --run on walls, slide down precarious ramps, ride ziplines, and leap between rooftops. Leave the enemy in your dust.	
+TEXT_356	Edge-of-your-seat Excitement	
+TEXT_357	Burn through 14 levels of the fastest, most fluid action imaginable. Dynamic camera angles capture the intense action of this unique game.	
+TEXT_358	Heighten your senses	
+TEXT_359	Immerse yourself in a stylish, graphically rich 3D environment flooded with realistic sound effects and phenomenal music.	
+TEXT_360	Return to Menu	
+TEXT_361	Click here to buy now.	
+TEXT_362	日本語	
+TEXT_363	한글	
+TEXT_364	简体中文	
+TEXT_365	Русский	
+TEXT_366	Polski	
+TEXT_367	Português	
+TEXT_368	Português (BR)	
+TEXT_369	Español (CO)	
+TEXT_370	繁體中文	
+TEXT_371	Arabic	
+TEXT_372	Error communicating with Xbox LIVE	
+TEXT_373	Waiting for Login...	
+TEXT_374	Waiting for Achievements...	
+TEXT_375	Waiting for Leaderboard...	
+TEXT_376	You earned one star in speed run mode	
+TEXT_377	You earned \0 stars in speed run mode	
+TEXT_378	You earned all stars in speed run mode	
+TEXT_379	You completed the game	
+TEXT_380	You collected a bag	
+TEXT_381	You collected \0 bags	
+TEXT_382	You balanced \0 meters	
+TEXT_383	You fell \0 meters	
+TEXT_384	You defeated an enemy	
+TEXT_385	You defeated \0 enemies in \1 seconds	
+TEXT_386	You disarmed an enemy	
+TEXT_387	You disarmed \0 enemies	
+TEXT_388	You defeated a Runner	
+TEXT_389	You defeated \0 Runners	
+TEXT_390	You made an enemy fall	
+TEXT_391	You made \0 enemies fall	
+TEXT_392	You defeated 2 enemies with 1 attack	
+TEXT_393	You dropped from a zipline and kicked an enemy	
+TEXT_394	You found the Scruffy graffiti	
+TEXT_395	You found the pirate radio frequency graffiti	
+TEXT_396	||COMBAT||Enemy police officers and helicopters will open fire on Faith when they see her. Keep moving to avoid gun fire.||If an enemy is directly in line with Faith then time will slow momentarily giving you a chance to take down or avoid the enemy.||Swipe down to slide and knock enemies down temporarily.||Swipe in the direction Faith is moving during a jump to do a flying kick and knock enemies down temporarily.||Swipe down when dropping in on an enemy to perform a combat roll and knock enemies down temporarily.||Swipe in the same direction Faith is running when right next to an enemy to disarm them and knock them out permanently.||Enemies will knock Faith down if she tries to run past them. Swipe up when this happens to get back up and knock down your assailant at the same time.||CHECKPOINTS||Radar dishes, cameras and pump switches are checkpoints. Faith will restart from the last one she passed if she is hurt.||ACHIEVEMENTS||Collect hidden bags, perform advanced moves and beat level times in speed run mode to earn Achievements.||Earning Achievements unlocks concept art. Faith must reach a checkpoint or complete a level to 'bank' any collected bags and have them counted.||HINTS||Look for shortcuts.||Jump just before a wall run and then swipe up over it to travel even further.||Swipe up to jump out of a wall run and maximize distance.||Drop into ziplines from above but make sure Faith is facing the right way when she grabs it.||Swipe away from a wall when sliding down to exit the wall slide and start running immediately when Faith lands (provided she does not land badly).||High jump from clamber can help Faith access hard to reach areas.	
+TEXT_397	To check out how your best score ranks against your friends just tap on Buy Full Game from the Main Menu!	
+TEXT_398	For optimal performance please disable the sound enhancer from the device settings.	
+TEXT_399	Important information!	
+TEXT_400	||Certain Wi-Fi security settings will allow you to connect but not use the application's network features, including Leaderboards. Network fees may apply.	
