@@ -38,11 +38,13 @@ namespace UI
       int x1 = this.m_width - this.m_next.getWidth() - 20;
       int x2 = x1 - 12 - this.m_menu.getWidth();
       this.m_next.setPosition(x1, y);
-      if (AppEngine.getLevelData().getGameMode() == LevelData.GameMode.GAME_MODE_SPEEDRUN || AppEngine.getLevelData().getGameMode() == LevelData.GameMode.GAME_MODE_CHALLENGE && !MirrorsEdge.TrialMode)
+      if (AppEngine.getLevelData().getGameMode() == LevelData.GameMode.GAME_MODE_SPEEDRUN 
+                || AppEngine.getLevelData().getGameMode() == LevelData.GameMode.GAME_MODE_CHALLENGE && !MirrorsEdge.TrialMode)
         this.m_restart.setPosition(20, y);
       else
         this.m_restart.setPosition(-500, -500);
-      if (this.m_gameComplete && !MirrorsEdge.TrialMode || AppEngine.getLevelData().getCurrentLevelIndex() == AppEngine.getLevelData().getLevelNum() - 1 && MirrorsEdge.TrialMode)
+      if (this.m_gameComplete && !MirrorsEdge.TrialMode 
+                || AppEngine.getLevelData().getCurrentLevelIndex() == AppEngine.getLevelData().getLevelNum() - 1 && MirrorsEdge.TrialMode)
       {
         this.m_MenuButtonHidden = true;
         this.m_menu.setPosition(-500, -500);
@@ -91,7 +93,7 @@ namespace UI
       stringRenderer1.setColor(color1);
       textManager.drawString(g, 2226, this.LEVEL_COMPLETE_TITLE_FONT, 20, 15, 9);
       int y = 15 + textManager.getLineHeight(this.LEVEL_COMPLETE_TITLE_FONT) + 5;
-      int name = currentLevelObject.getName();
+      string name = currentLevelObject.getName().ToString();
       StringRenderer stringRenderer2 = textManager.getStringRenderer(this.LEVEL_COMPLETE_BODY_FONT);
       int color2 = stringRenderer2.getColor();
       stringRenderer2.setColor(0);

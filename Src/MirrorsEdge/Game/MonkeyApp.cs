@@ -9,6 +9,7 @@ using midp;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace game
@@ -37,19 +38,14 @@ namespace game
 
     public override void destroyApp(bool unconditional)
     {
-      //while (this.m_gettingInput)
-      //{
-      //    //Thread.Sleep(1);
-      //}
+      while (this.m_gettingInput)
+        Task.Delay(1);
       EASpywareManager.getInstance().logEvent(20000);
       this.close();
       this.notifyDestroyed();
     }
 
-    public override void pauseApp()
-    {
-        this.m_engine.pauseGame();
-    }
+    public override void pauseApp() => this.m_engine.pauseGame();
 
     public override void startApp()
     {
@@ -94,7 +90,7 @@ namespace game
       int frameTime = Math.Max(0, (int) (time - this.timeStartFrame));
       if (frameTime < 34)
       {
-        //Thread.Sleep(34 - frameTime);
+        Task.Delay(34 - frameTime);
         this.timeStartFrame += 34L;
         frameTime = 34;
       }

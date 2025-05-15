@@ -221,8 +221,8 @@ namespace text
       int num1 = clipY + g.getClipHeight();
       int y1 = y;
       int anchor1 = anchor;
-      int num2 = stringRenderer1.getHeight() / Runtime.pixelScale;
-      int num3 = stringRenderer1.getLeading() / Runtime.pixelScale;
+      int num2 = (int)(stringRenderer1.getHeight() / Runtime.pixelScale);
+      int num3 = (int)(stringRenderer1.getLeading() / Runtime.pixelScale);
       int num4 = num2;
       int num5 = startLine + numLines;
       if ((anchor & 16) != 0)
@@ -302,13 +302,13 @@ namespace text
     public int getWrappedTextHeight()
     {
       StringRenderer stringRenderer = AppEngine.getCanvas().getTextManager().getStringRenderer(this.m_fontId);
-      return (this.m_numWrappedLines * stringRenderer.getHeight() - stringRenderer.getLeading()) / Runtime.pixelScale;
+      return (int)((this.m_numWrappedLines * stringRenderer.getHeight() - stringRenderer.getLeading()) / Runtime.pixelScale);
     }
 
     public int getLinesInHeight(int height)
     {
       StringRenderer stringRenderer = AppEngine.getCanvas().getTextManager().getStringRenderer(this.m_fontId);
-      return (height - stringRenderer.getLeading()) / stringRenderer.getHeight() / Runtime.pixelScale;
+      return (int)((height - stringRenderer.getLeading()) / stringRenderer.getHeight() / Runtime.pixelScale);
     }
 
     public int length() => this.m_wrapString.Length;

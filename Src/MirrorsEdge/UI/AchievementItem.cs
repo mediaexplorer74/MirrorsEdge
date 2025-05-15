@@ -79,11 +79,15 @@ namespace UI
       this.m_descriptionString.draw(g, left + this.m_x + 5, top + this.m_y + 3 + textManager.getLineHeight(this.FONT_TITLE), 9);
       textManager.drawString(g, this.m_StringGamePoints, this.FONT_TITLE, left + this.m_x + 441 + 50, top + this.m_y + 3 + this.m_height, 36);
       Achievement achievement = (this.m_parent as AchievementsList).getAchievementData().getAchievement(this.m_achievementId);
-      Image src = achievement.isComplete() ? achievement.iconOpened : achievement.iconLocked;
 
-      g.drawScaledRegion(src, 0, 0, src.getWidth(), src.getHeight(), left + this.m_x + 441, top + this.m_y, 
-          left + this.m_x + 441 + Math.Min(src.getWidth(), this.m_height) / Runtime.pixelScale,
-          top + this.m_y + Math.Min(src.getHeight(), this.m_height) / Runtime.pixelScale);
+        if (achievement != null)
+        {
+            Image src = achievement.isComplete() ? achievement.iconOpened : achievement.iconLocked;
+
+            g.drawScaledRegion(src, 0, 0, src.getWidth(), src.getHeight(), left + this.m_x + 441, top + this.m_y,
+                (int)(left + this.m_x + 441 + Math.Min(src.getWidth(), this.m_height) / Runtime.pixelScale),
+                (int)(top + this.m_y + Math.Min(src.getHeight(), this.m_height) / Runtime.pixelScale));
+        }
     }
   }
 }

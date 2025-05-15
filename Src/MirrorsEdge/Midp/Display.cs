@@ -5,6 +5,7 @@
 
 
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace midp
@@ -95,9 +96,7 @@ namespace midp
       if (nextDisplayable == this.m_currentDisplayable)
         return;
       while (this.m_isRefreshing)
-      {
-            //Thread.Sleep(1);
-      }
+        Task.Delay(1);
       if (this.m_currentDisplayable != null)
       {
         this.m_currentDisplayable.hideNotify();

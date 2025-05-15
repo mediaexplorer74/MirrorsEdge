@@ -1,7 +1,7 @@
 # Mirror's Edge 1.1.25-alpha - master branch 
 ![Logo](Images/logo.png)
 
-Planned "UWP-remake" of Mirror's Edge game project. 
+Planned "UWP-remake" of Mirror's Edge game project. However, is just cool dev research project. No less, no more.
 
 ## Screenshot
 ![W11](Images/screenshot.png)
@@ -12,24 +12,26 @@ Planned "UWP-remake" of Mirror's Edge game project.
 - Min. Win SDK build: 10240
 
 ## Status
-- Work-in-progress
-- Draft UWP app as result of initital reversed-code research (early bird -- not for game run!)
+- Work-in-progress: game opntions & game start fixed (?), but some screen object distortions (scaling problems/bugs) detected!
+- Draft UWP app as result of initial reversed-code research (early bird -- not for game run!)
 - Min. Win. SDK = 10240, and Win. SDK 19041 used
 - Alpha state, 100500 bugs still here (but binary game data not decoded, and screen scaling problems not fixed)
-- No music, no sound (soundmanager not fixed)
+- Music theme refresh (StillAlive-2025 based on Mirror's Edge - Still Alive-1 by Cookieluver31)
 - No Russian (ru) text support (sprite font problem?), only English (en) text resource seems to be ok... 
+- No accelerometer emulation on "desktop pcs"... so, player moving disabled...  ;( 
 
 ## ToDo
-- Refresh intro music for 2025 ... some remix needed :)
-- Fix bugs to normal game run
-- Extend Input manager (kbd, mouse, and touchscreen or joystick)
-- Fix localization
-- Fix screen scaling
+- Fix player movements (via accelerometer or mouse "right-click and hold + move".... idk!)
+- Continue fixing screen scaling errors
+- Fix proper resources reading
+- Fix localization (en-US as default, also ru, ch, ...)
 - Check game data & settings save/store
+- Emulate some achievements (?)
+
 
 ## Reference(s)
 - https://www.ea.com/games/mirrors-edge/ Electronic Arts site :: Mirror's Edge section 
-- https://soundcloud.com/user249000542/lisa-miskovsky-still-alive-the-theme-from-mirrors-edge Sound Cloud :: Lisa Miskovsky - Still Alive (music theme from Mirror's Edge)
+- https://soundcloud.com/cookieluver31/mirrors-edge-still-alive-1 Sound Cloud :: Mirror's Edge - Still Alive(1) by Cookieluver31 
 
 ## .
 As is. No support. Research purposes only. DIY.

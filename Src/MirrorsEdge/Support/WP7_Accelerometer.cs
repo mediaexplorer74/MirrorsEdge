@@ -38,11 +38,15 @@ namespace support
 
     public void SetFrequency(float samplesPerSecond)
     {
-      this.m_samplesPerSecond = samplesPerSecond;
-      if ((double) samplesPerSecond != 0.0)
-        this.accelerometer.Start();
-      else
-        this.accelerometer.Stop();
+        this.m_samplesPerSecond = samplesPerSecond;
+        if ((double)samplesPerSecond != 0.0)
+        {
+            this.accelerometer.Start();
+        }
+        else
+        {
+            this.accelerometer.Stop();
+        }
     }
 
     public float GetFrequency() => this.m_samplesPerSecond;
@@ -145,17 +149,17 @@ namespace support
 
     internal class Accelerometer
     {
-        internal int State;
+        internal int State = 0; //!
         internal EventHandler<AccelerometerReadingEventArgs> ReadingChanged;
 
         internal void Start()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         internal void Stop()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

@@ -12,6 +12,7 @@ using GameManager;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace support
@@ -196,6 +197,7 @@ namespace support
       while (this.m_threadLock)
       {
         //Thread.Sleep(1);
+        Task.Delay(1);
       }
       this.m_threadLock = true;
     }
@@ -562,8 +564,8 @@ namespace support
         Image2D image2 = image1.image;
         if ((double) image1.texMeshScale == 0.0)
         {
-          int val1 = image2.getWidth() / Runtime.pixelScale;
-          int val2 = image2.getHeight() / Runtime.pixelScale;
+          int val1 = (int)(image2.getWidth() / Runtime.pixelScale);
+          int val2 = (int)(image2.getHeight() / Runtime.pixelScale);
           int num = Math.Max(val1, val2);
           image1.texMeshScale = 1f / (float) num;
           image1.texMax = num;

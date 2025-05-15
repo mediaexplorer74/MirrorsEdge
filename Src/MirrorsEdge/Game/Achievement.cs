@@ -79,9 +79,9 @@ namespace game
       return stringBuffer;
     }
 
-    public void eventHappended()
-    {
-            
+        public void eventHappended()
+        {
+            //
+        }
     }
-  }
 }

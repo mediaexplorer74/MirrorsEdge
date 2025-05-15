@@ -9,7 +9,7 @@ using System;
 #nullable disable
 namespace midp
 {
-  public class Throwable /* : SystemException*/
+  public class Throwable : System.Exception
   {
     private readonly string m_message;
 

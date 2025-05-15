@@ -15,6 +15,7 @@ using System;
 using System.Threading;
 using text;
 using UI;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace game
@@ -122,7 +123,10 @@ namespace game
     private SceneGame.GameState m_preMenuState;
     private int m_stateTime;
     private bool m_gameRunning;
-    //private Thread m_loadingThread;
+
+    private CancellationTokenSource m_loadingCancellationTokenSource;
+    private Task m_loadingThread;
+
     private int m_loadingThreadState;
     private int m_loadingState;
     private SceneGame.GameState m_postLoadingState;
@@ -216,7 +220,7 @@ namespace game
       this.m_preMenuState = SceneGame.GameState.STATE_INVALID;
       this.m_stateTime = 0;
       this.m_gameRunning = false;
-      //this.m_loadingThread = (Thread) null;
+      this.m_loadingThread =  null;
       this.m_loadingThreadState = 0;
       this.m_loadingState = 0;
       this.m_postLoadingState = SceneGame.GameState.STATE_INTRO;
@@ -636,9 +640,14 @@ namespace game
     {
       if (this.m_state == newState || this.m_state == SceneGame.GameState.STATE_GAME_FADE_OUT)
         return;
-      if (newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING || newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING_NO_DEATH_SOUND || newState == SceneGame.GameState.STATE_PLAYER_DIED)
+      if (newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING
+                || newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING_NO_DEATH_SOUND
+                || newState == SceneGame.GameState.STATE_PLAYER_DIED)
         SpywareManager.getInstance().trackFaithKilled();
-      if (this.m_preMenuState == SceneGame.GameState.STATE_INVALID && newState == SceneGame.GameState.STATE_MENU_PAUSED && (MirrorsEdge.TrialMode || this.m_state != SceneGame.GameState.STATE_RESTART_CONFIRM && this.m_state != SceneGame.GameState.STATE_QUIT_CONFIRM))
+      if (this.m_preMenuState == SceneGame.GameState.STATE_INVALID
+                && newState == SceneGame.GameState.STATE_MENU_PAUSED
+                && (MirrorsEdge.TrialMode || this.m_state != SceneGame.GameState.STATE_RESTART_CONFIRM 
+                && this.m_state != SceneGame.GameState.STATE_QUIT_CONFIRM))
         this.m_preMenuState = this.m_state;
       this.m_prevState = this.m_state;
       this.deinitState();
@@ -657,39 +666,44 @@ namespace game
 
     public void Run()
     {
-      while (this.m_loadingThreadState != 2)
+      while (this.m_loadingThreadState != SceneGame.LOADINGTHREAD_STATE_QUIT) //2
       {
-        if (this.m_loadingThreadState != 0)
-        {
-            //Thread.Sleep(1000);
-        }
+        if (this.m_loadingThreadState != SceneGame.LOADINGTHREAD_STATE_IDLE) //0
+          Task.Delay(1000);
         else
-            this.updateLoadingState(100);
+          this.updateLoadingState(100);
       }
     }
 
     public void updateLoading(int timeStep)
     {
-      this.m_engine.updateLoading(timeStep);
-      if (this.m_loadingProgress == 100)
-        return;
-      //if (this.m_loadingThread == null)
-      //{
-        if (this.m_engine.isFading())
-          return;
+        this.m_engine.updateLoading(timeStep);
+        if (this.m_loadingProgress == 100)
+            return;
+
+        if (m_loadingThread == null)
+        {
+            if (this.m_engine.isFading())
+                return;
+
             //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneGame.Start));
+            this.m_loadingThreadState = SceneGame.LOADINGTHREAD_STATE_IDLE;//0;
+            //this.m_loadingThread.Start((object)this);
 
-        ThreadImplSceneGame.Start((object) this);
-        
-        this.m_loadingThreadState = 0;
-        //this.m_loadingThread.Start((object) this);
-        //}
-        //else
-        //  Thread.Sleep(40);
-
-        //RnD
-        this.m_loadingProgress = 100;
+             m_loadingCancellationTokenSource = new CancellationTokenSource();
+             m_loadingThread = Task.Run(() =>
+            {
+                this.Run();
+                //m_loadingThreadState = 0;
+                updateLoadingState(100);
+            }, m_loadingCancellationTokenSource.Token);
+        }
+        else
+        {
+            Task.Delay(40).Wait();
+        }
     }
+
 
     public void updateLoadingState(int timeStep)
     {
@@ -748,7 +762,7 @@ namespace game
         case 13:
           this.m_loadingProgress = 100;
           this.m_loadingThreadState = 2;
-          //this.m_loadingThread = (Thread) null;
+          this.m_loadingThread = null;
           break;
       }
     }
@@ -1483,7 +1497,9 @@ namespace game
         SceneGame.painTextureData[index] = num3 < 256 ? (byte) num3 : byte.MaxValue;
       }
       SceneGame.painTexture.SetData<byte>(SceneGame.painTextureData);
-      MirrorsEdge.spriteBatch.Begin(SpriteSortMode.Deferred, SceneGame.blendStateAdd);
+
+      // TEST
+      MirrorsEdge.spriteBatch.Begin(SpriteSortMode.Deferred, SceneGame.blendStateAdd,default,default,default,default, MirrorsEdge.globalTransformation);
       MirrorsEdge.spriteBatch.Draw(SceneGame.painTexture, new Rectangle(0, 0, 800, 480), Color.White);
       MirrorsEdge.spriteBatch.End();
     }
@@ -2209,10 +2225,10 @@ namespace game
         int currentValue = (int) this.m_topMessageInterpolation.getCurrentValue();
         int font = 14;
         TextManager textManager = AppEngine.getCanvas().getTextManager();
-        if (textManager.getStringWidth(this.m_topMessageStringId, font) > 500)
+        if (textManager.getStringWidth(this.m_topMessageStringId.ToString(), font) > 500)
         {
           font = 28;
-          if (textManager.getStringWidth(this.m_topMessageStringId, font) > 500)
+          if (textManager.getStringWidth(this.m_topMessageStringId.ToString(), font) > 500)
             font = 30;
         }
         StringRenderer stringRenderer = this.m_engine.getTextManager().getStringRenderer(font);

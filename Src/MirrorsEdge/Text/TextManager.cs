@@ -175,43 +175,40 @@ namespace text
 
     public int getLineHeight(int font)
     {
-      return this.getStringRenderer(font).getHeight() / Runtime.pixelScale;
+      return (int)(this.getStringRenderer(font).getHeight() / Runtime.pixelScale);
     }
 
     public int getBaseline(int font)
     {
-      return this.getStringRenderer(font).getBaselinePosition() / Runtime.pixelScale;
+      return (int)(this.getStringRenderer(font).getBaselinePosition() / Runtime.pixelScale);
     }
 
     public int getLeading(int font)
     {
-      return this.getStringRenderer(font).getLeading() / Runtime.pixelScale;
+      return (int)(this.getStringRenderer(font).getLeading() / Runtime.pixelScale);
     }
 
-    public int getStringWidth(int stringid, int font)
-    {
-      return this.getStringRenderer(font).stringWidth(this.getString(stringid)) / Runtime.pixelScale;
-    }
+    
 
-    public int getStringWidth(string str, int font)
+    public int getStringWidth(string stringid, int font)
     {
-      return this.getStringRenderer(font).stringWidth(str) / Runtime.pixelScale;
+        return (int)(this.getStringRenderer(font).stringWidth(stringid) / Runtime.pixelScale);
     }
 
     public int getSubStringWidth(string str, int offset, int len, int font)
     {
-      return this.getStringRenderer(font).substringWidth(str, offset, len) / Runtime.pixelScale;
+      return (int)(this.getStringRenderer(font).substringWidth(str, offset, len) / Runtime.pixelScale);
     }
 
     public int getStringWidth(StringBuffer str, int font)
     {
-      return this.getStringRenderer(font).stringWidth(str.toString()) / Runtime.pixelScale;
+      return (int)(this.getStringRenderer(font).stringWidth(str.toString()) / Runtime.pixelScale);
     }
 
     public int getLinesHeight(int font, int numLines)
     {
       StringRenderer stringRenderer = this.getStringRenderer(font);
-      return (numLines * stringRenderer.getHeight() - stringRenderer.getLeading()) / Runtime.pixelScale;
+      return (int)((numLines * stringRenderer.getHeight() - stringRenderer.getLeading()) / Runtime.pixelScale);
     }
 
     private void initFonts()

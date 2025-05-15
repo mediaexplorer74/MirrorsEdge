@@ -20,7 +20,7 @@ namespace UI
       TextManager textManager = AppEngine.getCanvas().getTextManager();
       int meshWidth = this.m_quadManager.getMeshWidth((int) QuadManager.get("MESH_WINDOW_BUTTON_MINOR"));
       int meshHeight = this.m_quadManager.getMeshHeight((int) QuadManager.get("MESH_WINDOW_BUTTON_MINOR"));
-      int stringWidth = textManager.getStringWidth(this.m_stringId, this.m_fontId);
+      int stringWidth = textManager.getStringWidth(this.m_stringId.ToString(), this.m_fontId);
       if (stringWidth > meshWidth)
         this.setWidth(stringWidth);
       else
@@ -33,7 +33,8 @@ namespace UI
       this.m_quadManager.setGroupVisible((int) QuadManager.get("GROUP_WINDOW_BUTTON_MINOR"), true);
       int meshWidth = this.m_quadManager.getMeshWidth((int) QuadManager.get("MESH_WINDOW_BUTTON_MINOR"));
       int meshHeight = this.m_quadManager.getMeshHeight((int) QuadManager.get("MESH_WINDOW_BUTTON_MINOR"));
-      this.m_quadManager.setMeshBounds((int) QuadManager.get("MESH_WINDOW_BUTTON_MINOR"), (float) (left + this.m_x), (float) (top + this.m_y), (float) this.m_width, (float) this.m_height, 9);
+      this.m_quadManager.setMeshBounds((int) QuadManager.get("MESH_WINDOW_BUTTON_MINOR"), (float) (left + this.m_x), 
+          (float) (top + this.m_y), (float) this.m_width, (float) this.m_height, 9);
       if (this.m_enabled)
         this.m_quadManager.setMeshAlpha((int) QuadManager.get("MESH_WINDOW_BUTTON_MAJOR"), 1f);
       else

@@ -4,6 +4,7 @@
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
 
 
+using GameManager;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace midp
     private int[] m_pointerStatus2 = new int[3];
     protected List<MIDlet> m_midlets;
     public static Runtime m_runtime = new Runtime();
-    public static int pixelScale = 1;
+    public static /*int*/float pixelScale = /*1*/MirrorsEdge.Scaling;
 
     protected Runtime()
     {
@@ -47,13 +48,10 @@ namespace midp
 
         public void startMIDlet()
         {
-            try
-            {
-              MIDlet curMidlet = this.getCurrentMIDlet();
-              if (curMidlet != null)
-                curMidlet.startApp();
-            }
-            catch { }
+            MIDlet curMidlet = this.getCurrentMIDlet();
+
+            if (curMidlet != null)
+               curMidlet.startApp();
         }
 
         public void pauseMIDlet() => this.getCurrentMIDlet().pauseApp();
@@ -143,14 +141,7 @@ namespace midp
 
     protected MIDlet getCurrentMIDlet()
     {
-        MIDlet res = (MIDlet)null;
-
-        if (this.m_midlets != null)
-        {
-            if (this.m_midlets.Count > 0)
-                res = this.m_midlets.Last<MIDlet>();
-        }
-      return res;
+      return this.m_midlets.Count > 0 ? this.m_midlets.Last<MIDlet>() : (MIDlet) null;
     }
 
     private MIDlet Graphics3D_getMIDlet() => Runtime.getRuntime().getCurrentMIDlet();

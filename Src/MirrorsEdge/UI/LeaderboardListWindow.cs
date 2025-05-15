@@ -10,6 +10,7 @@ using midp;
 using support;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using text;
 
 #nullable disable
@@ -86,6 +87,7 @@ namespace UI
           else
           {
             //Thread.Sleep(1);
+            Task.Delay(1);
             if (LiveProcessor.gamestate == LiveProcessor.GameState.ErrorLeaderboard)
             {
               this.m_WaitingForLeaderboardN = -1;

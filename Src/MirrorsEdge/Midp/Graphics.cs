@@ -27,7 +27,7 @@ namespace midp
     private int m_translateX;
     private int m_translateY;
     private Font m_font;
-    public int pixelScale;
+    public float pixelScale; // int //!
 
     protected Graphics()
     {

@@ -4,12 +4,13 @@
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
 
 
+using GameManager;
 using generic;
 using Microsoft.Xna.Framework.Media;
 using midp;
-using GameManager;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 #nullable disable
 namespace support
@@ -28,7 +29,7 @@ namespace support
     private volatile bool m_otherAudioPlaying;
     private volatile int m_otherAudioPollTime;
     private volatile bool m_restarting;
-    private volatile bool m_closed = true; //!
+    private volatile bool m_closed; 
     private volatile bool m_updated;
     public static object musicLockObject = new object();
     private volatile BGMusic.PlayState m_state;
@@ -179,7 +180,7 @@ namespace support
       }
     }
 
-    public void suspend()
+    public async void suspend()
     {
       lock (BGMusic.musicLockObject)
       {
@@ -190,9 +191,9 @@ namespace support
           return;
         this.m_state = BGMusic.PlayState.STATE_STOPPING;
         MediaPlayer.Stop();
-        //Thread.Sleep(200);
-        this.m_state = BGMusic.PlayState.STATE_CLOSING;
-        this.m_eventMusic = (Song) null;
+        //Task.Delay(200);
+        //this.m_state = BGMusic.PlayState.STATE_CLOSING;
+        //this.m_eventMusic = (Song) null;
       }
     }
 
@@ -206,7 +207,18 @@ namespace support
         this.m_otherAudioPlaying = true;
         this.m_otherAudioPollTime = 0;
         this.m_eventPlaying = -1;
-      }
+                
+            //Experimental
+        if (this.m_state != BGMusic.PlayState.STATE_PLAYING)
+        {
+            this.m_eventPlaying = this.m_eventToPlay;
+            string assetName = "music/" + this.m_soundManager.getEventName(this.m_eventPlaying);
+            this.m_eventMusic = MirrorsEdge.content.Load<Song>(assetName);
+            MediaPlayer.IsRepeating = this.m_looped;
+            MediaPlayer.Play(this.m_eventMusic);
+            this.m_state = BGMusic.PlayState.STATE_PLAYING;
+        }
+      }      
     }
 
     public void close() => this.m_closed = true;
@@ -232,7 +244,9 @@ namespace support
 
     public virtual void run()
     {
-      //while (!this.m_closed)
+      //TEST
+      //while
+      if (!this.m_closed)
       {
         if (!MirrorsEdge.externalMusic)
         {
@@ -249,10 +263,11 @@ namespace support
         }
         this.m_updated = true;
         //Thread.Sleep(250);
+        Task.Delay(250);
       }
     }
 
-    public static void Process() => BGMusic.getInstance().run();
+    public static void Process(CancellationToken token) => BGMusic.getInstance().run();
 
     private enum PlayState
     {
