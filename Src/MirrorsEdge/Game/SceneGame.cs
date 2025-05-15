@@ -123,15 +123,17 @@ namespace game
     private SceneGame.GameState m_preMenuState;
     private int m_stateTime;
     private bool m_gameRunning;
-    private Thread m_loadingThread;
+
+    private CancellationTokenSource m_loadingCancellationTokenSource;
+    private Task m_loadingThread;
+
     private int m_loadingThreadState;
     private int m_loadingState;
     private SceneGame.GameState m_postLoadingState;
     private int BLOOM_INTERP_TYPE;
     private SignalFilter m_bloomMixFilter;
     private SignalFilter m_bloomBlendFilter;
-    private static Microsoft.Xna.Framework.Graphics.Texture2D painTexture 
-            = (Microsoft.Xna.Framework.Graphics.Texture2D) null;
+    private static Microsoft.Xna.Framework.Graphics.Texture2D painTexture = (Microsoft.Xna.Framework.Graphics.Texture2D) null;
     private static byte[] painTextureData0 = new byte[65536];
     private static byte[] painTextureData = new byte[65536];
     private static BlendState blendStateAdd;
@@ -218,7 +220,7 @@ namespace game
       this.m_preMenuState = SceneGame.GameState.STATE_INVALID;
       this.m_stateTime = 0;
       this.m_gameRunning = false;
-      this.m_loadingThread = (Thread) null;
+      this.m_loadingThread =  null;
       this.m_loadingThreadState = 0;
       this.m_loadingState = 0;
       this.m_postLoadingState = SceneGame.GameState.STATE_INTRO;
@@ -423,8 +425,7 @@ namespace game
           while (Math.PI < (double) this.m_freelookRotationAzimuthRad)
             this.m_freelookRotationAzimuthRad -= 5.141593f;
           float val1_3 = 1.2566371f;
-          this.m_freelookRotationElevationRad = 
-                        Math.Max(-val1_3, Math.Min(val1_3, this.m_freelookRotationElevationRad));
+          this.m_freelookRotationElevationRad = Math.Max(-val1_3, Math.Min(val1_3, this.m_freelookRotationElevationRad));
           this.m_freelookRotation.setIdentity();
           this.m_freelookRotation.addToElevation(this.m_freelookRotationElevationRad);
           this.m_freelookRotation.addToAzimuth(this.m_freelookRotationAzimuthRad);
@@ -457,8 +458,7 @@ namespace game
           this.m_freelookPosition += vec;
         }
         this.m_freelookTransform.setIdentity();
-        this.m_freelookTransform.postTranslate(this.m_freelookPosition.x, 
-            this.m_freelookPosition.y, this.m_freelookPosition.z);
+        this.m_freelookTransform.postTranslate(this.m_freelookPosition.x, this.m_freelookPosition.y, this.m_freelookPosition.z);
         this.m_freelookRotation.applyToTransform(ref this.m_freelookTransform);
         this.m_freelookTransform.postRotate(90f, 0.0f, 0.0f, 1f);
         this.m_m3gCamera.setTransform(ref this.m_freelookTransform);
@@ -473,9 +473,7 @@ namespace game
         float lookAtY = this.m_gameCamera.getLookAtY();
         float lookAtZ = this.m_gameCamera.getLookAtZ();
         this.m_freelookPosition.set(lookFromX, lookFromY, lookFromZ);
-        MathTrig.convertLookVectorToEulerRotationsRad(lookAtX - lookFromX, 
-            lookAtY - lookFromY, lookAtZ - lookFromZ, ref this.m_freelookRotationAzimuthRad, 
-            ref this.m_freelookRotationElevationRad);
+        MathTrig.convertLookVectorToEulerRotationsRad(lookAtX - lookFromX, lookAtY - lookFromY, lookAtZ - lookFromZ, ref this.m_freelookRotationAzimuthRad, ref this.m_freelookRotationElevationRad);
         this.m_freelookRotationElevationRad = -this.m_freelookRotationElevationRad;
         this.m_freelookRotationAzimuthRad = -this.m_freelookRotationAzimuthRad;
         this.m_freelookRotation.setIdentity();
@@ -486,11 +484,7 @@ namespace game
 
     public void updateCameraFrustum()
     {
-      this.m_gameCameraFrustum.set(new MathVector(this.m_gameCamera.getLookFromX(), 
-          this.m_gameCamera.getLookFromY(), this.m_gameCamera.getLookFromZ()), 
-          new MathVector(this.m_gameCamera.getLookAtX(), this.m_gameCamera.getLookAtY(), 
-          this.m_gameCamera.getLookAtZ()), this.m_gameCamera.getNearClip(), 
-          this.m_gameCamera.getFarClip(), this.m_gameCamera.getFOV());
+      this.m_gameCameraFrustum.set(new MathVector(this.m_gameCamera.getLookFromX(), this.m_gameCamera.getLookFromY(), this.m_gameCamera.getLookFromZ()), new MathVector(this.m_gameCamera.getLookAtX(), this.m_gameCamera.getLookAtY(), this.m_gameCamera.getLookAtZ()), this.m_gameCamera.getNearClip(), this.m_gameCamera.getFarClip(), this.m_gameCamera.getFOV());
     }
 
     public void startVerticalCameraBump(float mag) => this.m_gameCamera.startVerticalBump(mag);
@@ -569,8 +563,7 @@ namespace game
         int num2 = 90;
         if (height - num2 >= y)
           return;
-        this.m_freelookPosition.set(this.m_gameCamera.getLookFromX(), 
-            this.m_gameCamera.getLookFromY(), this.m_gameCamera.getLookFromZ());
+        this.m_freelookPosition.set(this.m_gameCamera.getLookFromX(), this.m_gameCamera.getLookFromY(), this.m_gameCamera.getLookFromZ());
         this.m_freelookRotationAzimuthRad = 0.0f;
         this.m_freelookRotationElevationRad = 0.0f;
         this.m_freelookRotation.setIdentity();
@@ -647,14 +640,13 @@ namespace game
     {
       if (this.m_state == newState || this.m_state == SceneGame.GameState.STATE_GAME_FADE_OUT)
         return;
-      if (newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING 
-                || newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING_NO_DEATH_SOUND 
+      if (newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING
+                || newState == SceneGame.GameState.STATE_PLAYER_DEATH_FALLING_NO_DEATH_SOUND
                 || newState == SceneGame.GameState.STATE_PLAYER_DIED)
         SpywareManager.getInstance().trackFaithKilled();
-      if (this.m_preMenuState == SceneGame.GameState.STATE_INVALID 
-                && newState == SceneGame.GameState.STATE_MENU_PAUSED 
-                && (MirrorsEdge.TrialMode 
-                || this.m_state != SceneGame.GameState.STATE_RESTART_CONFIRM 
+      if (this.m_preMenuState == SceneGame.GameState.STATE_INVALID
+                && newState == SceneGame.GameState.STATE_MENU_PAUSED
+                && (MirrorsEdge.TrialMode || this.m_state != SceneGame.GameState.STATE_RESTART_CONFIRM 
                 && this.m_state != SceneGame.GameState.STATE_QUIT_CONFIRM))
         this.m_preMenuState = this.m_state;
       this.m_prevState = this.m_state;
@@ -672,42 +664,46 @@ namespace game
       this.stateTransition(SceneGame.GameState.STATE_GAME_FADE_OUT);
     }
 
-    public async void Run()
+    public void Run()
     {
-      while (this.m_loadingThreadState != 2)
+      while (this.m_loadingThreadState != SceneGame.LOADINGTHREAD_STATE_QUIT) //2
       {
-        if (this.m_loadingThreadState != 0)
-        {
-            //Thread.Sleep(1000);
-            await Task.Delay(1000);
-        }
+        if (this.m_loadingThreadState != SceneGame.LOADINGTHREAD_STATE_IDLE) //0
+          Task.Delay(1000);
         else
-            this.updateLoadingState(100);
+          this.updateLoadingState(100);
       }
     }
 
-    public async void updateLoading(int timeStep)
+    public void updateLoading(int timeStep)
     {
-      this.m_engine.updateLoading(timeStep);
-      if (this.m_loadingProgress == 100)
-        return;
-      if (this.m_loadingThread == null)
-      {
-        if (this.m_engine.isFading())
+        this.m_engine.updateLoading(timeStep);
+        if (this.m_loadingProgress == 100)
             return;
-        this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneGame.Start));
-        //ThreadImplSceneGame.Start((object) this);
-        this.m_loadingThreadState = 0;
-        this.m_loadingThread.Start((object)this);
-      }
-      else
-      {
-        //Thread.Sleep(40);
-        await Task.Delay(40);
-      }
-      //TEST
-      //this.m_loadingProgress = 100;
+
+        if (m_loadingThread == null)
+        {
+            if (this.m_engine.isFading())
+                return;
+
+            //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneGame.Start));
+            this.m_loadingThreadState = SceneGame.LOADINGTHREAD_STATE_IDLE;//0;
+            //this.m_loadingThread.Start((object)this);
+
+             m_loadingCancellationTokenSource = new CancellationTokenSource();
+             m_loadingThread = Task.Run(() =>
+            {
+                this.Run();
+                //m_loadingThreadState = 0;
+                updateLoadingState(100);
+            }, m_loadingCancellationTokenSource.Token);
+        }
+        else
+        {
+            Task.Delay(40).Wait();
+        }
     }
+
 
     public void updateLoadingState(int timeStep)
     {
@@ -766,7 +762,7 @@ namespace game
         case 13:
           this.m_loadingProgress = 100;
           this.m_loadingThreadState = 2;
-          this.m_loadingThread = (Thread) null;
+          this.m_loadingThread = null;
           break;
       }
     }
@@ -867,8 +863,7 @@ namespace game
           this.m_engine.startFadeOut(true, 16777215);
           break;
         case SceneGame.GameState.STATE_PLAYER_DEATH_FALLING:
-          this.m_engine.getSoundManager().playEvent((int) 
-              ResourceManager.get("SOUNDEVENT_SFX_DEATH_01"), 1f);
+          this.m_engine.getSoundManager().playEvent((int) ResourceManager.get("SOUNDEVENT_SFX_DEATH_01"), 1f);
           this.m_engine.startFadeOut(true, 0);
           break;
         case SceneGame.GameState.STATE_PLAYER_DEATH_FALLING_NO_DEATH_SOUND:
@@ -951,8 +946,7 @@ namespace game
       {
         this.m_bagCountDisplayTimer -= timeStepMillis;
         if (this.m_bagCountDisplayTimer <= 0)
-          this.m_engine.getQuadManager().setMeshVisible((int) QuadManager.get("MESH_HUD_BAG_ICON_GAME"), 
-              false);
+          this.m_engine.getQuadManager().setMeshVisible((int) QuadManager.get("MESH_HUD_BAG_ICON_GAME"), false);
       }
       this.m_sfxVolumeFilter.setTargetValue(0.0f);
       this.m_stateTime += timeStepMillis;
@@ -1046,8 +1040,7 @@ namespace game
           {
             case WindowResult.WINDOW_RESULT_POSITIVE:
               this.m_engine.getWindowStore().clearWindowResult();
-              SpywareManager.getInstance().trackRestartLevel(
-                  AppEngine.getLevelData().getCurrentLevelIndex());
+              SpywareManager.getInstance().trackRestartLevel(AppEngine.getLevelData().getCurrentLevelIndex());
               this.m_engine.startFadeOut(true, 16777215);
               break;
             case WindowResult.WINDOW_RESULT_NEGATIVE:
@@ -1068,8 +1061,7 @@ namespace game
           {
             case WindowResult.WINDOW_RESULT_POSITIVE:
               this.m_engine.getWindowStore().clearWindowResult();
-              SpywareManager.getInstance().trackQuitLevel(
-                  AppEngine.getLevelData().getCurrentLevelIndex());
+              SpywareManager.getInstance().trackQuitLevel(AppEngine.getLevelData().getCurrentLevelIndex());
               this.m_engine.startFadeOut(true, 16777215);
               break;
             case WindowResult.WINDOW_RESULT_NEGATIVE:
@@ -1136,10 +1128,7 @@ namespace game
                 break;
               }
               this.stateTransition(SceneGame.GameState.STATE_MAYHEM_WAIT);
-              InputStream resourceAsStream = 
-                                (InputStream) WP7InputStreamIsolatedStorage.getResourceAsStream(
-                                    SceneGame.LAST_GHOST_ANIMATION_FILENAME 
-                                    + (MirrorsEdge.TrialMode ? "_trial" : "") + "_7zip");
+              InputStream resourceAsStream = (InputStream) WP7InputStreamIsolatedStorage.getResourceAsStream(SceneGame.LAST_GHOST_ANIMATION_FILENAME + (MirrorsEdge.TrialMode ? "_trial" : "") + "_7zip");
               if (resourceAsStream == null)
               {
                 this.m_engine.getWindowStore().clearWindowResult();
@@ -1152,8 +1141,7 @@ namespace game
               resourceAsStream.read(ref this.localBuffer, 0, length);
               resourceAsStream.close();
               int raceTimeMillis = this.m_raceTimeMillis;
-              if (!LiveProcessor.NewLeaderboardRecord(AppEngine.getLevelData().getCurrentLevelIndex(), 
-                  raceTimeMillis, this.localBuffer, length))
+              if (!LiveProcessor.NewLeaderboardRecord(AppEngine.getLevelData().getCurrentLevelIndex(), raceTimeMillis, this.localBuffer, length))
                 this.m_pleaseWaitWindow.Succeeded(2357);
               else
                 this.m_pleaseWaitWindow.Succeeded(2356);
@@ -1203,8 +1191,7 @@ namespace game
       this.m_sfxVolumeFilter.update(timeStepMillis);
       this.m_engine.getSoundManager().setVolumeGroup(2, this.m_sfxVolumeFilter.getFilteredValue());
       this.m_engine.getSoundManager().setVolumeGroup(5, this.m_sfxVolumeFilter.getFilteredValue());
-      if (this.m_playerHurtSoundHandle == -1 
-                || this.m_engine.getSoundManager().isHandlePlaying(this.m_playerHurtSoundHandle))
+      if (this.m_playerHurtSoundHandle == -1 || this.m_engine.getSoundManager().isHandlePlaying(this.m_playerHurtSoundHandle))
         return;
       this.m_playerHurtSoundHandle = -1;
     }

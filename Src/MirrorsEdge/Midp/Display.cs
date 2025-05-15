@@ -91,15 +91,12 @@ namespace midp
 
     public static Display getDisplay(MIDlet m) => m.getDisplay();
 
-    public async virtual void setCurrent(Displayable nextDisplayable)
+    public virtual void setCurrent(Displayable nextDisplayable)
     {
       if (nextDisplayable == this.m_currentDisplayable)
         return;
       while (this.m_isRefreshing)
-      {
-         //Thread.Sleep(1);
-         await Task.Delay(1);
-      }
+        Task.Delay(1);
       if (this.m_currentDisplayable != null)
       {
         this.m_currentDisplayable.hideNotify();

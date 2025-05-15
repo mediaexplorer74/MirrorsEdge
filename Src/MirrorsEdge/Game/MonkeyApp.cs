@@ -1,4 +1,5 @@
-﻿// Type: game.MonkeyApp
+﻿
+// Type: game.MonkeyApp
 // Assembly: MirrorsEdge, Version=1.1.25.0, Culture=neutral, PublicKeyToken=null
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
 
@@ -35,21 +36,16 @@ namespace game
 
     public override void Destructor() => base.Destructor();
 
-    public override async void destroyApp(bool unconditional)
+    public override void destroyApp(bool unconditional)
     {
       while (this.m_gettingInput)
-      {
-          await Task.Delay(1);
-      }
+        Task.Delay(1);
       EASpywareManager.getInstance().logEvent(20000);
       this.close();
       this.notifyDestroyed();
     }
 
-    public override void pauseApp()
-    {
-        this.m_engine.pauseGame();
-    }
+    public override void pauseApp() => this.m_engine.pauseGame();
 
     public override void startApp()
     {
@@ -88,14 +84,13 @@ namespace game
 
     public long GetTime() => DateTime.Now.Ticks / 10000L;
 
-    public async void update()
+    public void update()
     {
       long time = this.GetTime();
       int frameTime = Math.Max(0, (int) (time - this.timeStartFrame));
       if (frameTime < 34)
       {
-        //Thread.Sleep(34 - frameTime);
-        await Task.Delay(34 - frameTime);
+        Task.Delay(34 - frameTime);
         this.timeStartFrame += 34L;
         frameTime = 34;
       }

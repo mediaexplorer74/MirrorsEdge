@@ -29,7 +29,7 @@ namespace support
     private volatile bool m_otherAudioPlaying;
     private volatile int m_otherAudioPollTime;
     private volatile bool m_restarting;
-    private volatile bool m_closed = true; //!
+    private volatile bool m_closed; 
     private volatile bool m_updated;
     public static object musicLockObject = new object();
     private volatile BGMusic.PlayState m_state;
@@ -191,10 +191,9 @@ namespace support
           return;
         this.m_state = BGMusic.PlayState.STATE_STOPPING;
         MediaPlayer.Stop();
-        //Thread.Sleep(200);
-        Task.Delay(200);
-        this.m_state = BGMusic.PlayState.STATE_CLOSING;
-        this.m_eventMusic = (Song) null;
+        //Task.Delay(200);
+        //this.m_state = BGMusic.PlayState.STATE_CLOSING;
+        //this.m_eventMusic = (Song) null;
       }
     }
 
@@ -208,7 +207,15 @@ namespace support
         this.m_otherAudioPlaying = true;
         this.m_otherAudioPollTime = 0;
         this.m_eventPlaying = -1;
-      }
+                
+            //Experimental
+        if (this.m_state != BGMusic.PlayState.STATE_PLAYING)
+        {
+            MediaPlayer.IsRepeating = this.m_looped;
+            MediaPlayer.Play(this.m_eventMusic);
+            this.m_state = BGMusic.PlayState.STATE_PLAYING;
+        }
+      }      
     }
 
     public void close() => this.m_closed = true;
@@ -232,9 +239,9 @@ namespace support
 
     public bool isUpdated() => this.m_updated;
 
-    public async virtual void run()
+    public virtual void run()
     {
-      //while (!this.m_closed)
+      while (!this.m_closed)
       {
         if (!MirrorsEdge.externalMusic)
         {
@@ -251,11 +258,11 @@ namespace support
         }
         this.m_updated = true;
         //Thread.Sleep(250);
-        await Task.Delay(250);
+        Task.Delay(250);
       }
     }
 
-    public static void Process() => BGMusic.getInstance().run();
+    public static void Process(CancellationToken token) => BGMusic.getInstance().run();
 
     private enum PlayState
     {

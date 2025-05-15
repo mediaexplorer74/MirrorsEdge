@@ -20,11 +20,9 @@ Planned "UWP-remake" of Mirror's Edge game project.
 - No Russian (ru) text support (sprite font problem?), only English (en) text resource seems to be ok... 
 
 ## ToDo
-- Fix sounds&music... no sound is not good :)
-- Fix bugs to normal game run
+- Fix screen scaling
 - Extend Input manager (kbd, mouse, and touchscreen or joystick)
 - Fix localization
-- Fix screen scaling
 - Check game data & settings save/store
 
 ## Reference(s)

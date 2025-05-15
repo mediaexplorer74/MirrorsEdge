@@ -1453,7 +1453,7 @@ namespace generic
       "Puzzle_intro",
       "Reversed_stinger_01",
       "StillAlive",
-      "StillAlive"/*"StillAliveRemix"*/,
+      "StillAliveRemix",
       "sfx_AI_Scream_Short_03",
       "sfx_AI_Scream_Short_04",
       "sfx_AI_Scream_Short_05",
@@ -1703,7 +1703,7 @@ namespace generic
       "Ambience_03",
       "Chase_02",
       "StillAlive",
-      "StillAlive"/*"StillAliveRemix"*/,
+      "StillAliveRemix",
       "sfx_bag_stinger",
       "sfx_Blades_Far",
       "sfx_Blades_Near",
@@ -2734,8 +2734,7 @@ namespace generic
 
     public InputStream loadBinaryFile(int resourceID)
     {
-       string fileName = "res/" + ResourceManager.ID_TO_FILENAME(resourceID);
-       return meClass.getResourceAsStream(fileName);
+      return meClass.getResourceAsStream("res/" + ResourceManager.ID_TO_FILENAME(resourceID));
     }
 
     public List<Object3D> loadM3GFile(int resourceID)

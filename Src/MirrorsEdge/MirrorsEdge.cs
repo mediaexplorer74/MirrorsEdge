@@ -379,7 +379,7 @@ label_13:
       base.Draw(gameTime);
     }
 
-    /*protected override void OnActivated(object sender, EventArgs args)
+    protected override void OnActivated(object sender, EventArgs args)
     {
       if (!MirrorsEdge.active)
       {
@@ -403,9 +403,9 @@ label_13:
       MirrorsEdge.marketplaceCalled = false;
       MirrorsEdge.displayMusicQuestion = false;
       MirrorsEdge.defaultImageTime = DateTime.Now.Ticks / 10000L;
-    }*/
+    }
 
-    /*protected override void OnDeactivated(object sender, EventArgs args)
+    protected override void OnDeactivated(object sender, EventArgs args)
     {
       if (MirrorsEdge.active)
       {
@@ -413,7 +413,7 @@ label_13:
         Runtime.getRuntime().pauseMIDlet();
       }
       base.OnDeactivated(sender, args);
-    }*/
+    }
 
     protected override void OnExiting(object sender, EventArgs args)
     {

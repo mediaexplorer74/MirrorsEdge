@@ -20,7 +20,7 @@ namespace midp
       {
         this.m_Stream = TitleContainer.OpenStream(fileName);
       }
-      catch (System.Exception ex)
+      catch (Exception ex)
       {
         this.m_Stream = (Stream) null;
       }
@@ -30,7 +30,7 @@ namespace midp
 
     public override int read()
     {
-      return this.m_Stream != null ? this.m_Stream.ReadByte() : throw new System.Exception("File Not Found");
+      return this.m_Stream != null ? this.m_Stream.ReadByte() : throw new FileNotFoundException();
     }
 
     public override void close()
@@ -38,20 +38,20 @@ namespace midp
       if (this.m_Stream == null)
         return;
       this.m_Stream.Dispose();
-      this.m_Stream = (Stream) null;
+      this.m_Stream = null;
     }
 
     public override int read(ref byte[] b, int off, int len)
     {
-    if (this.m_Stream == null)
-        throw new System.Exception("File not found");
+      if (this.m_Stream == null)
+        throw new FileNotFoundException();
       return this.m_Stream.Read(b, off, len);
     }
 
     public override int available()
     {
       if (this.m_Stream == null)
-        throw new System.Exception("File Not Found");
+        throw new FileNotFoundException();
       return (int) (this.m_Stream.Length - this.m_Stream.Position);
     }
 

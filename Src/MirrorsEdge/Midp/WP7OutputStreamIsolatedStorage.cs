@@ -10,36 +10,36 @@ using System.IO.IsolatedStorage;
 #nullable disable
 namespace midp
 {
-  public class WP7OutputStreamIsolatedStorage : OutputStream
-  {
-    private IsolatedStorageFile isoFile;
-    private IsolatedStorageFileStream m_Stream;
-
-    public WP7OutputStreamIsolatedStorage(string fileName)
+    public class WP7OutputStreamIsolatedStorage : OutputStream
     {
-      this.isoFile = IsolatedStorageFile.GetUserStoreForApplication();
-      if (!this.isoFile.FileExists(fileName))
-        this.m_Stream = this.isoFile.CreateFile(fileName);
-      else
-        this.m_Stream = this.isoFile.OpenFile(fileName, FileMode.Truncate);
-    }
+        private IsolatedStorageFile isoFile;
+        private IsolatedStorageFileStream m_Stream;
 
-    public bool loadSuccessful() => this.m_Stream != null;
+        public WP7OutputStreamIsolatedStorage(string fileName)
+        {
+            this.isoFile = IsolatedStorageFile.GetUserStoreForApplication();
+            if (!this.isoFile.FileExists(fileName))
+                this.m_Stream = this.isoFile.CreateFile(fileName);
+            else
+                this.m_Stream = this.isoFile.OpenFile(fileName, FileMode.Truncate);
+        }
 
-    public override bool close()
-    {
-      if (this.m_Stream == null)
-        return false;
-      this.m_Stream.Dispose();
-      this.m_Stream = (IsolatedStorageFileStream) null;
-      return true;
-    }
+        public bool loadSuccessful() => this.m_Stream != null;
 
-    public override void write(byte writeByte)
-    {
-      if (this.m_Stream == null)
-        throw new System.Exception("File Not Found");
-      this.m_Stream.WriteByte(writeByte);
+        public override bool close()
+        {
+            if (this.m_Stream == null)
+                return false;
+            this.m_Stream.Dispose();
+            this.m_Stream = (IsolatedStorageFileStream)null;
+            return true;
+        }
+
+        public override void write(byte writeByte)
+        {
+            if (this.m_Stream == null)
+                throw new System.Exception("File Not Found");
+            this.m_Stream.WriteByte(writeByte);
+        }
     }
-  }
 }

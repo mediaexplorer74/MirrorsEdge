@@ -7,7 +7,6 @@
 using game;
 using midp;
 using support;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,19 +15,18 @@ namespace generic
 {
   public class SoundManager
   {
-    private byte[] d_groupFlags = new byte[4]; //!
-    private short[] d_eventResources = new short[4]; // !
-    private byte[] d_eventGroups = new byte[4]; //!;
-    private byte[] d_eventInstances = new byte[4]; //!;
-    private byte[] d_eventFlags = new byte[4]; //!;
-    private float[] d_eventRanges = new float[4]; //!;
-    private float m_globalVolume = 1f; //!
-    private float m_musicVolume = 1f; // !
-    private float m_sfxVolume = 1f; //!
-
-    private Player[][] m_players = new Player[4][]; //!;
-    private float[][] m_volumes = new float[4][]; //!
-    private float[] m_groupVolumes = new float[4]; //!
+    private byte[] d_groupFlags;
+    private short[] d_eventResources;
+    private byte[] d_eventGroups;
+    private byte[] d_eventInstances;
+    private byte[] d_eventFlags;
+    private float[] d_eventRanges;
+    private float m_globalVolume;
+    private float m_musicVolume;
+    private float m_sfxVolume;
+    private Player[][] m_players;
+    private float[][] m_volumes;
+    private float[] m_groupVolumes;
     public static float MAX_VOLUME = 1f;
     public static float MIN_VOLUME = 0.0f;
 
@@ -76,20 +74,18 @@ namespace generic
 
     public SoundManager()
     {
-      this.d_groupFlags = new byte[4]; //!
-      this.d_eventResources = new short[4]; //!
-      this.d_eventGroups = new byte[4]; //!
-      this.d_eventInstances = new byte[4]; //!
-      this.d_eventFlags = new byte[4]; //!
-      this.d_eventRanges = new float[4]; //!
+      this.d_groupFlags = (byte[]) null;
+      this.d_eventResources = (short[]) null;
+      this.d_eventGroups = (byte[]) null;
+      this.d_eventInstances = (byte[]) null;
+      this.d_eventFlags = (byte[]) null;
+      this.d_eventRanges = (float[]) null;
       this.m_globalVolume = SoundManager.MAX_VOLUME;
       this.m_musicVolume = SoundManager.MAX_VOLUME;
       this.m_sfxVolume = SoundManager.MAX_VOLUME;
-
-      this.m_players = new Player[4][];//this.m_players = (Player[][]) null; //!
-
-      this.m_volumes = new float[4][]; //!
-      this.m_groupVolumes = new float[4]; //!
+      this.m_players = (Player[][]) null;
+      this.m_volumes = (float[][]) null;
+      this.m_groupVolumes = (float[]) null;
     }
 
     public virtual void Destructor()
@@ -101,9 +97,7 @@ namespace generic
 
     public void loadData()
     {
-      DataInputStream dataInputStream = new DataInputStream(
-          AppEngine.getCanvas().getResourceManager()
-          .loadBinaryFile((int) ResourceManager.get("IDI_SOUNDEVENTS_BIN")));
+      DataInputStream dataInputStream = new DataInputStream(AppEngine.getCanvas().getResourceManager().loadBinaryFile((int) ResourceManager.get("IDI_SOUNDEVENTS_BIN")));
       int length1 = (int) dataInputStream.readByte();
       byte[] numArray1 = new byte[length1];
       for (int index = 0; index < length1; ++index)
@@ -168,7 +162,7 @@ namespace generic
       }
     }
 
-    public async void unloadEvent(int eventID)
+    public void unloadEvent(int eventID)
     {
       if (eventID < 0)
         return;
@@ -184,8 +178,7 @@ namespace generic
             {
               player2.stop();
               player2.setMediaTime(0L);
-              //Thread.Sleep(500);
-              await Task.Delay(500);
+              Task.Delay(500);
             }
             player2.close();
           }
@@ -339,20 +332,13 @@ namespace generic
     public void setVolumeGlobal(float volume)
     {
       this.m_globalVolume = volume;
-      try
+      for (int eventID = 0; eventID < this.m_players.Length; ++eventID)
       {
-        for (int eventID = 0; eventID < this.m_players.Length; ++eventID)
+        if (this.m_players[eventID] != null)
         {
-            if (this.m_players[eventID] != null)
-            {
-                for (int instance = 0; instance < this.m_players[eventID].Length; ++instance)
-                    this.applyVolume(eventID, instance);
-            }
+          for (int instance = 0; instance < this.m_players[eventID].Length; ++instance)
+            this.applyVolume(eventID, instance);
         }
-      }
-      catch (System.Exception ex)
-      {
-        Debug.WriteLine("[ex] SoundManager problem: " + ex.Message);
       }
     }
 

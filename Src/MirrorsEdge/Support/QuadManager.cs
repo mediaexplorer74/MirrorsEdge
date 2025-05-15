@@ -192,12 +192,12 @@ namespace support
       return num;
     }
 
-    private async void threadLock()
+    private void threadLock()
     {
       while (this.m_threadLock)
       {
         //Thread.Sleep(1);
-        await Task.Delay(1);
+        Task.Delay(1);
       }
       this.m_threadLock = true;
     }

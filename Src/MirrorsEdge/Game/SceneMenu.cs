@@ -50,7 +50,10 @@ namespace game
     private int m_loadingState;
     private SceneMenu.MenuState m_postLoadingState;
     private static bool IsItTheFirstEnter = true;
-    private Thread m_loadingThread;
+
+    private CancellationTokenSource m_loadingCancellationTokenSource;
+    private Task m_loadingThread;
+    
     private SceneMenu.LoadingThreadState m_loadingThreadState;
     private World m_world;
     private Camera m_m3gCamera;
@@ -78,15 +81,27 @@ namespace game
     private AboutMenu m_aboutMenu;
     private static readonly int[] UPSELL_QUAD_BACK_MESH_ARRAY = new int[5]
     {
-      16,       18,      20,      22,      24
+      16,
+      18,
+      20,
+      22,
+      24
     };
     private static readonly int[] UPSELL_QUAD_FRONT_MESH_ARRAY = new int[5]
     {
-      17,      19,      21,      23,      25
+      17,
+      19,
+      21,
+      23,
+      25
     };
     private static readonly int[] UPSELL_QUAD_REVEAL_GROUP_ARRAY = new int[5]
     {
-      11,      12,      13,      14,      15
+      11,
+      12,
+      13,
+      14,
+      15
     };
     private static readonly int[][] UPSELL_QUAD_REVEAL_MESH_ARRAY = new int[5][]
     {
@@ -106,11 +121,19 @@ namespace game
     };
     private static readonly int[] UPSELL_STRING_TITLE_ARRAY = new int[5]
     {
-      2398,      2400,      2402,      2404,      2406
+      2398,
+      2400,
+      2402,
+      2404,
+      2406
     };
     private static readonly int[] UPSELL_STRING_BODY_ARRAY = new int[5]
     {
-      2399,      2401,      2403,      2405,      2407
+      2399,
+      2401,
+      2403,
+      2405,
+      2407
     };
     private SceneMenu.UpsellAnimState m_liteUpsellState;
     private int m_listUpsellScreenIndex;
@@ -139,7 +162,7 @@ namespace game
       this.m_statePhaseTime = 0;
       this.m_stateTransitionFade = false;
       this.m_loadingState = 0;
-      this.m_loadingThread = (Thread) null;
+      this.m_loadingThread = null;
       this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
       this.m_world = (World) null;
       this.m_m3gCamera = (Camera) null;
@@ -202,12 +225,7 @@ namespace game
       this.m_loadingState = 1;
       this.m_loadingProgress = 0;
       bool flag = false;
-      this.m_postLoadingState = AppEngine.getLevelData().isGameNewlyCompleted() 
-                || flag 
-                ? (MirrorsEdge.TrialMode 
-                 ? (SceneMenu.MenuState) initialState 
-                 : SceneMenu.MenuState.STATE_GAME_COMPLETE_RESULTS) 
-                   : (SceneMenu.MenuState) initialState;
+      this.m_postLoadingState = AppEngine.getLevelData().isGameNewlyCompleted() || flag ? (MirrorsEdge.TrialMode ? (SceneMenu.MenuState) initialState : SceneMenu.MenuState.STATE_GAME_COMPLETE_RESULTS) : (SceneMenu.MenuState) initialState;
       this.m_state = SceneMenu.MenuState.STATE_LOADING;
       SoundManager soundManager = this.m_engine.getSoundManager();
       soundManager.setVolumeGlobal(SoundManager.MAX_VOLUME);
@@ -220,42 +238,39 @@ namespace game
 
     public int getState() => (int) this.m_state;
 
-    public async void updateLoading(int timeStep)
+    public void updateLoading(int timeStep)
     {
       this.m_engine.updateLoading(timeStep);
       this.m_engine.getLoadingRunAnimPlayer().updateAnim(timeStep);
-
-        if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_PRE)
+      if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_PRE)
+        this.stateActivate();
+      else if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_ACTIVE)
+      {
+        if (this.m_loadingThread == null && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
         {
-            this.stateActivate();
+          if (this.m_engine.isFading())
+            return;
+
+          //this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneMenu.Start));
+          this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
+          //this.m_loadingThread.Start((object) this);
+          m_loadingCancellationTokenSource = new CancellationTokenSource();
+          m_loadingThread = Task.Run(() =>
+          {
+            this.Run();
+            //m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE; 
+            updateLoadingState(100);
+          }, m_loadingCancellationTokenSource.Token);
         }
-        else if (this.m_statePhase == SceneMenu.StatePhase.STATE_PHASE_ACTIVE)
-        {
-            if (this.m_loadingThread == null && 
-                    this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-            {
-                if (this.m_engine.isFading())
-                    return;
-                this.m_loadingThread = new Thread(new ParameterizedThreadStart(ThreadImplSceneMenu.Start));
-                //ThreadImplSceneMenu.Start((object)this);
-                this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
-                this.m_loadingThread.Start((object) this);
-
-                //TEST
-                //this.m_loadingProgress = 100;
-            }
-            else
-            {
-                //Thread.Sleep(40);
-                await Task.Delay(40);
-            }
-            }
         else
-        {
-            if (this.m_statePhase != SceneMenu.StatePhase.STATE_PHASE_POST)
-                return;
-            this.stateDeactivate();
-        }
+          Task.Delay(40);
+      }
+      else
+      {
+        if (this.m_statePhase != SceneMenu.StatePhase.STATE_PHASE_POST)
+          return;
+        this.stateDeactivate();
+      }
     }
 
     public void updateLoadingState(int timeStep)
@@ -304,7 +319,7 @@ namespace game
         case 4:
           this.precacheAchievementsWindow();
           this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-          this.m_loadingThread = (Thread) null;
+          this.m_loadingThread = null;
           if (this.m_engine.getSaveFileError())
             this.stateTransition(SceneMenu.MenuState.STATE_FILESAVEERROR);
           else
@@ -314,17 +329,14 @@ namespace game
       }
     }
 
-    public async void Run()
+    public void Run()
     {
       while (this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
       {
         if (this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE)
-        {
-            //Thread.Sleep(1000);
-            await Task.Delay(1000);
-        }
+          Task.Delay(1000);
         else
-            this.updateLoadingState(100);
+          this.updateLoadingState(100);
       }
     }
 
@@ -334,21 +346,16 @@ namespace game
         this.m_menuMain.getSelectedSubMenu().transitionToIdle();
       if (this.m_engine.getBGMusic() != null)
         this.m_engine.getBGMusic().suspend();
-      if (this.m_state == SceneMenu.MenuState.STATE_LOADING
-                && this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
+      if (this.m_state == SceneMenu.MenuState.STATE_LOADING && this.m_loadingThreadState != SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT)
         this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_WAIT;
       EASpywareManager.getInstance().MTXpause();
     }
 
     public override void resume()
     {
-      if (this.m_engine.getBGMusic() != null 
-                && (!MirrorsEdge.TrialMode
-                || this.m_state != SceneMenu.MenuState.STATE_MEDIAPICKER))
+      if (this.m_engine.getBGMusic() != null && (!MirrorsEdge.TrialMode || this.m_state != SceneMenu.MenuState.STATE_MEDIAPICKER))
         this.m_engine.getBGMusic().resume();
-
-      if (this.m_state == SceneMenu.MenuState.STATE_LOADING 
-                && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_WAIT)
+      if (this.m_state == SceneMenu.MenuState.STATE_LOADING && this.m_loadingThreadState == SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_WAIT)
         this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_IDLE;
       EASpywareManager.getInstance().MTXresume();
     }
@@ -358,7 +365,7 @@ namespace game
       if (this.m_loadingThread != null)
       {
         this.m_loadingThreadState = SceneMenu.LoadingThreadState.LOADINGTHREAD_STATE_QUIT;
-        this.m_loadingThread = (Thread) null;
+        this.m_loadingThread = null;
       }
       this.m_engine.getQuadManager().freeQuads((int) QuadManager.get("GROUP_SCENEMENU"));
     }
@@ -380,10 +387,8 @@ namespace game
       if (this.m_cityscapeCameraInterp)
       {
         float progress = 1f - this.m_cityscapeCameraInterpolationProgress;
-        float degrees1 = (float) ((double) this.m_cityscapeCameraInterpolationProgress
-                    * (double) this.m_cityscapeCameraInterpolationAzimuthStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationAzimuthEndDeg);
-        float degrees2 = (float) ((double) this.m_cityscapeCameraInterpolationProgress
-                    * (double) this.m_cityscapeCameraInterpolationElevationStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationElevationEndDeg);
+        float degrees1 = (float) ((double) this.m_cityscapeCameraInterpolationProgress * (double) this.m_cityscapeCameraInterpolationAzimuthStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationAzimuthEndDeg);
+        float degrees2 = (float) ((double) this.m_cityscapeCameraInterpolationProgress * (double) this.m_cityscapeCameraInterpolationElevationStartDeg + (double) progress * (double) this.m_cityscapeCameraInterpolationElevationEndDeg);
         MathVector mathVector = new MathVector();
         mathVector.setAsLinearInterpolation(this.m_cityscapeCameraInterpolationFromStart, this.m_cityscapeCameraInterpolationFromEnd, progress);
         this.m_cityscapeCameraTransform.setIdentity();
@@ -395,8 +400,7 @@ namespace game
       {
         this.m_cityscapeCameraLookFromNode.getTranslation(ref this.lookFrom);
         this.m_cityscapeCameraLookAtNode.getTranslation(ref this.lookAt);
-        GameCamera.createLookAtTransform(this.m_cityscapeCameraTransform, this.lookFrom[0], this.lookFrom[1], 
-            this.lookFrom[2], this.lookAt[0], this.lookAt[1], this.lookAt[2], 0.0f, 1f, 0.0f);
+        GameCamera.createLookAtTransform(this.m_cityscapeCameraTransform, this.lookFrom[0], this.lookFrom[1], this.lookFrom[2], this.lookAt[0], this.lookAt[1], this.lookAt[2], 0.0f, 1f, 0.0f);
       }
       this.m_cityscapeCameraTransform.postRotate(0.0f, 0.0f, 0.0f, 1f);
       this.m_m3gCamera.setTransform(ref this.m_cityscapeCameraTransform);
@@ -426,10 +430,8 @@ namespace game
       this.m_cityscapeCameraLookAtAnim.setAnimTime(num2);
       this.m_cityscapeCameraInterp = true;
       this.m_cityscapeCameraInterpolationProgress = 1f;
-      this.calculateCameraOrientationAtTime(animTime, ref this.m_cityscapeCameraInterpolationFromStart, 
-          ref this.m_cityscapeCameraInterpolationAzimuthStartDeg, ref this.m_cityscapeCameraInterpolationElevationStartDeg);
-      this.calculateCameraOrientationAtTime(num2, ref this.m_cityscapeCameraInterpolationFromEnd,
-          ref this.m_cityscapeCameraInterpolationAzimuthEndDeg, ref this.m_cityscapeCameraInterpolationElevationEndDeg);
+      this.calculateCameraOrientationAtTime(animTime, ref this.m_cityscapeCameraInterpolationFromStart, ref this.m_cityscapeCameraInterpolationAzimuthStartDeg, ref this.m_cityscapeCameraInterpolationElevationStartDeg);
+      this.calculateCameraOrientationAtTime(num2, ref this.m_cityscapeCameraInterpolationFromEnd, ref this.m_cityscapeCameraInterpolationAzimuthEndDeg, ref this.m_cityscapeCameraInterpolationElevationEndDeg);
     }
 
     private void calculateCameraOrientationAtTime(
@@ -443,8 +445,7 @@ namespace game
       this.m_cityscapeCameraLookFromNode.getTranslation(ref this.lookFrom);
       this.m_cityscapeCameraLookAtNode.getTranslation(ref this.lookAt);
       position.set(this.lookFrom[0], this.lookFrom[1], this.lookFrom[2]);
-      MathTrig.convertLookVectorToEulerRotationsDeg(this.lookAt[0] - this.lookFrom[0], this.lookAt[1] - this.lookFrom[1],
-          this.lookAt[2] - this.lookFrom[2], ref azimuth, ref elevation);
+      MathTrig.convertLookVectorToEulerRotationsDeg(this.lookAt[0] - this.lookFrom[0], this.lookAt[1] - this.lookFrom[1], this.lookAt[2] - this.lookFrom[2], ref azimuth, ref elevation);
     }
 
     private void initState()

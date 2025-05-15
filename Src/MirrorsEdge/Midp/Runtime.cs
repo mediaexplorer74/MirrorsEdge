@@ -47,13 +47,10 @@ namespace midp
 
         public void startMIDlet()
         {
-            try
-            {
-              MIDlet curMidlet = this.getCurrentMIDlet();
-              if (curMidlet != null)
-                curMidlet.startApp();
-            }
-            catch { }
+            MIDlet curMidlet = this.getCurrentMIDlet();
+
+            if (curMidlet != null)
+               curMidlet.startApp();
         }
 
         public void pauseMIDlet() => this.getCurrentMIDlet().pauseApp();
@@ -143,14 +140,7 @@ namespace midp
 
     protected MIDlet getCurrentMIDlet()
     {
-        MIDlet res = (MIDlet)null;
-
-        if (this.m_midlets != null)
-        {
-            if (this.m_midlets.Count > 0)
-                res = this.m_midlets.Last<MIDlet>();
-        }
-      return res;
+      return this.m_midlets.Count > 0 ? this.m_midlets.Last<MIDlet>() : (MIDlet) null;
     }
 
     private MIDlet Graphics3D_getMIDlet() => Runtime.getRuntime().getCurrentMIDlet();

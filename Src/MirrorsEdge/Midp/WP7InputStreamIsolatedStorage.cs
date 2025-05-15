@@ -12,19 +12,23 @@ namespace midp
 {
   public class WP7InputStreamIsolatedStorage : InputStream
   {
-    private IsolatedStorageFile isoFile;
-    private IsolatedStorageFileStream m_Stream;
+    //private IsolatedStorageFile isoFile = default;
+    //private IsolatedStorageFileStream m_Stream = default;
+    private FileStream m_Stream = default;
 
     protected WP7InputStreamIsolatedStorage(string fileName)
     {
-      this.isoFile = IsolatedStorageFile.GetUserStoreForApplication();
-      if (!this.isoFile.FileExists(fileName))
-        return;
-      this.m_Stream = this.isoFile.OpenFile(fileName, FileMode.Open);
+        // Use FileStream instead of Stream, as Stream is abstract and cannot be instantiated.
+        try
+        {
+            this.m_Stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+        }
+        catch { }
     }
 
     public static WP7InputStreamIsolatedStorage getResourceAsStream(string name)
     {
+      name = "res/" + name;
       WP7InputStreamIsolatedStorage resourceAsStream = new WP7InputStreamIsolatedStorage(name);
       if (resourceAsStream.loadSuccessful())
         return resourceAsStream;
@@ -35,9 +39,7 @@ namespace midp
 
     public override int read()
     {
-      return this.m_Stream != null
-                ? this.m_Stream.ReadByte() 
-                : throw new System.Exception("File Not Found");
+      return this.m_Stream != null ? this.m_Stream.ReadByte() : throw new FileNotFoundException();
     }
 
     public override void close()
@@ -45,20 +47,20 @@ namespace midp
       if (this.m_Stream == null)
         return;
       this.m_Stream.Dispose();
-      this.m_Stream = (IsolatedStorageFileStream) null;
+      this.m_Stream = null;
     }
 
     public override int read(ref byte[] b, int off, int len)
     {
       if (this.m_Stream == null)
-        throw new System.Exception("File Not Found");
+        throw new FileNotFoundException();
       return this.m_Stream.Read(b, off, len);
     }
 
     public override int available()
     {
       if (this.m_Stream == null)
-        throw new System.Exception("File Not Found");
+        throw new FileNotFoundException();
       return (int) (this.m_Stream.Length - this.m_Stream.Position);
     }
 
@@ -66,7 +68,7 @@ namespace midp
 
     public override int size()
     {
-      return this.m_Stream != null ? (int) this.m_Stream.Length : throw new System.Exception("File Not Found");
+      return this.m_Stream != null ? (int) this.m_Stream.Length : throw new FileNotFoundException();
     }
   }
 }

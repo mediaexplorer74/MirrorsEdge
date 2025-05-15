@@ -71,9 +71,7 @@ namespace midp
       int num;
       for (int index = off + len; off1 < index; off1 += num)
       {
-        num = 0;
-        if (this.m_inputStream != null)      
-          num = this.m_inputStream.read(ref b, off1, index - off1);
+        num = this.m_inputStream.read(ref b, off1, index - off1);
         if (num <= 0)
         {
           this.m_eofExceptionThrown = true;
