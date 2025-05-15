@@ -96,7 +96,8 @@ namespace midp
       this.setSize(width, height);
       this.m_textureWidth = width;
       this.m_textureHeight = height;
-      this.m_texture = (Texture2D) new RenderTarget2D(MirrorsEdge.graphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
+      this.m_texture = (Texture2D) new RenderTarget2D(MirrorsEdge.graphicsDevice, width, height, false, 
+          SurfaceFormat.Color, DepthFormat.None, 1, RenderTargetUsage.PreserveContents);
     }
 
     public static midp.Graphics implementation_Image_getGraphics(Image source)

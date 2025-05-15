@@ -46,7 +46,7 @@ namespace midp
       this.clip = false;
       this.m_target = (RenderTarget2D) null;
       this.m_prev_target = (RenderTarget2D) null;
-      this.m_scale = 1.5f;
+      this.m_scale = MirrorsEdge.Scaling;//1.5f;
       this.m_clipX = 0;
       this.m_clipY = 0;
       this.m_clipWidth = this.m_display.getWidth();
@@ -68,7 +68,7 @@ namespace midp
       this.clip = false;
       this.m_target = target;
       this.m_prev_target = (RenderTarget2D) null;
-      this.m_scale = 2f;
+      this.m_scale = MirrorsEdge.Scaling;//2f;
       this.m_clipX = 0;
       this.m_clipY = 0;
       this.m_clipWidth = (int) ((double) this.m_target.Width / (double) this.m_scale);
@@ -81,17 +81,31 @@ namespace midp
     {
       RenderTargetBinding[] renderTargets = MirrorsEdge.graphicsDevice.GetRenderTargets();
       this.m_prev_target = (RenderTarget2D) null;
+      
       if (renderTargets != null && renderTargets.Length > 0)
         this.m_prev_target = renderTargets[0].RenderTarget as RenderTarget2D;
+
       if (this.m_prev_target != this.m_target)
         MirrorsEdge.graphicsDevice.SetRenderTarget(this.m_target);
+      
       if (this.m_target != null)
         this.setScissorRectangle();
+      
       Matrix translation = Matrix.CreateTranslation((float) this.getTranslateX(), (float) this.getTranslateY(), 0.0f);
       if (!forText)
         translation *= Matrix.CreateScale(this.m_scale, this.m_scale, 1f);
-      this.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, (SamplerState) null, (DepthStencilState) null, this.clip ? this.clipState : this.noClipState, (Effect) null, translation);
-    }
+
+            // this.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, default, default,
+            //     this.clip ? this.clipState : this.noClipState, (Effect)null);//, translation);
+
+            this.spriteBatch.Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend, 
+                SamplerState.PointClamp,
+                        null,
+                        this.clip ? this.clipState : this.noClipState, 
+                        null, 
+                        MirrorsEdge.globalTransformation);
+        }
 
     private void resetCurrentTarget()
     {
@@ -187,17 +201,25 @@ namespace midp
       float rotation = (float) Math.Atan2((double) y2 - (double) y1, (double) x2 - (double) x1);
       float x3 = Vector2.Distance(new Vector2(x1, y1), new Vector2(x2, y2));
       this.setCurrentTarget();
-      this.spriteBatch.Draw(this.blank, new Vector2(x1, y1), new Rectangle?(), this.currentColor, rotation, Vector2.Zero, new Vector2(x3, (float) this.lineWidth), SpriteEffects.None, 0.0f);
+      this.spriteBatch.Draw(this.blank, new Vector2(x1, y1), new Rectangle?(), this.currentColor, rotation, Vector2.Zero, 
+          new Vector2(x3, (float) this.lineWidth), SpriteEffects.None, 0.0f);
       this.resetCurrentTarget();
     }
 
     public override void drawRect(int x, int y, int width, int height)
     {
       this.setCurrentTarget();
-      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) y), new Rectangle?(), this.currentColor, 0.0f, Vector2.Zero, new Vector2((float) width, (float) this.lineWidth), SpriteEffects.None, 0.0f);
-      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) (y + height)), new Rectangle?(), this.currentColor, 0.0f, Vector2.Zero, new Vector2((float) width, (float) this.lineWidth), SpriteEffects.None, 0.0f);
-      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) y), new Rectangle?(), this.currentColor, 1.57079637f, Vector2.Zero, new Vector2((float) height, (float) this.lineWidth), SpriteEffects.None, 0.0f);
-      this.spriteBatch.Draw(this.blank, new Vector2((float) (x + width), (float) y), new Rectangle?(), this.currentColor, 1.57079637f, Vector2.Zero, new Vector2((float) height, (float) this.lineWidth), SpriteEffects.None, 0.0f);
+      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) y), new Rectangle?(), this.currentColor,
+          0.0f, Vector2.Zero, new Vector2((float) width, (float) this.lineWidth), SpriteEffects.None, 0.0f);
+
+      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) (y + height)), new Rectangle?(), this.currentColor,
+          0.0f, Vector2.Zero, new Vector2((float) width, (float) this.lineWidth), SpriteEffects.None, 0.0f);
+
+      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) y), new Rectangle?(), this.currentColor, 
+          1.57079637f, Vector2.Zero, new Vector2((float) height, (float) this.lineWidth), SpriteEffects.None, 0.0f);
+
+      this.spriteBatch.Draw(this.blank, new Vector2((float) (x + width), (float) y), new Rectangle?(), this.currentColor, 
+          1.57079637f, Vector2.Zero, new Vector2((float) height, (float) this.lineWidth), SpriteEffects.None, 0.0f);
       this.resetCurrentTarget();
     }
 
@@ -261,7 +283,8 @@ namespace midp
         dest_left = dest_right;
         dest_right = num;
       }
-      this.spriteBatch.Draw((src as ImageWP7).m_texture, new Rectangle(dest_left, dest_top, dest_right - dest_left, dest_bottom - dest_top), new Rectangle?(new Rectangle(src_left, src_top, src_right - src_left, src_bottom - src_top)), Color.White, 0.0f, new Vector2(0.0f, 0.0f), effects, 0.0f);
+      this.spriteBatch.Draw((src as ImageWP7).m_texture, new Rectangle(dest_left, dest_top, dest_right - dest_left, dest_bottom - dest_top), 
+          new Rectangle?(new Rectangle(src_left, src_top, src_right - src_left, src_bottom - src_top)), Color.White, 0.0f, new Vector2(0.0f, 0.0f), effects, 0.0f);
       this.resetCurrentTarget();
     }
 
@@ -344,7 +367,9 @@ namespace midp
     public override void fillRect(int x, int y, int width, int height)
     {
       this.setCurrentTarget();
-      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) y), new Rectangle?(), this.currentColor, 0.0f, Vector2.Zero, new Vector2((float) width, (float) height), SpriteEffects.None, 0.0f);
+      this.spriteBatch.Draw(this.blank, new Vector2((float) x, (float) y), new Rectangle?(), 
+          this.currentColor, 0.0f, Vector2.Zero, new Vector2((float) width, (float) height), 
+          SpriteEffects.None, 0.0f);
       this.resetCurrentTarget();
     }
 
@@ -399,12 +424,12 @@ namespace midp
       this.m_clipY = num2;
       this.m_clipWidth = num3;
       this.m_clipHeight = num4;
-      int num5 = num1 * Runtime.pixelScale;
-      int num6 = num2 * Runtime.pixelScale;
-      int num7 = num3 * Runtime.pixelScale;
-      int num8 = num4 * Runtime.pixelScale;
-      int num9 = width * Runtime.pixelScale;
-      int num10 = height * Runtime.pixelScale;
+      int num5 = (int)(num1 * Runtime.pixelScale);
+      int num6 = (int)(num2 * Runtime.pixelScale);
+      int num7 = (int)(num3 * Runtime.pixelScale);
+      int num8 = (int)(num4 * Runtime.pixelScale);
+      int num9 = (int)(width * Runtime.pixelScale);
+      int num10 = (int)(height * Runtime.pixelScale);
       if (this.m_display == null)
         return;
       this.setScissorRectangle();
@@ -427,12 +452,16 @@ namespace midp
       }
       if (this.m_clipX <= 0 && this.m_clipY <= 0 && this.m_clipWidth >= num1 && this.m_clipHeight >= num2)
       {
-        MirrorsEdge.graphicsDevice.ScissorRectangle = this.m_display == null ? new Rectangle(0, 0, this.m_target.Width, this.m_target.Height) : new Rectangle(0, 0, MirrorsEdge.SCREEN_WIDTH, MirrorsEdge.SCREEN_HEIGHT);
+        MirrorsEdge.graphicsDevice.ScissorRectangle = this.m_display == null
+                    ? new Rectangle(0, 0, this.m_target.Width, this.m_target.Height)
+                    : new Rectangle(0, 0, (int)MirrorsEdge.SCREEN_WIDTH, (int)MirrorsEdge.SCREEN_HEIGHT);
         this.clip = false;
       }
       else
       {
-        MirrorsEdge.graphicsDevice.ScissorRectangle = new Rectangle((int) ((double) this.m_scale * (double) this.m_clipX), (int) ((double) this.m_scale * (double) this.m_clipY), (int) ((double) this.m_scale * (double) this.m_clipWidth), (int) ((double) this.m_scale * (double) this.m_clipHeight));
+        MirrorsEdge.graphicsDevice.ScissorRectangle = new Rectangle((int) ((double) this.m_scale * (double) this.m_clipX), 
+            (int) ((double) this.m_scale * (double) this.m_clipY), (int) ((double) this.m_scale * (double) this.m_clipWidth), 
+            (int) ((double) this.m_scale * (double) this.m_clipHeight));
         this.clip = true;
       }
     }

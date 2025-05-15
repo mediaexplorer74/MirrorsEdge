@@ -45,7 +45,10 @@ namespace UI
     {
       int resourceID = (int) ResourceManager.get("IDI_UI_LOADING_TEXT_BLANK_PNG");
       Image src = AppEngine.getCanvas().getResourceManager().loadImage(resourceID);
-      g.drawRegion(src, 0, 0, this.m_width * Runtime.pixelScale, this.m_height * Runtime.pixelScale, 0, this.m_x, this.m_y, 9);
+      g.drawRegion(src, 0, 0, 
+          (int)(this.m_width * Runtime.pixelScale), 
+          (int)(this.m_height * Runtime.pixelScale),
+          0, this.m_x, this.m_y, 9);
       foreach (WindowElement element in this.m_elements)
         element.render(g, top, left);
     }

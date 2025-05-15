@@ -4,6 +4,7 @@
 // MVID: AADE1522-6AC0-41D0-BFE0-4276CBF513F9
 
 
+using GameManager;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace midp
     private int[] m_pointerStatus2 = new int[3];
     protected List<MIDlet> m_midlets;
     public static Runtime m_runtime = new Runtime();
-    public static int pixelScale = 1;
+    public static /*int*/float pixelScale = /*1*/MirrorsEdge.Scaling;
 
     protected Runtime()
     {

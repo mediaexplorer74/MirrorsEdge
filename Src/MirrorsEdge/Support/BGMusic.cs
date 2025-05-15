@@ -211,6 +211,9 @@ namespace support
             //Experimental
         if (this.m_state != BGMusic.PlayState.STATE_PLAYING)
         {
+            this.m_eventPlaying = this.m_eventToPlay;
+            string assetName = "music/" + this.m_soundManager.getEventName(this.m_eventPlaying);
+            this.m_eventMusic = MirrorsEdge.content.Load<Song>(assetName);
             MediaPlayer.IsRepeating = this.m_looped;
             MediaPlayer.Play(this.m_eventMusic);
             this.m_state = BGMusic.PlayState.STATE_PLAYING;
@@ -241,7 +244,9 @@ namespace support
 
     public virtual void run()
     {
-      while (!this.m_closed)
+      //TEST
+      //while
+      if (!this.m_closed)
       {
         if (!MirrorsEdge.externalMusic)
         {

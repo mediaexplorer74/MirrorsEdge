@@ -298,8 +298,8 @@ namespace generic
             int srcBottom = srcTop + (int) subImage[4];
             int destLeft = num1;
             int destTop = num2;
-            int destRight = num1 + (srcRight - srcLeft) / Runtime.pixelScale;
-            int destBottom = num2 + (srcBottom - srcTop) / Runtime.pixelScale;
+            int destRight = num1 + (int)((srcRight - srcLeft) / Runtime.pixelScale);
+            int destBottom = num2 + (int)((srcBottom - srcTop) / Runtime.pixelScale);
             Image src = animManData.m_animImageArray[animManData.m_curBank][index3];
             g.drawScaledRegion(src, srcLeft, srcTop, srcRight, srcBottom, destLeft, destTop, destRight, destBottom);
             goto case 2;

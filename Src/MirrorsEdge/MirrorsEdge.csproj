@@ -256,7 +256,6 @@
     <Compile Include="Generic\SignalFilter.cs" />
     <Compile Include="Generic\SoundManager.cs" />
     <Compile Include="Generic\StringConstants.cs" />
-    <Compile Include="InputManager.cs" />
     <Compile Include="Glob.cs" />
     <Compile Include="Microedition\m3g\AnimationController.cs" />
     <Compile Include="Microedition\m3g\AnimationTrack.cs" />

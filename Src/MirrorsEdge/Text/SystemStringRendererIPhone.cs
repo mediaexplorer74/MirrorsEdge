@@ -151,9 +151,9 @@ namespace text
 
     public virtual void setIPhoneDropShadowParameters(int xoffset, int yoffset, int blurradius)
     {
-      this.m_dropShadowX = xoffset * Runtime.pixelScale;
-      this.m_dropShadowY = -yoffset * Runtime.pixelScale;
-      this.m_dropShadowRadius = blurradius * Runtime.pixelScale;
+      this.m_dropShadowX = (int)(xoffset * Runtime.pixelScale);
+      this.m_dropShadowY = (int)(-yoffset * Runtime.pixelScale);
+      this.m_dropShadowRadius = (int)(blurradius * Runtime.pixelScale);
     }
 
     public virtual void setIPhoneDropShadowColor(int colour) => this.m_dropShadowColor = colour;

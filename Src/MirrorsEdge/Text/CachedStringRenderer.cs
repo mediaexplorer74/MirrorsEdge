@@ -68,8 +68,8 @@ namespace text
 
     private void bufferedDrawString(Graphics g, string str, int x_, int y_, int anchor)
     {
-      int num1 = x_ * Runtime.pixelScale;
-      int num2 = y_ * Runtime.pixelScale;
+      int num1 = (int)(x_ * Runtime.pixelScale);
+      int num2 = (int)(y_ * Runtime.pixelScale);
       int num3 = this.m_stringRenderer.stringWidth(str);
       int num4 = this.m_stringRenderer.getHeight() - this.m_stringRenderer.getLeading();
       int x0;

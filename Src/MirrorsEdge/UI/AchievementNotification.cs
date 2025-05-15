@@ -71,7 +71,8 @@ namespace UI
           this.m_description = achievement.getCompletedDescriptionStringBuffer().toString();
           this.iconImage = achievement.iconOpened;
           TextManager textManager = AppEngine.getCanvas().getTextManager();
-          this.setWidth(10 + (Math.Max(textManager.getStringWidth(this.m_title, this.FONT_TITLE), textManager.getStringWidth(this.m_description, this.FONT_DESCRIPTION)) + 28 + 5));
+          this.setWidth(10 + (Math.Max(textManager.getStringWidth(this.m_title, this.FONT_TITLE), 
+              textManager.getStringWidth(this.m_description, this.FONT_DESCRIPTION)) + 28 + 5));
           this.m_state = AchievementNotification.State.STATE_SLIDE_IN;
           this.m_stateTime = 0;
           this.m_badgeAlpha = 0.0f;
@@ -130,7 +131,12 @@ namespace UI
         return;
       TextManager textManager = AppEngine.getCanvas().getTextManager();
       base.render(g, top, left);
-      g.drawScaledRegion(this.iconImage, 0, 0, this.iconImage.getWidth(), this.iconImage.getHeight(), left + this.m_x + 5, top + this.m_y, left + this.m_x + 5 + 28 / Runtime.pixelScale, top + this.m_y + 28 / Runtime.pixelScale);
+      g.drawScaledRegion( 
+          this.iconImage, 0, 0, this.iconImage.getWidth(), this.iconImage.getHeight(),
+          left + this.m_x + 5, 
+          top + this.m_y, 
+          left + this.m_x + 5 + (int)(28 / Runtime.pixelScale), 
+          top + this.m_y + (int)(28 / Runtime.pixelScale)  );
       int num1 = 33;
       int num2 = num1 + (this.m_width - num1 >> 1);
       textManager.drawString(g, this.m_title, this.FONT_TITLE, left + this.m_x + num2, top + this.m_y + 8, 10);

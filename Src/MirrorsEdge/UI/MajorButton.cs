@@ -39,7 +39,7 @@ namespace UI
         this.m_upperStr = textManager.getString(this.m_stringId).ToUpper();
         int meshWidth = this.m_quadManager.getMeshWidth((int) QuadManager.get("MESH_WINDOW_BUTTON_MAJOR"));
         int meshHeight = this.m_quadManager.getMeshHeight((int) QuadManager.get("MESH_WINDOW_BUTTON_MAJOR"));
-        int width = textManager.getStringWidth(this.m_stringId, this.m_fontId) + 40;
+        int width = textManager.getStringWidth(this.m_stringId.ToString(), this.m_fontId) + 40;
         if (width > meshWidth)
           this.setWidth(width);
         else

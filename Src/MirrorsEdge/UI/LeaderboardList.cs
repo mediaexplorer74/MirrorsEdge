@@ -60,8 +60,8 @@ namespace UI
       TextManager textManager = AppEngine.getCanvas().getTextManager();
       this.setWidth(width);
       int val2 = Math.Min(29, board.Entries.Count);
-      int num1 = 35 * Runtime.pixelScale;
-      int width1 = width * Runtime.pixelScale;
+      int num1 = (int)(35 * Runtime.pixelScale);
+      int width1 = (int)(width * Runtime.pixelScale);
       Image image = Image.createImage(width1, num1 * Math.Max(5, val2));
       Graphics graphics = image.getGraphics();
       FontWP7Font.SetBitmapGraphics(true);
@@ -85,11 +85,15 @@ namespace UI
         string str3 = stringBuffer3.toString();
         int num3 = !flag ? 2141233312 : 2135969872;
         graphics.setColor(num3 >> 16 & (int) byte.MaxValue, num3 >> 8 & (int) byte.MaxValue, num3 & (int) byte.MaxValue, num3 >> 24 & (int) byte.MaxValue);
-        graphics.fillRect(0, num2 * Runtime.pixelScale / 2, width1 / 2, 35 * Runtime.pixelScale / 2);
+
+        graphics.fillRect(0, 
+            (int)(num2 * Runtime.pixelScale / 2), width1 / 2, 
+            (int)(35 * Runtime.pixelScale / 2)   );
         int y = num2 + 17;
         StringRenderer stringRenderer = textManager.getStringRenderer(this.STAT_FONT);
         int color = stringRenderer.getColor();
-                stringRenderer.setColor(128);//(entry.Gamer.Gamertag == Gamer.SignedInGamers[PlayerIndex.One].Gamertag ? 128 : 0);
+        stringRenderer.setColor(128);//(entry.Gamer.Gamertag == Gamer.SignedInGamers[PlayerIndex.One].Gamertag ? 128 : 0);
+        
         textManager.drawString(graphics, str1, this.STAT_FONT, 17, y, 17);
         textManager.drawString(graphics, str2, this.STAT_FONT, 70, y, 17);
         textManager.drawString(graphics, str3, this.STAT_FONT, 380, y, 17);
@@ -199,7 +203,10 @@ namespace UI
     public override void render(Graphics g, int top, int left)
     {
       if (this.m_image != null)
-        g.drawScaledRegion(this.m_image, 0, 0, this.m_image.getWidth(), this.m_image.getHeight(), left, top, left + this.m_image.getWidth() / Runtime.pixelScale, top + this.m_image.getHeight() / Runtime.pixelScale);
+        g.drawScaledRegion(this.m_image, 0, 0, this.m_image.getWidth(), 
+            this.m_image.getHeight(), left, top, 
+            left + (int)(this.m_image.getWidth() / Runtime.pixelScale),
+            top + (int)(this.m_image.getHeight() / Runtime.pixelScale));
       AppEngine canvas = AppEngine.getCanvas();
       if (this.m_selectedItem == -1)
         return;

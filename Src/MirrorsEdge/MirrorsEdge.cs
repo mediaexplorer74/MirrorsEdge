@@ -27,14 +27,28 @@ namespace GameManager
   public class MirrorsEdge : Game
   {
     public static GraphicsDeviceManager graphics;
-    public static GraphicsDevice graphicsDevice;
+   
     public static SpriteBatch spriteBatch;
+
+    // *********************************************************************
+    Vector2 baseScreenSize = new Vector2(800, 480); //!
+
+    public static Matrix globalTransformation;
+    float backbufferWidth = 800;
+    float backbufferHeight = 480;
+    public static float Scaling = 1f;
+    // *********************************************************************
+
+
+    public static GraphicsDevice graphicsDevice;
+
     public static ContentManager content;
     public static ContentManager defaultImageContent;
+
     private static Texture2D defaultImage;
     private static long defaultImageTime;
-    public static int SCREEN_WIDTH = 800;
-    public static int SCREEN_HEIGHT = 480;
+    public static float SCREEN_WIDTH = 800f;
+    public static float SCREEN_HEIGHT = 480f;
 
     public static bool externalMusic = MediaPlayer.State == MediaState.Playing || !MediaPlayer.GameHasControl;
 
@@ -54,30 +68,49 @@ namespace GameManager
     public static bool m_ReturnFromTombstone = false;
     private List<string> dialogButtons;
 
+    public static Random rand = new Random();
+    public static float screenWidth = 800f;
+    public static float screenHeight = 600f;
+
+
+
+    // constructor
     public MirrorsEdge()
     {
       MirrorsEdge.m_MirrorsEdge = this;
       MirrorsEdge.graphics = new GraphicsDeviceManager((Game) this);
+
+
+//#if WINDOWS_PHONE
+            TargetElapsedTime = TimeSpan.FromTicks(400000L);
+//#endif
+
       this.Content.RootDirectory = "Content";
       MirrorsEdge.content = this.Content;
       MirrorsEdge.defaultImageContent = new ContentManager((IServiceProvider) this.Services, "Content");
-      this.TargetElapsedTime = TimeSpan.FromTicks(400000L);
-      MirrorsEdge.graphics.PreferredBackBufferWidth = MirrorsEdge.SCREEN_WIDTH;
-      MirrorsEdge.graphics.PreferredBackBufferHeight = MirrorsEdge.SCREEN_HEIGHT;
-      MirrorsEdge.graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
+     
+      MirrorsEdge.graphics.PreferredBackBufferWidth = (int)MirrorsEdge.SCREEN_WIDTH;
+      MirrorsEdge.graphics.PreferredBackBufferHeight = (int)MirrorsEdge.SCREEN_HEIGHT;
+
+      //Supported screen orientations for Windows devices (phones, tablets, notebooks, game consoles, etc.)
+       graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft
+                | DisplayOrientation.LandscapeRight | DisplayOrientation.Portrait;
+
+
       MirrorsEdge.graphics.PreferMultiSampling = false;
 
       MirrorsEdge.graphics.IsFullScreen = false; // set it True for w10m/release
 
       //MirrorsEdge.graphics.SynchronizeWithVerticalRetrace = true;//false; // ?
-      MirrorsEdge.graphics.GraphicsProfile = GraphicsProfile.HiDef; // experimental
+      //MirrorsEdge.graphics.GraphicsProfile = GraphicsProfile.HiDef; // experimental
       //MirrorsEdge.graphics.ApplyChanges();
       MirrorsEdge.TrialMode = false;//Guide.IsTrialMode;
       ResourceManager.SetResources();
       this.IsFixedTimeStep = false;
-    }
+    }//constructor
 
-    private void GameDeactivated(object sender, DeactivatedEventArgs e)
+
+    /*private void GameDeactivated(object sender, DeactivatedEventArgs e)
     {
     }
 
@@ -85,10 +118,16 @@ namespace GameManager
     {
     }
 
-    private string GetOSVersionString() => "1.0";
+    private string GetOSVersionString() => "1.0";*/
 
+
+    // Initialize
     protected override void Initialize()
     {
+      if (MirrorsEdge.rand == null)
+          MirrorsEdge.rand = new Random((int)DateTime.Now.Ticks);
+
+
       if (1==0)//(PhoneApplicationService.Current.StartupMode == null)
       {
         MirrorsEdge.m_ReturnFromTombstone = true;
@@ -108,36 +147,58 @@ namespace GameManager
             MirrorsEdge.displayTitanWarning = false;//DeviceStatus.DeviceName.IndexOf("PI39100") >= 0;
         }
       }
+
       MirrorsEdge.graphicsDevice = this.GraphicsDevice;
       MirrorsEdge.spriteBatch = new SpriteBatch(MirrorsEdge.graphicsDevice);
+
       MirrorsEdge.m_monkeyAppMIDlet = new MonkeyApp();
       MirrorsEdge.m_monkeyAppDisplay = new DisplayWP7();
 
       Runtime.getRuntime().setMIDlet((MIDlet) MirrorsEdge.m_monkeyAppMIDlet, 
           (Display) MirrorsEdge.m_monkeyAppDisplay);
       MirrorsEdge.m_monkeyAppDisplay.showNotify();
-      //try
-      //{
-      //  GamerServicesDispatcher.WindowHandle = this.Window.Handle;
-      //  GamerServicesDispatcher.Initialize((IServiceProvider) this.Services);
-      //}
-      //catch (GamerServicesNotAvailableException ex)
-      //{
+
+
         MirrorsEdge.GS_Supported = false;
-      //}
-      //catch (NotSupportedException ex)
-      //{
-      //  MirrorsEdge.GS_Supported = false;
-      //}
-      //catch (InvalidOperationException ex)
-      //{
-      //  MirrorsEdge.GS_Supported = false;
-      //}
-      base.Initialize();
+        /*     
+        //try
+            //{
+            //  GamerServicesDispatcher.WindowHandle = this.Window.Handle;
+            //  GamerServicesDispatcher.Initialize((IServiceProvider) this.Services);
+            //}
+            //catch (GamerServicesNotAvailableException ex)
+            //{
+            MirrorsEdge.GS_Supported = false;
+        //}
+        //catch (NotSupportedException ex)
+        //{
+        //  MirrorsEdge.GS_Supported = false;
+        //}
+        //catch (InvalidOperationException ex)
+        //{
+        //  MirrorsEdge.GS_Supported = false;
+        //} */
+
+
+        MirrorsEdge.graphics.PreferredBackBufferWidth = (int)MirrorsEdge.screenWidth;
+        MirrorsEdge.graphics.PreferredBackBufferHeight = (int)MirrorsEdge.screenHeight;
+        MirrorsEdge.graphics.ApplyChanges();
+
+
+
+
+        base.Initialize();
     }
 
     protected override void LoadContent()
     {
+      this.Content.RootDirectory = "Content";
+
+      // **************************************
+      ScalePresentationArea();
+      // **************************************
+
+
       LiveProcessor.Init(this.Content, MirrorsEdge.graphics.GraphicsDevice, MirrorsEdge.spriteBatch);
       Runtime.getRuntime().startMIDlet();
       WP7_TouchManager.Init();
@@ -145,6 +206,29 @@ namespace GameManager
         MirrorsEdge.defaultImage = MirrorsEdge.defaultImageContent.Load<Texture2D>("Default");
       this.TryMusicQuestion();
     }
+
+
+    // ScalePresentationArea - scale our graphics :)
+    public void ScalePresentationArea()
+    {
+        //Work out how much we need to scale our graphics to fill the screen
+        backbufferWidth = GraphicsDevice.PresentationParameters.BackBufferWidth - 0; // 40 - dirty hack for Astoria!
+        backbufferHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
+
+        float horScaling = (float)(1f*backbufferWidth / baseScreenSize.X);
+        float verScaling = (float)(1f*backbufferHeight / baseScreenSize.Y);
+        Scaling = (float)(horScaling + verScaling) / 2f;
+
+        Vector3 screenScalingFactor = new Vector3(horScaling, verScaling, 1);
+
+        globalTransformation = Matrix.CreateScale(screenScalingFactor);
+
+        System.Diagnostics.Debug.WriteLine("Screen Size - Width["
+            + GraphicsDevice.PresentationParameters.BackBufferWidth + "] " +
+            "Height [" + GraphicsDevice.PresentationParameters.BackBufferHeight + "]");
+    }
+
+
 
     protected override void UnloadContent()
     {
@@ -219,8 +303,20 @@ namespace GameManager
       this.dialogButtons.Add(LocaleManager.getInstance().getString(2094));
     }
 
+
+        // Update
     protected override void Update(GameTime gameTime)
     {
+      // *********************************
+      //Confirm the screen has not been resized by the user
+      if ( backbufferHeight != GraphicsDevice.PresentationParameters.BackBufferHeight ||
+         backbufferWidth != GraphicsDevice.PresentationParameters.BackBufferWidth )
+      {
+        ScalePresentationArea();
+       }
+      // *********************************
+
+
       if (!MirrorsEdge.displayMusicQuestion)
       {
         if (!MirrorsEdge.displayTitleUpdateMessage)
@@ -262,9 +358,9 @@ label_13:
       try
       {
         if ( MirrorsEdge.GS_Supported
-                    && !MirrorsEdge.displayMusicQuestion 
-                    && !MirrorsEdge.displayTitanWarning 
-                    && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded )
+            && !MirrorsEdge.displayMusicQuestion 
+            && !MirrorsEdge.displayTitanWarning 
+            && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded )
         { 
             //GamerServicesDispatcher.Update();
         }
@@ -327,6 +423,8 @@ label_13:
       base.EndRun();
     }
 
+
+    // Draw
     protected override void Draw(GameTime gameTime)
     {
       if (!MirrorsEdge.displayMusicQuestion)
@@ -357,9 +455,14 @@ label_13:
         }
         else if (MirrorsEdge.defaultImage != null)
         {
-          MirrorsEdge.spriteBatch.Begin();
-          MirrorsEdge.spriteBatch.Draw(MirrorsEdge.defaultImage, new Vector2(0.0f, 0.0f), Color.White);
-          MirrorsEdge.spriteBatch.End();
+            //MirrorsEdge.spriteBatch.Begin();
+            MirrorsEdge.spriteBatch.Begin(SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend, SamplerState.PointClamp,
+                            null, null, null, globalTransformation);
+
+
+            MirrorsEdge.spriteBatch.Draw(MirrorsEdge.defaultImage, new Vector2(0.0f, 0.0f), /*Color.White*/ Color.Coral);
+            MirrorsEdge.spriteBatch.End();
         }
         else if (LiveProcessor.gamestate <= LiveProcessor.GameState.WaitingForAchivements
                     && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
@@ -387,6 +490,10 @@ label_13:
         if (!MirrorsEdge.externalMusic && !MediaPlayer.GameHasControl)
           MirrorsEdge.externalMusic = true;
         WP7_TouchManager.Init();
+
+        //TEST
+        ScalePresentationArea();
+
 
         try
         {

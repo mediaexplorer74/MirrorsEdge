@@ -216,15 +216,17 @@ namespace game
 
 
 
-        //this.m_bgMusicThread = new Thread(new ThreadStart(BGMusic.Process));
-        //this.m_bgMusicThread.Start();
-        // Start background music processing using Task
-        m_bgMusicCancellationTokenSource = new CancellationTokenSource();
-        m_bgMusicThread = Task.Run(() => BGMusic.Process(m_bgMusicCancellationTokenSource.Token));
+      //this.m_bgMusicThread = new Thread(new ThreadStart(BGMusic.Process));
+      //this.m_bgMusicThread.Start();
+      m_bgMusicCancellationTokenSource = new CancellationTokenSource();
+      m_bgMusicThread = Task.Run(() =>
+      {
+          BGMusic.Process(m_bgMusicCancellationTokenSource.Token);
+      });
 
 
 
-            AppEngine.getM3GAssets().loadData();
+      AppEngine.getM3GAssets().loadData();
       this.m_quadManager.loadQuadData(this.m_resourceManager.loadBinaryFile((int) ResourceManager.get("IDI_QUADS_BIN")), 533, 320);
       this.m_quadManager.loadQuads((int) QuadManager.get("GROUP_SCENESTARTUP"));
       this.m_paused = false;
@@ -810,10 +812,10 @@ namespace game
       GC.Collect();
       LoadingScreen loadingScreen = this.getLoadingScreen(screenId);
       int modelIndex = 0;
-      Image image1 = Image.createImage(256 * Runtime.pixelScale * 2, 1024 * Runtime.pixelScale * 2);
+      Image image1 = Image.createImage( (int) (256 * Runtime.pixelScale * 2), (int)(1024 * Runtime.pixelScale * 2)  );
       Graphics graphics = image1.getGraphics();
       FontWP7Font.SetBitmapGraphics(true);
-      graphics.setClip(0, 0, 256 * Runtime.pixelScale, 1024 * Runtime.pixelScale);
+      graphics.setClip(0, 0, (int)(256 * Runtime.pixelScale), (int)(1024 * Runtime.pixelScale) );
       loadingScreen.render(graphics);
       FontWP7Font.SetBitmapGraphics(false);
       Image2D image2 = new Image2D(32867, image1);

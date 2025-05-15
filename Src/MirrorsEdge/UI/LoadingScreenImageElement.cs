@@ -25,10 +25,10 @@ namespace UI
       this.m_imageId = ResourceManager.LOADING_IMAGE_LOOKUP[(int) dis.readShort()];
       int num2 = (int) dis.readShort();
       this.m_align = (int) dis.readShort();
-      this.m_x = dis.readInt() * Runtime.pixelScale;
-      this.m_y = dis.readInt() * Runtime.pixelScale;
-      this.m_width = dis.readInt() * Runtime.pixelScale;
-      this.m_height = dis.readInt() * Runtime.pixelScale;
+      this.m_x = (int)(dis.readInt() * Runtime.pixelScale);
+      this.m_y = (int)(dis.readInt() * Runtime.pixelScale);
+      this.m_width = (int)(dis.readInt() * Runtime.pixelScale);
+      this.m_height = (int)(dis.readInt() * Runtime.pixelScale);
     }
 
     public new void Destructor() => base.Destructor();

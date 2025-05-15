@@ -1497,7 +1497,9 @@ namespace game
         SceneGame.painTextureData[index] = num3 < 256 ? (byte) num3 : byte.MaxValue;
       }
       SceneGame.painTexture.SetData<byte>(SceneGame.painTextureData);
-      MirrorsEdge.spriteBatch.Begin(SpriteSortMode.Deferred, SceneGame.blendStateAdd);
+
+      // TEST
+      MirrorsEdge.spriteBatch.Begin(SpriteSortMode.Deferred, SceneGame.blendStateAdd,default,default,default,default, MirrorsEdge.globalTransformation);
       MirrorsEdge.spriteBatch.Draw(SceneGame.painTexture, new Rectangle(0, 0, 800, 480), Color.White);
       MirrorsEdge.spriteBatch.End();
     }
@@ -2223,10 +2225,10 @@ namespace game
         int currentValue = (int) this.m_topMessageInterpolation.getCurrentValue();
         int font = 14;
         TextManager textManager = AppEngine.getCanvas().getTextManager();
-        if (textManager.getStringWidth(this.m_topMessageStringId, font) > 500)
+        if (textManager.getStringWidth(this.m_topMessageStringId.ToString(), font) > 500)
         {
           font = 28;
-          if (textManager.getStringWidth(this.m_topMessageStringId, font) > 500)
+          if (textManager.getStringWidth(this.m_topMessageStringId.ToString(), font) > 500)
             font = 30;
         }
         StringRenderer stringRenderer = this.m_engine.getTextManager().getStringRenderer(font);

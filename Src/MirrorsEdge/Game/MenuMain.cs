@@ -66,9 +66,11 @@ namespace game
       {
         quadManager.setMeshVisible((int) QuadManager.get("MESH_MENU_BUTTON_MG"), true);
         quadManager.setMeshVisible((int) QuadManager.get("MESH_MENU_BUTTON_UPSELL"), true);
-        int stringWidth1 = AppEngine.getCanvas().getTextManager().getStringWidth(2397, 7);
+        int stringId1 = 2397;
+        int stringWidth1 = AppEngine.getCanvas().getTextManager().getStringWidth(stringId1.ToString(), 7);
         quadManager.setMeshBounds((int) QuadManager.get("MESH_MENU_BUTTON_UPSELL"), (float) (520 - (stringWidth1 + 20)), 20f, (float) (stringWidth1 + 20), 36f, 9);
-        int stringWidth2 = AppEngine.getCanvas().getTextManager().getStringWidth(2266, 7);
+        int stringId2 = 2266;
+        int stringWidth2 = AppEngine.getCanvas().getTextManager().getStringWidth(stringId2.ToString(), 7);
         quadManager.setMeshBounds((int) QuadManager.get("MESH_MENU_BUTTON_MG"), (float) (520 - (stringWidth2 + 20)), 80f, (float) (stringWidth2 + 20), 36f, 9);
       }
       this.m_subMenuArray[2].init((int) QuadManager.get("GROUP_MENU_MAIN_RIBBON_3_RED"), (int) QuadManager.get("MESH_MENU_RIBBON_3_SELECT_BUTTON"), (int) QuadManager.get("GROUP_MENU_MAIN_RIBBON_3_WHITE"), (int) QuadManager.get("ANIM_MENU_RIBBON_3_WIDTH"));
@@ -92,7 +94,8 @@ namespace game
       if (!MirrorsEdge.TrialMode)
       {
         quadManager.setMeshVisible((int) QuadManager.get("MESH_MENU_BUTTON_MG"), true);
-        int stringWidth = AppEngine.getCanvas().getTextManager().getStringWidth(2266, 7);
+        int stringId = 2266;
+        int stringWidth = AppEngine.getCanvas().getTextManager().getStringWidth(stringId.ToString(), 7);
         quadManager.setMeshBounds((int) QuadManager.get("MESH_MENU_BUTTON_MG"), (float) (520 - (stringWidth + 20)), 20f, (float) (stringWidth + 20), 36f, 9);
       }
       this.m_targetBannerYOffset = 0.0f;
@@ -210,7 +213,10 @@ namespace game
         {
           int destLeft = meshX1 - (meshWidth >> 1);
           int destTop = y;
-          g.drawScaledRegion(this.m_bannerImage, 0, 0, this.m_bannerImage.getWidth(), this.m_bannerImage.getHeight(), destLeft, destTop, destLeft + this.m_bannerImage.getWidth() / Runtime.pixelScale, destTop + this.m_bannerImage.getHeight() / Runtime.pixelScale);
+          g.drawScaledRegion(this.m_bannerImage, 0, 0, this.m_bannerImage.getWidth(), 
+              this.m_bannerImage.getHeight(), destLeft, destTop, 
+              (int)(destLeft + this.m_bannerImage.getWidth() / Runtime.pixelScale), 
+              (int)(destTop + this.m_bannerImage.getHeight() / Runtime.pixelScale) );
         }
         else
           g.drawImage(this.m_bannerImage, meshX1 - (meshWidth >> 1), y, 9);

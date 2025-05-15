@@ -9,6 +9,7 @@ using midp;
 using GameManager;
 using support;
 using System.Collections.Generic;
+using System;
 
 #nullable disable
 namespace game
@@ -244,7 +245,7 @@ namespace game
       "ACHIEVEMENT_RADIO"
         };
         public static int m_totalGamePoints = 0;
-        private Achievement[] m_allAchievements = new Achievement[17]; //!;
+        private Achievement[] m_allAchievements = new Achievement[20]; //!;
         private List<Achievement> m_uniqueAchievements = new List<Achievement>();
         private List<LevelAchievement> m_levelAchievements = new List<LevelAchievement>();
         private List<TimedLevelAchievement> m_timedLevelAchievements = new List<TimedLevelAchievement>();
@@ -277,7 +278,7 @@ namespace game
 
         public AchievementData()
         {
-            this.m_allAchievements = new Achievement[17]; // null
+            this.m_allAchievements = new Achievement[20]; // null //!
             this.m_uniqueAchievements = new List<Achievement>();
             this.m_levelAchievements = new List<LevelAchievement>();
             this.m_timedLevelAchievements = new List<TimedLevelAchievement>();
@@ -336,7 +337,7 @@ namespace game
             this.m_attacksInTimeAchievements.Clear();
             this.m_sprintDurationAchievements.Clear();
             this.m_boundingBoxAchievements.Clear();
-            this.m_allAchievements = new Achievement[17]; //!
+            this.m_allAchievements = new Achievement[20]; //!
             this.m_levelData = (AchievementMetrics)null;
             this.m_overallData = (AchievementMetrics)null;
         }
@@ -538,8 +539,11 @@ namespace game
             int badgeCount = 0;
             for (int index = 0; index < this.m_allAchievements.Length; ++index)
             {
-                if (this.m_allAchievements[index].isComplete())
-                    ++badgeCount;
+                if (this.m_allAchievements[index] != null)
+                {
+                    if (this.m_allAchievements[index].isComplete())
+                        ++badgeCount;
+                }
             }
             return badgeCount;
         }
@@ -549,8 +553,11 @@ namespace game
             int gamePointsEarned = 0;
             for (int index = 0; index < this.m_allAchievements.Length; ++index)
             {
-                if (this.m_allAchievements[index].isComplete())
-                    gamePointsEarned += this.m_allAchievements[index].m_GamePoints;
+                if (this.m_allAchievements[index] != null)
+                {
+                    if (this.m_allAchievements[index].isComplete())
+                        gamePointsEarned += this.m_allAchievements[index].m_GamePoints;
+                }
             }
             return gamePointsEarned;
         }
@@ -762,10 +769,25 @@ namespace game
 
         public void registerMapCollision()
         {
-            ((EventsInPhaseAchievement)this.m_allAchievements[17]).phaseOff();
+            bool BugFound = false;
+            for (int index = 0; index < this.m_allAchievements.Length; ++index)
+            {
+                if (this.m_allAchievements[index] != null)
+                    BugFound = true;
+            }
+
+            if (!BugFound)
+            {
+                EventsInPhaseAchievement ea = (EventsInPhaseAchievement)this.m_allAchievements[17];
+                if (ea != null)
+                    ea.phaseOff();
+            }
         }
 
-        public void registerBadLanding() => ++this.m_levelData.badLandings;
+        public void registerBadLanding()
+        {
+            ++this.m_levelData.badLandings;
+        }
 
         public void registerRunDist(float dist)
         {
@@ -874,7 +896,8 @@ namespace game
 
         private void loadRmsData()
         {
-            InputStream resourceAsStream = (InputStream)WP7InputStreamIsolatedStorage.getResourceAsStream("achievements_data3" + (MirrorsEdge.TrialMode ? "_trial" : ""));
+            InputStream resourceAsStream = (InputStream)WP7InputStreamIsolatedStorage.getResourceAsStream(
+                "achievements_data3" + (MirrorsEdge.TrialMode ? "_trial" : ""));
             if (resourceAsStream == null)
                 return;
             DataInputStream dis = new DataInputStream(resourceAsStream);
@@ -906,11 +929,17 @@ namespace game
         {
             if (AppEngine.getCanvas().storageFull())
                 return;
-            DataOutputStream dos = new DataOutputStream((OutputStream)OutputStream.getResourceAsStream("achievements_data3" + (MirrorsEdge.TrialMode ? "_trial" : "")));
+            DataOutputStream dos = new DataOutputStream((OutputStream)OutputStream.getResourceAsStream(
+                "achievements_data3" + (MirrorsEdge.TrialMode ? "_trial" : "")));
             dos.writeInt(this.m_allAchievements.Length);
             this.m_overallData.write(dos);
             for (int index = 0; index < this.m_allAchievements.Length; ++index)
-                dos.writeBoolean(this.m_allAchievements[index].isComplete());
+            {
+                bool ad = false;
+                if (this.m_allAchievements[index] != null)
+                  ad = this.m_allAchievements[index].isComplete();
+                dos.writeBoolean(ad);
+            }
             dos.close();
         }
 
