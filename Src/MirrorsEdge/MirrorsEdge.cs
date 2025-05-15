@@ -35,15 +35,17 @@ namespace GameManager
     private static long defaultImageTime;
     public static int SCREEN_WIDTH = 800;
     public static int SCREEN_HEIGHT = 480;
-    public static bool externalMusic = MediaPlayer.State == MediaState.Playing || !MediaPlayer.GameHasControl;
-    public static bool displayMusicQuestion = true;
+
+    public static bool externalMusic = false;//MediaPlayer.State == MediaState.Playing || !MediaPlayer.GameHasControl;
+
+    public static bool displayMusicQuestion = false;//true;
     public static bool displayTitanWarning = false;
     public static MirrorsEdge m_MirrorsEdge = (MirrorsEdge) null;
     public static bool TrialMode = false;
     public static bool displayTitleUpdateMessage = false;
     public static bool marketplaceCalled = false;
     public static bool active;
-    public static bool GS_Supported = true;
+    public static bool GS_Supported = false;//true;
     public int[] frame = new int[10];
     public int current_frame;
     public SpriteFont ffont;
@@ -65,11 +67,10 @@ namespace GameManager
       MirrorsEdge.graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
       MirrorsEdge.graphics.PreferMultiSampling = false;
 
-      MirrorsEdge.graphics.IsFullScreen = false;//true; // set it True for w10m/release
-      MirrorsEdge.graphics.SynchronizeWithVerticalRetrace = false; // ?
+      MirrorsEdge.graphics.IsFullScreen = true; // set it True for w10m/release
 
-      MirrorsEdge.graphics.GraphicsProfile = GraphicsProfile.HiDef; // experimental
-
+      //MirrorsEdge.graphics.SynchronizeWithVerticalRetrace = true;//false; // ?
+      //MirrorsEdge.graphics.GraphicsProfile = GraphicsProfile.HiDef; // experimental
       //MirrorsEdge.graphics.ApplyChanges();
       MirrorsEdge.TrialMode = false;//Guide.IsTrialMode;
       ResourceManager.SetResources();
@@ -95,7 +96,8 @@ namespace GameManager
       else
       {
         MirrorsEdge.m_ReturnFromTombstone = false;
-        InputStream resourceAsStream = (InputStream) WP7InputStreamIsolatedStorage.getResourceAsStream("gamesett2");
+        InputStream resourceAsStream = 
+                    (InputStream) WP7InputStreamIsolatedStorage.getResourceAsStream("gamesett2");
         if (resourceAsStream != null)
         {
           resourceAsStream.close();
@@ -110,7 +112,9 @@ namespace GameManager
       MirrorsEdge.spriteBatch = new SpriteBatch(MirrorsEdge.graphicsDevice);
       MirrorsEdge.m_monkeyAppMIDlet = new MonkeyApp();
       MirrorsEdge.m_monkeyAppDisplay = new DisplayWP7();
-      Runtime.getRuntime().setMIDlet((MIDlet) MirrorsEdge.m_monkeyAppMIDlet, (Display) MirrorsEdge.m_monkeyAppDisplay);
+
+      Runtime.getRuntime().setMIDlet((MIDlet) MirrorsEdge.m_monkeyAppMIDlet, 
+          (Display) MirrorsEdge.m_monkeyAppDisplay);
       MirrorsEdge.m_monkeyAppDisplay.showNotify();
       //try
       //{
@@ -210,7 +214,7 @@ namespace GameManager
       if (!MirrorsEdge.displayTitanWarning)
         return;
       this.dialogButtons = new List<string>();
-      // ISSUE: reference to a compiler-generated method
+     
       // ISSUE: reference to a compiler-generated method
       this.dialogButtons.Add(LocaleManager.getInstance().getString(2094));
     }
@@ -225,17 +229,21 @@ namespace GameManager
           {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             {
-              if (LiveProcessor.gamestate <= LiveProcessor.GameState.WaitingForAchivements && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
+              if (LiveProcessor.gamestate <= LiveProcessor.GameState.WaitingForAchivements
+                                && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
                 this.Exit();
               else
                 Runtime.getRuntime().OnHardBackKeyEvent();
             }
-            if (MirrorsEdge.defaultImage != null && DateTime.Now.Ticks / 10000L - MirrorsEdge.defaultImageTime > 2000L)
+
+            if (MirrorsEdge.defaultImage != null 
+                            && DateTime.Now.Ticks / 10000L - MirrorsEdge.defaultImageTime > 2000L)
             {
               MirrorsEdge.defaultImage = (Texture2D) null;
               MirrorsEdge.defaultImageContent.Unload();
               MirrorsEdge.defaultImageContent = (ContentManager) null;
             }
+
             if (MirrorsEdge.defaultImage == null)
             {
               LiveProcessor.OnUpdate();
@@ -253,8 +261,10 @@ namespace GameManager
 label_13:
       try
       {
-        if (MirrorsEdge.GS_Supported && !MirrorsEdge.displayMusicQuestion && !MirrorsEdge.displayTitanWarning 
-            && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
+        if ( MirrorsEdge.GS_Supported
+                    && !MirrorsEdge.displayMusicQuestion 
+                    && !MirrorsEdge.displayTitanWarning 
+                    && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded )
         { 
             //GamerServicesDispatcher.Update();
         }
@@ -311,7 +321,8 @@ label_13:
     protected override void EndRun()
     {
       //SignedInGamer signedInGamer = Gamer.SignedInGamers[PlayerIndex.One];
-      //if (MirrorsEdge.TrialMode && signedInGamer != null && signedInGamer.Privileges.AllowPurchaseContent)
+      //if ( MirrorsEdge.TrialMode && signedInGamer != null
+      //     && signedInGamer.Privileges.AllowPurchaseContent )
       //  Guide.ShowMarketplace(PlayerIndex.One);
       base.EndRun();
     }
@@ -350,7 +361,8 @@ label_13:
           MirrorsEdge.spriteBatch.Draw(MirrorsEdge.defaultImage, new Vector2(0.0f, 0.0f), Color.White);
           MirrorsEdge.spriteBatch.End();
         }
-        else if (LiveProcessor.gamestate <= LiveProcessor.GameState.WaitingForAchivements && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
+        else if (LiveProcessor.gamestate <= LiveProcessor.GameState.WaitingForAchivements
+                    && LiveProcessor.gamestate != LiveProcessor.GameState.UpdateNeeded)
         {
           this.GraphicsDevice.SetRenderTarget((RenderTarget2D) null);
           this.GraphicsDevice.Clear(Color.Black);
@@ -383,7 +395,9 @@ label_13:
         catch { }
       }
       base.OnActivated(sender, args);
-      if (!MirrorsEdge.marketplaceCalled && (!MirrorsEdge.externalMusic || MirrorsEdge.m_ReturnFromTombstone || !MirrorsEdge.displayMusicQuestion))
+
+      if (!MirrorsEdge.marketplaceCalled && (!MirrorsEdge.externalMusic 
+                || MirrorsEdge.m_ReturnFromTombstone || !MirrorsEdge.displayMusicQuestion))
         return;
       MirrorsEdge.marketplaceCalled = false;
       MirrorsEdge.displayMusicQuestion = false;
@@ -415,11 +429,11 @@ label_13:
     }
   }
 
-    internal class ActivatedEventArgs
-    {
-    }
+  internal class ActivatedEventArgs
+  {
+  }
 
-    internal class DeactivatedEventArgs
-    {
-    }
+  internal class DeactivatedEventArgs
+  {
+  }
 }

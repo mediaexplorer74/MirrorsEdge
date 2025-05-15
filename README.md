@@ -1,4 +1,4 @@
-# Mirror's Edge 1.1.25-alpha - uwp branch 
+# Mirror's Edge 1.1.25-alpha - master branch 
 ![Logo](Images/logo.png)
 
 Planned "UWP-remake" of Mirror's Edge game project. 
@@ -8,20 +8,24 @@ Planned "UWP-remake" of Mirror's Edge game project.
 
 ## Tech. details
 - App type: UWP
+- Win SDK build: 19041
 - Min. Win SDK build: 10240
 
 ## Status
 - Work-in-progress
-- UWP app - only template (draft / early bird -- not for game run!)
+- Draft UWP app as result of initital reversed-code research (early bird -- not for game run!)
 - Min. Win. SDK = 10240, and Win. SDK 19041 used
-- Alpha version (but save game data not reconstructed yet, and screen scaling problems not fixed)
+- Alpha state, 100500 bugs still here (but binary game data not decoded, and screen scaling problems not fixed)
 - No music, no sound (soundmanager not fixed)
-- No russian locale (ru) text support (sprite font problem?), only "en" is ok at now 
+- No Russian (ru) text support (sprite font problem?), only English (en) text resource seems to be ok... 
 
 ## ToDo
-- Fix R.E. bugs & update content(s)
+- Refresh intro music for 2025 ... some remix needed :)
+- Fix bugs to normal game run
 - Extend Input manager (kbd, mouse, and touchscreen or joystick)
-
+- Fix localization
+- Fix screen scaling
+- Check game data & settings save/store
 
 ## Reference(s)
 - https://www.ea.com/games/mirrors-edge/ Electronic Arts site :: Mirror's Edge section 
